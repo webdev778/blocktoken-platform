@@ -15,7 +15,10 @@ const mapStateToProps = (state, props) => ({
   userState: state.app.userState,
 })
 
-@connect(mapStateToProps, mapDispatchToProps)
+@connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)
 class ProfileMenu extends React.Component {
   state = {
     count: 7,
@@ -56,7 +59,8 @@ class ProfileMenu extends React.Component {
         <Menu.Divider />
         <Menu.Item>
           <a href="javascript: void(0);">
-            <i className="topbar__dropdownMenuIcon icmn-user" /> <Link to="/profile">Edit Profile</Link>
+            <i className="topbar__dropdownMenuIcon icmn-user" />{' '}
+            <Link to="/profile">Edit Profile</Link>
           </a>
         </Menu.Item>
         <Menu.Divider />

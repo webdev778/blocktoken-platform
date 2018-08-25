@@ -8,7 +8,7 @@ export default [
   {
     title: 'Users List',
     key: 'usersList',
-    url: '/userslist', 
+    url: '/userslist',
     icon: 'icm icmn-users',
   },
   {

@@ -96,9 +96,7 @@ class UsersList extends React.Component {
         sorter: (a, b) => a.name.length - b.name.length,
         render: text => (
           <a className="utils__link--underlined" href="javascript: void(0);">
-            <Link to="/profile">
-              {text}
-            </Link>
+            <Link to="/profile">{text}</Link>
           </a>
         ),
         filterDropdown: (

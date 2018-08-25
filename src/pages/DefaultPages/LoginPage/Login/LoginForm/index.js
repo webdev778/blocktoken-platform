@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { FacebookLoginButton, GoogleLoginButton } from "react-social-login-buttons"
+import { FacebookLoginButton, GoogleLoginButton } from 'react-social-login-buttons'
 import { REDUCER, submit } from 'ducks/login'
 import { Form, Input, Icon, Button } from 'antd'
 
@@ -39,16 +39,14 @@ class LoginForm extends React.Component {
         </h4>
         <br />
 
-      {
-        /*
+        {/*
         <div className="mb-2">
           Email: <code>admin@mediatec.org</code> or <code>agent@mediatec.org</code>
         </div>
         <div className="mb-4">
           Password: <code>123123</code>
         </div>
-        */
-      }
+        */}
         <Form layout="vertical" hideRequiredMark onSubmit={this.onSubmit(isSubmitForm)}>
           <FormItem>
             {form.getFieldDecorator('username', {
@@ -63,7 +61,7 @@ class LoginForm extends React.Component {
                 placeholder="Email or Nickname"
               />,
             )}
-          </FormItem>          
+          </FormItem>
           <FormItem>
             {form.getFieldDecorator('password', {
               initialValue: '123123',
@@ -76,16 +74,14 @@ class LoginForm extends React.Component {
               />,
             )}
           </FormItem>
-          {
-          /*
+          {/*
           <div className="mb-2">
             <a href="javascript: void(0);" className="utils__link--blue utils__link--underlined">
               Forgot password
             </a>
           </div>
-          */
-          }
-          
+          */}
+
           <div align="center">
             <Button
               type="primary"
@@ -97,16 +93,16 @@ class LoginForm extends React.Component {
               Login
             </Button>
           </div>
-          
+
           <div className="form-actions" align="center">
-              <GoogleLoginButton align="center" />
-              <br />
-              <FacebookLoginButton align="center" />
+            <GoogleLoginButton align="center" />
+            <br />
+            <FacebookLoginButton align="center" />
             <div className="mb-4">
               <br />
               <br />
               Don't have an account?
-              <Link to="/signup" style={{color: 'rgb(0,125,255)'}}>
+              <Link to="/signup" style={{ color: 'rgb(0,125,255)' }}>
                 <strong>&nbsp;&nbsp;SignUp</strong>
               </Link>
             </div>

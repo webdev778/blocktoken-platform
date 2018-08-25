@@ -111,9 +111,7 @@ class SignupForm extends React.Component {
               Sign Up
             </Button>
             <Button className="width-60" htmlType="button">
-              <Link to="/login">
-                Cancel
-              </Link>
+              <Link to="/login">Cancel</Link>
             </Button>
             <span className="ml-4">
               {form.getFieldDecorator('mailsubscription', {

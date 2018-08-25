@@ -15,9 +15,7 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div 
-        className="main-login main-login--fullscreen"
-      >
+      <div className="main-login main-login--fullscreen">
         <div className="main-login__header">
           <div className="row">
             <div className="col-lg-12">
@@ -37,7 +35,7 @@ class Login extends React.Component {
                   <strong>WELCOME TO BLOCKTOKEN</strong>
                 </h1>
                 <h2 className="text-white">
-                  BlockToken is a next generation token issuance platform for the launching and 
+                  BlockToken is a next generation token issuance platform for the launching and
                   marketing of your initial token offering.
                 </h2>
               </div>
