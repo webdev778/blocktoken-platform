@@ -21,7 +21,7 @@ class Login extends React.Component {
             <div className="col-lg-12">
               <div className="main-login__header__logo">
                 <a href="javascript: void(0);">
-                  <img src="resources/images/login/logo.png" alt="Clean UI Admin Template" />
+                  <img src="https://dev.blocktoken.ai/wp-content/uploads/thegem-logos/logo_5ed388aa7c69b61be6aa09babaeee6a4_1x.png" alt="Clean UI Admin Template" />
                 </a>
               </div>
             </div>
@@ -31,8 +31,8 @@ class Login extends React.Component {
           <div className="row">
             <div className="col-xl-12">
               <div className="main-login__block__promo text-black text-center">
-                <h1 className="mb-3 text-black">
-                  <strong>WELCOME TO CLEAN UI ADMIN TEMPLATE</strong>
+                <h1 className="mb-3 text-white">
+                  <strong>BLOCKTOKEN ICO DASHBOARD</strong>
                 </h1>
                 <p>
                   Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
