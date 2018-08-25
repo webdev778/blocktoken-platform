@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { logout } from 'ducks/app'
 import { Menu, Dropdown, Avatar, Badge } from 'antd'
 
@@ -55,7 +56,7 @@ class ProfileMenu extends React.Component {
         <Menu.Divider />
         <Menu.Item>
           <a href="javascript: void(0);">
-            <i className="topbar__dropdownMenuIcon icmn-user" /> Edit Profile
+            <i className="topbar__dropdownMenuIcon icmn-user" /> <Link to="/profile">Edit Profile</Link>
           </a>
         </Menu.Item>
         <Menu.Divider />

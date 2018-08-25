@@ -1,12 +1,9 @@
 import React from 'react'
-import LoginForm from './LoginForm'
+import SignupForm from './SignupForm'
 import './style.scss'
 
 class Login extends React.Component {
-  state = {
-    backgroundImage: 'url(resources/images/login/main-bg.jpg)',
-    fullSize: false,
-  }
+  state = {}
 
   componentDidMount() {
     document.getElementsByTagName('body')[0].style.overflow = 'hidden'
@@ -17,8 +14,6 @@ class Login extends React.Component {
   }
 
   render() {
-    const { backgroundImage, fullSize } = this.state
-
     return (
       <div 
         className="main-login main-login--fullscreen"
@@ -48,7 +43,7 @@ class Login extends React.Component {
               </div>
               <div className="main-login__block__inner">
                 <div className="main-login__block__form">
-                  <LoginForm email={this.state.restoredEmail} />
+                  <SignupForm />
                 </div>
                 <div className="main-login__block__sidebar">
                   <h4 className="main-login__block__sidebar__title text-white">
