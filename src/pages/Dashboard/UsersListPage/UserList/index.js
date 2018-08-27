@@ -35,15 +35,15 @@ class UsersList extends React.Component {
       filtered: !!searchText,
       data: tableData
         .map(record => {
-          let match = record.name.match(reg)
+          let match = record.email.match(reg)
           if (!match) {
             return null
           }
           return {
             ...record,
-            name: (
+            email: (
               <span>
-                {record.name
+                {record.email
                   .split(reg)
                   .map(
                     (text, i) =>
@@ -93,7 +93,7 @@ class UsersList extends React.Component {
         title: 'Email',
         dataIndex: 'email',
         key: 'email',
-        sorter: (a, b) => a.name.length - b.name.length,
+        sorter: (a, b) => a.email.length - b.email.length,
         render: text => (
           <a className="utils__link--underlined" href="javascript: void(0);">
             <Link to="/profile">{text}</Link>
@@ -130,7 +130,7 @@ class UsersList extends React.Component {
         title: 'Role',
         dataIndex: 'role',
         key: 'role',
-        sorter: (a, b) => a.type.length - b.type.length,
+        sorter: (a, b) => a.role.length - b.role.length,
       },
       {
         title: 'Action',

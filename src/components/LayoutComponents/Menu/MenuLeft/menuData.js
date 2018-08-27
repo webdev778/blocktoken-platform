@@ -12,6 +12,18 @@ export default [
     icon: 'icm icmn-users',
   },
   {
+    title: 'Token Contracts List',
+    key: 'tokenList',
+    url: '/tokenlist',
+    icon: 'icm icmn-bubble2',
+  },
+  {
+    title: 'CrowdSale Contracts List',
+    key: 'crowdsaleList',
+    url: '/crowdsalelist',
+    icon: 'icm icmn-bubbles',
+  },
+  {
     title: 'Empty Page',
     key: 'empty',
     url: '/empty',
