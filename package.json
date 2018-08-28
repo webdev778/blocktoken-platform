@@ -63,7 +63,7 @@
   },
   "lint-staged": {
     "ignore": [
-      "src/contracts/*.js"
+      "**/contracts/*.js"
     ],
     "linters": {
       "src/**/*.js": [
