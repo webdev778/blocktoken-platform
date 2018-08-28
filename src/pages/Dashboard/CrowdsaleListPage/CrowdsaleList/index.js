@@ -2,13 +2,13 @@ import React from 'react'
 import { Table, Icon, Input, Button } from 'antd'
 import { Link } from 'react-router-dom'
 import tableData from './data.json'
-import axios from 'axios';
+import axios from 'axios'
 import './style.scss'
 
-import EyeIcon from '../../../../assets/images/eye.png';
-import DetailIcon from '../../../../assets/images/detail.png';
-import ICOIcon from '../../../../assets/images/ico.png';
-import WhitelistIcon from '../../../../assets/images/whitelist.png';
+import EyeIcon from '../../../../assets/images/eye.png'
+import DetailIcon from '../../../../assets/images/detail.png'
+import ICOIcon from '../../../../assets/images/ico.png'
+import WhitelistIcon from '../../../../assets/images/whitelist.png'
 
 const defaultPagination = {
   pageSizeOptions: ['10', '50', '100', '250'],
@@ -50,14 +50,14 @@ class CrowdsaleList extends React.Component {
       url: '/ico.sol',
       method: 'GET',
       responseType: 'blob', // important
-    }).then((response) => {
-      const url = window.URL.createObjectURL(new Blob([response.data]));
-      const link = document.createElement('a');
-      link.href = url;
-      link.setAttribute('download', 'ico.sol');
-      document.body.appendChild(link);
-      link.click();
-    });
+    }).then(response => {
+      const url = window.URL.createObjectURL(new Blob([response.data]))
+      const link = document.createElement('a')
+      link.href = url
+      link.setAttribute('download', 'ico.sol')
+      document.body.appendChild(link)
+      link.click()
+    })
   }
 
   render() {
@@ -120,10 +120,10 @@ class CrowdsaleList extends React.Component {
             <a href="javascript: void(0);" className="mr-2">
               <img src={EyeIcon} width={16} />
             </a>
-            <a href="javascript: void(0);" className="mr-2" >
+            <a href="javascript: void(0);" className="mr-2">
               <img src={DetailIcon} width={16} />
             </a>
-            <a href="javascript: void(0);" className="mr-2" >
+            <a href="javascript: void(0);" className="mr-2">
               <img src={ICOIcon} width={16} />
             </a>
             <a href="javascript: void(0);" className="mr-2">
@@ -139,8 +139,8 @@ class CrowdsaleList extends React.Component {
         <div className="card-header">
           <div className="utils__title">
             <strong>Crowdsale Contracts List</strong>
-            <button className="btn btn-primary pull-right" >
-              <Link to='crowdsale/create' style={{ color: '#FFF' }}>
+            <button className="btn btn-primary pull-right">
+              <Link to="crowdsale/create" style={{ color: '#FFF' }}>
                 Create Crowdsale Contract
               </Link>
             </button>

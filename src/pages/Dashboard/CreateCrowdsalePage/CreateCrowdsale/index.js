@@ -2,31 +2,29 @@ import React from 'react'
 import { Form, Icon, Input, Button, Tabs, Checkbox } from 'antd'
 import IcoContract from './tabs/ico-contract/IcoContract'
 import Bonuses from './tabs/bonuses/Bonuses'
-import Vesting from './tabs/vesting/Vesting';
+import Vesting from './tabs/vesting/Vesting'
 import './style.scss'
 
-
-const FormItem = Form.Item;
-const TabPane = Tabs.TabPane;
+const FormItem = Form.Item
+const TabPane = Tabs.TabPane
 
 class CreateCrowdsale extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       isWhitelistingEnabled: false,
       isVestingEnabled: false,
-    };
+    }
   }
 
   handleOnValueChange = (key, val) => {
     this.setState({
-      [key]: val
-    });
-  };
+      [key]: val,
+    })
+  }
 
   render() {
-
     const { form } = this.props
 
     return (
@@ -41,20 +39,27 @@ class CreateCrowdsale extends React.Component {
             <div className="col">
               <div className="row-lg-6">
                 <FormItem>
-                  <label className="form-label"><strong>Token Contract</strong></label>
-                  <Input
-                    type="text"
-                    placeholder="Select token contract"
-                    required
-                  />
-                  <Checkbox 
-                    onChange={() => { this.handleOnValueChange('isWhitelistingEnabled', !this.state.isWhitelistingEnabled) }}
-                    value={this.state.isWhitelistingEnabled}>
+                  <label className="form-label">
+                    <strong>Token Contract</strong>
+                  </label>
+                  <Input type="text" placeholder="Select token contract" required />
+                  <Checkbox
+                    onChange={() => {
+                      this.handleOnValueChange(
+                        'isWhitelistingEnabled',
+                        !this.state.isWhitelistingEnabled,
+                      )
+                    }}
+                    value={this.state.isWhitelistingEnabled}
+                  >
                     Whitelisting enabled?
                   </Checkbox>
                   <Checkbox
-                    onChange={() => { this.handleOnValueChange('isVestingEnabled', !this.state.isVestingEnabled) }}
-                    value={this.state.isVestingEnabled}>
+                    onChange={() => {
+                      this.handleOnValueChange('isVestingEnabled', !this.state.isVestingEnabled)
+                    }}
+                    value={this.state.isVestingEnabled}
+                  >
                     Vesting enabled
                   </Checkbox>
                 </FormItem>
@@ -66,17 +71,16 @@ class CreateCrowdsale extends React.Component {
                 <TabPane tab="Bonuses" key="2">
                   <Bonuses />
                 </TabPane>
-                {
-                  this.state.isVestingEnabled && (
+                {this.state.isVestingEnabled && (
                   <TabPane tab="Vesting" key="3">
                     <Vesting />
                   </TabPane>
-                  )
-                }
-                
+                )}
               </Tabs>
             </div>
-            <button className="btn btn-primary pull-right" onClick={this.onClickCreate}>Deploy</button>
+            <button className="btn btn-primary pull-right" onClick={this.onClickCreate}>
+              Deploy
+            </button>
           </Form>
         </div>
       </div>

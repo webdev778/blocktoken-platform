@@ -2,13 +2,12 @@ import React from 'react'
 import { Table, Icon, Input, Button } from 'antd'
 import { Link } from 'react-router-dom'
 import tableData from './data.json'
-import axios from 'axios';
+import axios from 'axios'
 import './style.scss'
 
-import EyeIcon from '../../../../assets/images/eye.png';
-import ManageIcon from '../../../../assets/images/manage.png';
-import DownloadIcon from '../../../../assets/images/download.png';
-
+import EyeIcon from '../../../../assets/images/eye.png'
+import ManageIcon from '../../../../assets/images/manage.png'
+import DownloadIcon from '../../../../assets/images/download.png'
 
 const defaultPagination = {
   pageSizeOptions: ['10', '50', '100', '250'],
@@ -50,14 +49,14 @@ class TokenList extends React.Component {
       url: '/ico.sol',
       method: 'GET',
       responseType: 'blob', // important
-    }).then((response) => {
-      const url = window.URL.createObjectURL(new Blob([response.data]));
-      const link = document.createElement('a');
-      link.href = url;
-      link.setAttribute('download', 'ico.sol');
-      document.body.appendChild(link);
-      link.click();
-    });
+    }).then(response => {
+      const url = window.URL.createObjectURL(new Blob([response.data]))
+      const link = document.createElement('a')
+      link.href = url
+      link.setAttribute('download', 'ico.sol')
+      document.body.appendChild(link)
+      link.click()
+    })
   }
 
   render() {
@@ -108,10 +107,14 @@ class TokenList extends React.Component {
             <a href="javascript: void(0);" className="mr-2">
               <i className="icmn-eye mr-1" title="View on etherscan.io" width={16} />
             </a>
-            <a href="javascript: void(0);" className="mr-2" >
+            <a href="javascript: void(0);" className="mr-2">
               <i className="icmn-cog mr-1" title="View balances" width={16} />
             </a>
-            <a href="javascript: void(0);" onClick={this.handleOnClickDownloadContract} className="mr-2">
+            <a
+              href="javascript: void(0);"
+              onClick={this.handleOnClickDownloadContract}
+              className="mr-2"
+            >
               <i className="icmn-download2 mr-1" title="Download Contract" width={16} />
             </a>
           </span>
@@ -124,8 +127,8 @@ class TokenList extends React.Component {
         <div className="card-header">
           <div className="utils__title">
             <strong>Token Contracts List</strong>
-            <button className="btn btn-primary pull-right" >
-              <Link to='token/create' style={{ color: '#FFF' }}>
+            <button className="btn btn-primary pull-right">
+              <Link to="token/create" style={{ color: '#FFF' }}>
                 Create Token Contract
               </Link>
             </button>

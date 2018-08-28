@@ -4,19 +4,19 @@ import { message } from 'antd'
 
 export const REDUCER = 'login'
 
-export const submit = ({ username, password }: { username: string, password: string }) => (
+export const submit = ({ email, password }: { email: string, password: string }) => (
   dispatch: Function,
   getState: Function,
 ) => {
   dispatch(app.addSubmitForm(REDUCER))
 
-  let isLoggined = app.login(username, password, dispatch)
+  let isLoggined = app.login(email, password, dispatch)
 
   if (isLoggined) {
     dispatch(app.deleteSubmitForm(REDUCER))
   } else {
     dispatch(app.deleteSubmitForm(REDUCER))
-    message.error('Invalid username or password')
+    message.error('Invalid email or password')
   }
 }
 

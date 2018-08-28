@@ -3,5 +3,5 @@ export const networks = {
   '2': 'morden',
   '3': 'ropsten',
   '4': 'rinkeby',
-  '42': 'kovan'
-};
+  '42': 'kovan',
+}
