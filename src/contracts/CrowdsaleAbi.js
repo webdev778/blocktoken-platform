@@ -23,7 +23,7 @@ export default [
         "type": "uint256"
       }
     ],
-    "payable": false,
+    "payable1": false,
     "stateMutability": "view",
     "type": "function"
   },
