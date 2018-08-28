@@ -33,7 +33,7 @@ export default [
     "name": "isVestingEnabled",
     "outputs": [
       {
-        "name": "",
+        "name1": "",
         "type": "bool"
       }
     ],

@@ -62,9 +62,11 @@
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "src/**/*.js": [
-      "prettier --tab-width 2 --print-width 100 --single-quote --trailing-comma all --no-semi --parser babylon --write"
-    ],
+    "linters": {
+      "src/**/*.js": [
+        "prettier --tab-width 2 --print-width 100 --single-quote --trailing-comma all --no-semi --parser babylon --write"
+      ]
+    },
     "ignore": [
       "src/contracts/*.js"
     ]
