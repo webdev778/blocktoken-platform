@@ -58,17 +58,6 @@
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
-    "eject": "react-scripts eject",
-    "precommit": "lint-staged"
-  },
-  "lint-staged": {
-    "linters": {
-      "src/**/*.js": [
-        "prettier --tab-width 2 --print-width 100 --single-quote --trailing-comma all --no-semi --parser babylon --write"
-      ]
-    },
-    "ignore": [
-      "**/contracts/*.js"
-    ]
+    "eject": "react-scripts eject"
   }
 }

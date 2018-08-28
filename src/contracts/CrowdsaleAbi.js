@@ -23,7 +23,7 @@ export default [
         "type": "uint256"
       }
     ],
-    "payable11": false,
+    "payable": false,
     "stateMutability": "view",
     "type": "function"
   },
@@ -33,7 +33,7 @@ export default [
     "name": "isVestingEnabled",
     "outputs": [
       {
-        "name1": "",
+        "name": "",
         "type": "bool"
       }
     ],
