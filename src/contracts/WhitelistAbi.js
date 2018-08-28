@@ -1,197 +1,197 @@
 export default [
   {
-    constant: false,
-    inputs: [
+    "constant": false,
+    "inputs": [
       {
-        name: '_user',
-        type: 'address',
-      },
+        "name": "_user",
+        "type": "address"
+      }
     ],
-    name: 'removeFromWhiteList',
-    outputs: [
+    "name": "removeFromWhiteList",
+    "outputs": [
       {
-        name: '',
-        type: 'bool',
-      },
+        "name": "",
+        "type": "bool"
+      }
     ],
-    payable: false,
-    stateMutability: 'nonpayable',
-    type: 'function',
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    constant: true,
-    inputs: [
+    "constant": true,
+    "inputs": [
       {
-        name: '',
-        type: 'address',
-      },
+        "name": "",
+        "type": "address"
+      }
     ],
-    name: 'whiteList',
-    outputs: [
+    "name": "whiteList",
+    "outputs": [
       {
-        name: '',
-        type: 'bool',
-      },
+        "name": "",
+        "type": "bool"
+      }
     ],
-    payable: false,
-    stateMutability: 'view',
-    type: 'function',
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    constant: false,
-    inputs: [
+    "constant": false,
+    "inputs": [
       {
-        name: '_user',
-        type: 'address',
-      },
+        "name": "_user",
+        "type": "address"
+      }
     ],
-    name: 'addToWhiteList',
-    outputs: [
+    "name": "addToWhiteList",
+    "outputs": [
       {
-        name: '',
-        type: 'bool',
-      },
+        "name": "",
+        "type": "bool"
+      }
     ],
-    payable: false,
-    stateMutability: 'nonpayable',
-    type: 'function',
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    constant: true,
-    inputs: [
+    "constant": true,
+    "inputs": [
       {
-        name: '_user',
-        type: 'address',
-      },
+        "name": "_user",
+        "type": "address"
+      }
     ],
-    name: 'isWhiteListed',
-    outputs: [
+    "name": "isWhiteListed",
+    "outputs": [
       {
-        name: '',
-        type: 'bool',
-      },
+        "name": "",
+        "type": "bool"
+      }
     ],
-    payable: false,
-    stateMutability: 'view',
-    type: 'function',
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    constant: true,
-    inputs: [],
-    name: 'owner',
-    outputs: [
+    "constant": true,
+    "inputs": [],
+    "name": "owner",
+    "outputs": [
       {
-        name: '',
-        type: 'address',
-      },
+        "name": "",
+        "type": "address"
+      }
     ],
-    payable: false,
-    stateMutability: 'view',
-    type: 'function',
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    constant: false,
-    inputs: [
+    "constant": false,
+    "inputs": [
       {
-        name: '_users',
-        type: 'address[]',
-      },
+        "name": "_users",
+        "type": "address[]"
+      }
     ],
-    name: 'addToWhiteListMultiple',
-    outputs: [
+    "name": "addToWhiteListMultiple",
+    "outputs": [
       {
-        name: '',
-        type: 'bool',
-      },
+        "name": "",
+        "type": "bool"
+      }
     ],
-    payable: false,
-    stateMutability: 'nonpayable',
-    type: 'function',
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    constant: true,
-    inputs: [],
-    name: 'totalWhiteListed',
-    outputs: [
+    "constant": true,
+    "inputs": [],
+    "name": "totalWhiteListed",
+    "outputs": [
       {
-        name: '',
-        type: 'uint256',
-      },
+        "name": "",
+        "type": "uint256"
+      }
     ],
-    payable: false,
-    stateMutability: 'view',
-    type: 'function',
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    constant: false,
-    inputs: [
+    "constant": false,
+    "inputs": [
       {
-        name: 'newOwner',
-        type: 'address',
-      },
+        "name": "newOwner",
+        "type": "address"
+      }
     ],
-    name: 'transferOwnership',
-    outputs: [],
-    payable: false,
-    stateMutability: 'nonpayable',
-    type: 'function',
+    "name": "transferOwnership",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    anonymous: false,
-    inputs: [
+    "anonymous": false,
+    "inputs": [
       {
-        indexed: true,
-        name: 'user',
-        type: 'address',
+        "indexed": true,
+        "name": "user",
+        "type": "address"
       },
       {
-        indexed: false,
-        name: 'whiteListedNum',
-        type: 'uint256',
-      },
+        "indexed": false,
+        "name": "whiteListedNum",
+        "type": "uint256"
+      }
     ],
-    name: 'LogWhiteListed',
-    type: 'event',
+    "name": "LogWhiteListed",
+    "type": "event"
   },
   {
-    anonymous: false,
-    inputs: [
+    "anonymous": false,
+    "inputs": [
       {
-        indexed: false,
-        name: 'whiteListedNum',
-        type: 'uint256',
-      },
+        "indexed": false,
+        "name": "whiteListedNum",
+        "type": "uint256"
+      }
     ],
-    name: 'LogWhiteListedMultiple',
-    type: 'event',
+    "name": "LogWhiteListedMultiple",
+    "type": "event"
   },
   {
-    anonymous: false,
-    inputs: [
+    "anonymous": false,
+    "inputs": [
       {
-        indexed: true,
-        name: 'user',
-        type: 'address',
-      },
+        "indexed": true,
+        "name": "user",
+        "type": "address"
+      }
     ],
-    name: 'LogRemoveWhiteListed',
-    type: 'event',
+    "name": "LogRemoveWhiteListed",
+    "type": "event"
   },
   {
-    anonymous: false,
-    inputs: [
+    "anonymous": false,
+    "inputs": [
       {
-        indexed: true,
-        name: 'previousOwner',
-        type: 'address',
+        "indexed": true,
+        "name": "previousOwner",
+        "type": "address"
       },
       {
-        indexed: true,
-        name: 'newOwner',
-        type: 'address',
-      },
+        "indexed": true,
+        "name": "newOwner",
+        "type": "address"
+      }
     ],
-    name: 'OwnershipTransferred',
-    type: 'event',
-  },
-]
+    "name": "OwnershipTransferred",
+    "type": "event"
+  }
+];
