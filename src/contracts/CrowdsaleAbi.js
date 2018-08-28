@@ -1,6 +1,6 @@
 export default [
   {
-    "constant": true,
+    "constant1": true,
     "inputs": [],
     "name": "getWhiteListAddress",
     "outputs": [
