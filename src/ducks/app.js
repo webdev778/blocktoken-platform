@@ -112,7 +112,7 @@ export function login(email, password, dispatch) {
     })
     return true
   }
-  
+
   dispatch(push('/login'))
   dispatch(_setFrom(''))
 

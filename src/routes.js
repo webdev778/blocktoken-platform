@@ -47,6 +47,19 @@ const loadableRoutes = {
   '/dashboard/alpha': {
     component: loadable(() => import('pages/Dashboard/DashboardAlphaPage')),
   },
+
+  '/dash': {
+    component: loadable(() => import('pages/dash')),
+  },
+  '/account': {
+    component: loadable(() => import('pages/account')),
+  },
+  '/identity' : {
+    component: loadable(() => import('pages/identity')),
+  },
+  '/wallet' : {
+    component: loadable(() => import('pages/wallet')),
+  },
 }
 
 class Routes extends React.Component {
