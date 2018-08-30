@@ -24,7 +24,7 @@ const loadableRoutes = {
   '/profile': {
     component: loadable(() => import('pages/Dashboard/ProfilePage')),
   },
-  '/userslist': {
+  '/admin/users': {
     component: loadable(() => import('pages/Dashboard/UsersListPage')),
   },
   '/token/list': {
@@ -42,6 +42,9 @@ const loadableRoutes = {
   '/empty': {
     component: loadable(() => import('pages/DefaultPages/EmptyPage')),
   },
+  '/projects/active': {
+    component: loadable(() => import('pages/Dashboard/ViewProjectsPage')),
+  },
 
   // Dashboards
   '/user/dashboard': {
@@ -51,6 +54,7 @@ const loadableRoutes = {
   '/admin/dashboard': {
     component: loadable(() => import('pages/Dashboard/DashboardUserPage')),
   },
+<<<<<<< HEAD
 
   '/account': {
     component: loadable(() => import('pages/Dashboard/AccountPage')),
@@ -61,6 +65,8 @@ const loadableRoutes = {
   '/wallet' : {
     component: loadable(() => import('pages/Dashboard/MyWalletPage')),
   },
+=======
+>>>>>>> b8ce3e02f1d5c50f64222cb47dc1e01f616e18ef
 }
 
 class Routes extends React.Component {
