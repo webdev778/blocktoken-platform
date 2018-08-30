@@ -53,13 +53,13 @@ const loadableRoutes = {
   },
 
   '/account': {
-    component: loadable(() => import('pages/account')),
+    component: loadable(() => import('pages/Dashboard/AccountPage')),
   },
   '/identity' : {
-    component: loadable(() => import('pages/identity')),
+    component: loadable(() => import('pages/Dashboard/IdentityPage')),
   },
   '/wallet' : {
-    component: loadable(() => import('pages/wallet')),
+    component: loadable(() => import('pages/Dashboard/MyWalletPage')),
   },
 }
 
