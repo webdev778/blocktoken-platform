@@ -50,7 +50,7 @@ class LoginForm extends React.Component {
         <Form layout="vertical" hideRequiredMark onSubmit={this.onSubmit(isSubmitForm)}>
           <FormItem>
             {form.getFieldDecorator('email', {
-              initialValue: 'admin@mediatec.org',
+              initialValue: 'agent@mediatec.org',
               rules: [
                 { type: 'email', message: 'The input is not a valid e-mail address' },
                 { required: true, message: 'Please input your e-mail address' },
