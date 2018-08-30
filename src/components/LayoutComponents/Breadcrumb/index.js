@@ -68,15 +68,13 @@ class Breadcrumb extends React.Component {
 
   componentWillReceiveProps(newProps) {
     this.setState({
-      breadcrumb: this.getBreadcrumb(newProps, menuUser),
-      breadcrumb: this.getBreadcrumb(newProps, menuAdmin),
+      breadcrumb: this.getBreadcrumb(newProps, menuUser, menuAdmin),
     })
   }
 
   componentDidMount() {
     this.setState({
-      breadcrumb: this.getBreadcrumb(this.props, menuUser),
-      breadcrumb: this.getBreadcrumb(this.props, menuAdmin),
+      breadcrumb: this.getBreadcrumb(this.props, menuUser, menuAdmin),
     })
   }
 
@@ -85,7 +83,7 @@ class Breadcrumb extends React.Component {
     return (
       <div className="breadcrumbBar">
         <div className="breadcrumbBar__path">
-          <Link to={`/dashboard/alpha`} className="text-muted">
+          <Link to={`/dashboard`} className="text-muted">
             Home
           </Link>
           {breadcrumb}

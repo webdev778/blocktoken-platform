@@ -155,8 +155,11 @@ class MenuLeft extends React.Component {
   }
 
   componentDidMount() {
-    this.getActiveMenuItem(this.props, menuUser)
-    this.getActiveMenuItem(this.props, menuAdmin)
+    var userRole = window.localStorage.getItem('app.Role');
+    if (userRole === 'agent')
+      this.getActiveMenuItem(this.props, menuUser)
+    else if (userRole === 'administrator')
+      this.getActiveMenuItem(this.props, menuAdmin)
   }
 
   componentWillReceiveProps(newProps) {
@@ -169,8 +172,11 @@ class MenuLeft extends React.Component {
       },
       () => {
         if (!newProps.isMobile) {
-          this.getActiveMenuItem(newProps, menuUser)
-          this.getActiveMenuItem(newProps, menuAdmin)
+          var userRole = window.localStorage.getItem('app.Role');
+          if (userRole === 'agent')
+            this.getActiveMenuItem(newProps, menuUser)
+          else if (userRole === 'administrator')
+            this.getActiveMenuItem(newProps, menuAdmin)
         }
       },
     )

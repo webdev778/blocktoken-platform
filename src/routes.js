@@ -27,13 +27,13 @@ const loadableRoutes = {
   '/userslist': {
     component: loadable(() => import('pages/Dashboard/UsersListPage')),
   },
-  '/tokenlist': {
+  '/token/list': {
     component: loadable(() => import('pages/Dashboard/TokenListPage')),
   },
   '/token/create': {
     component: loadable(() => import('pages/Dashboard/CreateTokenPage')),
   },
-  '/crowdsalelist': {
+  '/token/crowdsale': {
     component: loadable(() => import('pages/Dashboard/CrowdsaleListPage')),
   },
   '/crowdsale/create': {
@@ -44,7 +44,7 @@ const loadableRoutes = {
   },
 
   // Dashboards
-  '/dashboard/alpha': {
+  '/dashboard': {
     component: loadable(() => import('pages/Dashboard/DashboardAlphaPage')),
   },
 
