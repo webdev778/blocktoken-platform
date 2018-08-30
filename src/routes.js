@@ -24,7 +24,7 @@ const loadableRoutes = {
   '/profile': {
     component: loadable(() => import('pages/Dashboard/ProfilePage')),
   },
-  '/userslist': {
+  '/admin/users': {
     component: loadable(() => import('pages/Dashboard/UsersListPage')),
   },
   '/token/list': {
@@ -42,6 +42,9 @@ const loadableRoutes = {
   '/empty': {
     component: loadable(() => import('pages/DefaultPages/EmptyPage')),
   },
+  '/projects/active': {
+    component: loadable(() => import('pages/Dashboard/ViewProjectsPage')),
+  },
 
   // Dashboards
   '/user/dashboard': {
@@ -50,16 +53,6 @@ const loadableRoutes = {
 
   '/admin/dashboard': {
     component: loadable(() => import('pages/Dashboard/DashboardUserPage')),
-  },
-
-  '/account': {
-    component: loadable(() => import('pages/account')),
-  },
-  '/identity' : {
-    component: loadable(() => import('pages/identity')),
-  },
-  '/wallet' : {
-    component: loadable(() => import('pages/wallet')),
   },
 }
 

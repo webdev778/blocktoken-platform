@@ -1,0 +1,48 @@
+{
+  "tokenTableData": [
+    {
+      "key": "1",
+      "name": "EOS",
+      "price": "$5.8406145197",
+      "marketcap": "$5,293,030,000",
+      "change(24h)": "-4.33%"
+    },
+    {
+      "key": "2",
+      "name": "TRON",
+      "price": "$0.0239710944",
+      "marketcap": "$1,576,050,000",
+      "change(24h)": "-10.05%"
+    },
+    {
+      "key": "3",
+      "name": "BNB",
+      "price": "$10.5833094522",
+      "marketcap": "$1,010,840,000",
+      "change(24h)": "-5.4%"
+    }
+  ],
+  "syndicateTableData": [
+    {
+      "key": "1",
+      "name": "EOS",
+      "price": "$5.8406145197",
+      "marketcap": "$5,293,030,000",
+      "change(24h)": "-4.33%"
+    },
+    {
+      "key": "2",
+      "name": "TRON",
+      "price": "$0.0239710944",
+      "marketcap": "$1,576,050,000",
+      "change(24h)": "-10.05%"
+    },
+    {
+      "key": "3",
+      "name": "BNB",
+      "price": "$10.5833094522",
+      "marketcap": "$1,010,840,000",
+      "change(24h)": "-5.4%"
+    }
+  ]
+}
