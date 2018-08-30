@@ -3,6 +3,7 @@ import { push } from 'react-router-redux'
 import { pendingTask, begin, end } from 'react-redux-spinner'
 import { notification } from 'antd'
 import axios from 'axios'
+import * as AuthAPI from 'lib/api/auth'
 
 const REDUCER = 'app'
 const NS = `@@${REDUCER}/`
@@ -59,7 +60,6 @@ export const initAuth = roles => (dispatch, getState) => {
       }),
     )
     if (!roles.find(role => role === userRole)) {
-      console.log(state.routing.location.pathname);
       if (!(state.routing.location.pathname === '/dashboard')) {
         dispatch(push('/dashboard'))
       }
@@ -84,40 +84,34 @@ export const initAuth = roles => (dispatch, getState) => {
   }
 }
 
-export function login(email, password, dispatch) {
+export async function login(email, password, dispatch) {
   // Use Axios there to get User Auth Token with Basic Method Authentication
-  if (email === 'admin@mediatec.org' && password === '123123') {
+  try{
+    console.log(email + password);
+    const result = await AuthAPI.localLogin({email, password})
+    //console.log(result)
+
     window.localStorage.setItem('app.Authorization', '')
     window.localStorage.setItem('app.Role', 'administrator')
     dispatch(_setHideLogin(true))
-    dispatch(push('/admin/dashboard'))
+    dispatch(push('/dashboard/user'))
+
     notification.open({
       type: 'success',
       message: 'You have successfully logged in!',
       description:
         'Welcome to the Clean UI Admin Template. The Clean UI Admin Template is a complimentary template that empowers developers to make perfect looking and useful apps!',
     })
-    return true
+
+    return true;
+    
+  }catch(e){
+    console.log('the password or email is in correct.')
+    console.log(e);
+    //dispatch(push('/login'))
+    dispatch(_setFrom(''))
+    return false;
   }
-
-  if (email === 'agent@mediatec.org' && password === '123123') {
-    window.localStorage.setItem('app.Authorization', '')
-    window.localStorage.setItem('app.Role', 'agent')
-    dispatch(_setHideLogin(true))
-    dispatch(push('/user/dashboard'))
-    notification.open({
-      type: 'success',
-      message: 'You have successfully logged in!',
-      description:
-        'Welcome to the Clean UI Admin Template. The Clean UI Admin Template is a complimentary template that empowers developers to make perfect looking and useful apps!',
-    })
-    return true
-  }
-
-  dispatch(push('/login'))
-  dispatch(_setFrom(''))
-
-  return false
 }
 
 export const logout = () => (dispatch, getState) => {

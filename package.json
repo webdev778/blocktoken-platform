@@ -59,5 +59,6 @@
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "eject": "react-scripts eject"
-  }
+  },
+  "proxy": "http://18.188.0.108:4000/"
 }
