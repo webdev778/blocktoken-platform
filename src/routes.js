@@ -44,13 +44,14 @@ const loadableRoutes = {
   },
 
   // Dashboards
-  '/dashboard': {
-    component: loadable(() => import('pages/Dashboard/DashboardAlphaPage')),
+  '/user/dashboard': {
+    component: loadable(() => import('pages/Dashboard/DashboardUserPage')),
   },
 
-  '/dash': {
-    component: loadable(() => import('pages/dash')),
+  '/admin/dashboard': {
+    component: loadable(() => import('pages/Dashboard/DashboardUserPage')),
   },
+
   '/account': {
     component: loadable(() => import('pages/account')),
   },

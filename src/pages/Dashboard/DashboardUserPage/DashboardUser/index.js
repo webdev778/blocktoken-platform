@@ -6,7 +6,7 @@ import ChartCard from 'components/CleanComponents/ChartCard'
 import { Button, Input, Icon, Table } from 'antd'
 import { tableData } from './data.json'
 
-class DashboardAlpha extends React.Component {
+class DashboardUser extends React.Component {
   state = {
     tableData: tableData,
   }
@@ -242,4 +242,4 @@ class DashboardAlpha extends React.Component {
   }
 }
 
-export default DashboardAlpha
+export default DashboardUser

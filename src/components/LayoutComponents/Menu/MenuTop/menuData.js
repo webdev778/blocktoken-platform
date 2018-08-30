@@ -2,7 +2,7 @@ export default [
   {
     title: 'Dashboard',
     key: 'dashboard',
-    url: '/dashboard',
+    url: '/user/dashboard',
     icon: 'icmn icmn-stack',
   },
   {

@@ -2,7 +2,7 @@ export default [
   {
     title: 'Dashboard',
     key: 'admin_dashboard',
-    url: '/dashboard',
+    url: '/admin/dashboard',
     icon: 'icmn icmn-home',
   },
   {
