@@ -2,7 +2,6 @@ import { createAction, createReducer } from 'redux-act'
 import { push } from 'react-router-redux'
 import { pendingTask, begin, end } from 'react-redux-spinner'
 import { notification } from 'antd'
-import axios from 'axios'
 import * as AuthAPI from 'lib/api/auth'
 
 const REDUCER = 'app'
@@ -87,27 +86,51 @@ export const initAuth = roles => (dispatch, getState) => {
 export async function login(email, password, dispatch) {
   // Use Axios there to get User Auth Token with Basic Method Authentication
   try{
-    console.log(email + password);
     const result = await AuthAPI.localLogin({email, password})
-    //console.log(result)
-
-    window.localStorage.setItem('app.Authorization', '')
     window.localStorage.setItem('app.Role', 'administrator')
     dispatch(_setHideLogin(true))
-    dispatch(push('/dashboard/user'))
-
+    dispatch(push('/admin/dashboard'))
+    
     notification.open({
       type: 'success',
       message: 'You have successfully logged in!',
-      description:
-        'Welcome to the Clean UI Admin Template. The Clean UI Admin Template is a complimentary template that empowers developers to make perfect looking and useful apps!',
     })
 
     return true;
     
-  }catch(e){
-    console.log('the password or email is in correct.')
-    console.log(e);
+  }catch(err){
+    notification.open({
+      type: 'error',
+      message: 'Your email and password does not match!',
+    })
+    dispatch(push('/login'))
+    dispatch(_setFrom(''))
+    return false;
+  }
+}
+
+export async function signup(displayName, email, password, dispatch) {
+  // Use Axios there to get User Auth Token with Basic Method Authentication
+  try{
+    console.log(displayName + ", " + email + ", " + password);
+    const result = await AuthAPI.localRegister({displayName, email, password})
+    console.log(result);
+
+    dispatch(push('/login'))
+    dispatch(_setFrom(''))
+    
+    notification.open({
+      type: 'success',
+      message: 'You have successfully signed up!',
+    })
+
+    return true;
+    
+  }catch(err){
+    notification.open({
+      type: 'error',
+      message: 'Sign up failed!',
+    })
     //dispatch(push('/login'))
     dispatch(_setFrom(''))
     return false;

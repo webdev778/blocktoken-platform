@@ -39,18 +39,9 @@ class LoginForm extends React.Component {
         </h4>
         <br />
 
-        {/*
-        <div className="mb-2">
-          Email: <code>admin@mediatec.org</code> or <code>agent@mediatec.org</code>
-        </div>
-        <div className="mb-4">
-          Password: <code>123123</code>
-        </div>
-        */}
         <Form layout="vertical" hideRequiredMark onSubmit={this.onSubmit(isSubmitForm)}>
           <FormItem>
             {form.getFieldDecorator('email', {
-              initialValue: 'agent@mediatec.org',
               rules: [
                 { type: 'email', message: 'The input is not a valid e-mail address' },
                 { required: true, message: 'Please input your e-mail address' },
@@ -64,7 +55,6 @@ class LoginForm extends React.Component {
           </FormItem>
           <FormItem>
             {form.getFieldDecorator('password', {
-              initialValue: '123123',
               rules: [{ required: true, message: 'Please input your password' }],
             })(
               <Input
