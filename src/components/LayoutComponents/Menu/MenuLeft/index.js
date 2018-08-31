@@ -156,7 +156,7 @@ class MenuLeft extends React.Component {
 
   componentDidMount() {
     var userRole = window.localStorage.getItem('app.Role');
-    if (userRole === 'agent')
+    if (userRole === 'user')
       this.getActiveMenuItem(this.props, menuUser)
     else if (userRole === 'administrator')
       this.getActiveMenuItem(this.props, menuAdmin)
@@ -173,7 +173,7 @@ class MenuLeft extends React.Component {
       () => {
         if (!newProps.isMobile) {
           var userRole = window.localStorage.getItem('app.Role');
-          if (userRole === 'agent')
+          if (userRole === 'user')
             this.getActiveMenuItem(newProps, menuUser)
           else if (userRole === 'administrator')
             this.getActiveMenuItem(newProps, menuAdmin)
@@ -234,7 +234,7 @@ class MenuLeft extends React.Component {
                 className={'icmn icmn-cog menuLeft__icon utils__spin-delayed--pseudo-selector'}
               />
             </Menu.Item>
-            {(userRole === 'agent') && menuUserItems}
+            {(userRole === 'user') && menuUserItems}
             {(userRole === 'administrator') && menuAdminItems}
           </Menu>
         </Scrollbars>

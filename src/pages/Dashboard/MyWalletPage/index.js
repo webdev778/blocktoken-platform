@@ -5,7 +5,7 @@ import Helmet from 'react-helmet'
 class Wallet extends React.Component {
   static defaultProps ={
     pathName: 'Wallet',
-    roles: ['agent', 'administrator',]
+    roles: ['user', 'administrator',]
   }
   render() {
     const props = this.props

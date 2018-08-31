@@ -5,7 +5,7 @@ import Helmet from 'react-helmet'
 class Account extends React.Component {
   static defaultProps ={
     pathName: 'Account',
-    roles: ['agent', 'administrator',]
+    roles: ['user', 'administrator',]
   }
   render() {
     const props = this.props

@@ -6,7 +6,7 @@ import DashboardUser from './DashboardUser'
 class DashboardUserPage extends React.Component {
   static defaultProps = {
     pathName: 'Dashboard',
-    roles: ['agent', 'administrator'],
+    roles: ['user', 'administrator'],
   }
 
   render() {

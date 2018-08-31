@@ -6,7 +6,7 @@ import UsersList from './UserList/'
 class UsersListPage extends React.Component {
   static defaultProps = {
     pathName: 'User List',
-    roles: ['agent', 'administrator'],
+    roles: ['user', 'administrator'],
   }
 
   render() {

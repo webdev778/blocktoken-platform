@@ -30,13 +30,13 @@ const loadableRoutes = {
   '/token/list': {
     component: loadable(() => import('pages/Dashboard/TokenListPage')),
   },
-  '/token/create': {
+  '/create': {
     component: loadable(() => import('pages/Dashboard/CreateTokenPage')),
   },
   '/token/crowdsale': {
     component: loadable(() => import('pages/Dashboard/CrowdsaleListPage')),
   },
-  '/crowdsale/create': {
+  '/token/crowdsale/create': {
     component: loadable(() => import('pages/Dashboard/CreateCrowdsalePage')),
   },
   '/empty': {

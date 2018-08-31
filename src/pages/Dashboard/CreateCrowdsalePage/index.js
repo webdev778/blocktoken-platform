@@ -6,7 +6,7 @@ import CreateCrowdsale from './CreateCrowdsale/'
 class CreateCrowdsalePage extends React.Component {
   static defaultProps = {
     pathName: 'Create Crowdsale Contract',
-    roles: ['agent', 'administrator'],
+    roles: ['user', 'administrator'],
   }
 
   render() {

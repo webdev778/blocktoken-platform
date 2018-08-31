@@ -44,9 +44,9 @@ export const initAuth = roles => (dispatch, getState) => {
       email: 'admin@mediatec.org',
       role: 'administrator',
     },
-    agent: {
+    user: {
       email: 'agent@mediatec.org',
-      role: 'agent',
+      role: 'user',
     },
   }
 
@@ -71,7 +71,7 @@ export const initAuth = roles => (dispatch, getState) => {
     case 'administrator':
       return setUser(users.administrator, userRole)
 
-    case 'agent':
+    case 'user':
       return setUser(users.agent, userRole)
 
     default:
@@ -87,10 +87,23 @@ export async function login(email, password, dispatch) {
   // Use Axios there to get User Auth Token with Basic Method Authentication
   try{
     const result = await AuthAPI.localLogin({email, password})
-    window.localStorage.setItem('app.Role', 'administrator')
-    dispatch(_setHideLogin(true))
-    dispatch(push('/admin/dashboard'))
+    if (email === 'admin@blocktoken.ai' && password === '123123')
+    {
+      window.localStorage.setItem('app.Role', 'administrator')
+      dispatch(_setHideLogin(true))
+      dispatch(push('/admin/dashboard'))
+      notification.open({
+        type: 'success',
+        message: 'You have successfully logged in!',
+      })
+  
+      return true;
+    }
     
+    window.localStorage.setItem('app.Role', 'user')
+    dispatch(_setHideLogin(true))
+    dispatch(push('/user/dashboard'))
+      
     notification.open({
       type: 'success',
       message: 'You have successfully logged in!',

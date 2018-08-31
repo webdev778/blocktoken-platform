@@ -5,7 +5,7 @@ import Helmet from 'react-helmet'
 class Identity extends React.Component {
   static defaultProps ={
     pathName: 'Identity',
-    roles: ['agent', 'administrator',]
+    roles: ['user', 'administrator',]
   }
   render() {
     const props = this.props

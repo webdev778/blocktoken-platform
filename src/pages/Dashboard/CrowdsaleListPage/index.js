@@ -6,7 +6,7 @@ import CrowdsaleList from './CrowdsaleList/'
 class CrowdsaleListPage extends React.Component {
   static defaultProps = {
     pathName: 'Crowdsale Contracts List',
-    roles: ['agent', 'administrator'],
+    roles: ['user', 'administrator'],
   }
 
   render() {

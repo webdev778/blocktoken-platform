@@ -6,7 +6,7 @@ import ViewProjects from './ViewProjects'
 class ViewProjectsPage extends React.Component {
   static defaultProps = {
     pathName: 'View All Live Projects',
-    roles: ['agent', 'administrator'],
+    roles: ['user', 'administrator'],
   }
 
   render() {
