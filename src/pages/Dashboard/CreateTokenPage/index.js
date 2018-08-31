@@ -6,7 +6,7 @@ import CreateToken from './CreateToken/'
 class CreateTokenPage extends React.Component {
   static defaultProps = {
     pathName: 'Create Token Contract',
-    roles: ['agent', 'administrator'],
+    roles: ['user', 'administrator'],
   }
 
   render() {

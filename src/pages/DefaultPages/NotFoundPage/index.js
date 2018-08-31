@@ -5,7 +5,7 @@ const NotFoundPage = () =>
   <div className="text-center">
     <div className="w-50 d-inline-block pt-5 pb-5 mt-5 mb-5">
       <h1 className="mb-4">
-        <strong>Error 404</strong>
+        <strong>Empty Page</strong>
       </h1>
       <p className="mb-4">
         The page you are looking for does not exist it may have been moved, or removed altogether.

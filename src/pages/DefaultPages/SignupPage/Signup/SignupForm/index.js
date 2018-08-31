@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { REDUCER, submit } from 'ducks/login'
+import { REDUCER, submit } from 'ducks/signup'
 import { Form, Input, Icon, Checkbox, Button } from 'antd'
 
 const FormItem = Form.Item
@@ -24,9 +24,11 @@ class SignupForm extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault()
+    const { form, dispatch } = this.props
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values)
+        dispatch(submit(values))
       }
     })
   }
@@ -59,13 +61,23 @@ class SignupForm extends React.Component {
         <br />
 
         <Form onSubmit={this.handleSubmit} className="login-form">
-          <FormItem validateStatus="validating">
-            {form.getFieldDecorator('Nickname', {
-              rules: [{ required: true, message: 'Please input your Nickname!' }],
+        <FormItem>
+            {form.getFieldDecorator('displayName', {
+              rules: [{ required: true, message: 'Please input your username!' }],
             })(
               <Input
                 prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                placeholder="Email or Nickname"
+                placeholder="Username"
+              />,
+            )}
+          </FormItem>
+          <FormItem>
+            {form.getFieldDecorator('email', {
+              rules: [{ required: true, message: 'Please input your email!' }],
+            })(
+              <Input
+                prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                placeholder="Email"
               />,
             )}
           </FormItem>

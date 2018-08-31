@@ -2,7 +2,6 @@ import { createAction, createReducer } from 'redux-act'
 import { push } from 'react-router-redux'
 import { pendingTask, begin, end } from 'react-redux-spinner'
 import { notification } from 'antd'
-import axios from 'axios'
 import * as AuthAPI from 'lib/api/auth'
 
 const REDUCER = 'app'
@@ -45,9 +44,9 @@ export const initAuth = roles => (dispatch, getState) => {
       email: 'admin@mediatec.org',
       role: 'administrator',
     },
-    agent: {
+    user: {
       email: 'agent@mediatec.org',
-      role: 'agent',
+      role: 'user',
     },
   }
 
@@ -60,8 +59,8 @@ export const initAuth = roles => (dispatch, getState) => {
       }),
     )
     if (!roles.find(role => role === userRole)) {
-      if (!(state.routing.location.pathname === '/dashboard/alpha')) {
-        dispatch(push('/dashboard/alpha'))
+      if (!(state.routing.location.pathname === '/dashboard')) {
+        dispatch(push('/dashboard'))
       }
       return Promise.resolve(false)
     }
@@ -72,7 +71,7 @@ export const initAuth = roles => (dispatch, getState) => {
     case 'administrator':
       return setUser(users.administrator, userRole)
 
-    case 'agent':
+    case 'user':
       return setUser(users.agent, userRole)
 
     default:
@@ -88,25 +87,63 @@ export async function login(email, password, dispatch) {
   // Use Axios there to get User Auth Token with Basic Method Authentication
   try{
     const result = await AuthAPI.localLogin({email, password})
-    console.log(result)
-
-    window.localStorage.setItem('app.Authorization', '')
-    window.localStorage.setItem('app.Role', 'administrator')
+    if (email === 'admin@blocktoken.ai' && password === '123123')
+    {
+      window.localStorage.setItem('app.Role', 'administrator')
+      dispatch(_setHideLogin(true))
+      dispatch(push('/admin/dashboard'))
+      notification.open({
+        type: 'success',
+        message: 'You have successfully logged in!',
+      })
+  
+      return true;
+    }
+    
+    window.localStorage.setItem('app.Role', 'user')
     dispatch(_setHideLogin(true))
-    dispatch(push('/dashboard/alpha'))
-
+    dispatch(push('/user/dashboard'))
+      
     notification.open({
       type: 'success',
       message: 'You have successfully logged in!',
-      description:
-        'Welcome to the Clean UI Admin Template. The Clean UI Admin Template is a complimentary template that empowers developers to make perfect looking and useful apps!',
     })
 
     return true;
     
-  }catch(e){
-    console.log('the password or email is in correct.')
-    console.log(e);
+  }catch(err){
+    notification.open({
+      type: 'error',
+      message: 'Your email and password does not match!',
+    })
+    dispatch(push('/login'))
+    dispatch(_setFrom(''))
+    return false;
+  }
+}
+
+export async function signup(displayName, email, password, dispatch) {
+  // Use Axios there to get User Auth Token with Basic Method Authentication
+  try{
+    console.log(displayName + ", " + email + ", " + password);
+    const result = await AuthAPI.localRegister({displayName, email, password})
+    console.log(result);
+
+    dispatch(push('/login'))
+    dispatch(_setFrom(''))
+    
+    notification.open({
+      type: 'success',
+      message: 'You have successfully signed up!',
+    })
+
+    return true;
+    
+  }catch(err){
+    notification.open({
+      type: 'error',
+      message: 'Sign up failed!',
+    })
     //dispatch(push('/login'))
     dispatch(_setFrom(''))
     return false;

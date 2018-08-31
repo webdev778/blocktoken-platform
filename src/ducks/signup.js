@@ -2,15 +2,15 @@ import { createReducer } from 'redux-act'
 import * as app from './app'
 import { message } from 'antd'
 
-export const REDUCER = 'login'
+export const REDUCER = 'signup'
 
-export const submit = ({ email, password }: { email: string, password: string }) => (
+export const submit = ({ displayName, email, password }: { displayName: string, email: string, password: string }) => (
   dispatch: Function,
   getState: Function,
 ) => {
   dispatch(app.addSubmitForm(REDUCER))
-
-  let isLoggined = app.login(email, password, dispatch)
+  console.log(displayName + ", " + email + ", " + password);
+  let isLoggined = app.signup(displayName, email, password, dispatch)
 
   if (isLoggined) {
     dispatch(app.deleteSubmitForm(REDUCER))

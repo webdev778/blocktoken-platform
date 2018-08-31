@@ -1,11 +1,11 @@
 import React from 'react'
 import Page from 'components/LayoutComponents/Page'
 import Helmet from 'react-helmet'
-import CrowdsaleList from './CrowdsaleList/'
+import ViewProjects from './ViewProjects'
 
-class CrowdsaleListPage extends React.Component {
+class ViewProjectsPage extends React.Component {
   static defaultProps = {
-    pathName: 'Crowdsale Contracts List',
+    pathName: 'View All Live Projects',
     roles: ['user', 'administrator'],
   }
 
@@ -13,11 +13,11 @@ class CrowdsaleListPage extends React.Component {
     const props = this.props
     return (
       <Page {...props}>
-        <Helmet title="Crowdsale Contracts List" />
-        <CrowdsaleList />
+        <Helmet title="View All Live Projects" />
+        <ViewProjects />
       </Page>
     )
   }
 }
 
-export default CrowdsaleListPage
+export default ViewProjectsPage

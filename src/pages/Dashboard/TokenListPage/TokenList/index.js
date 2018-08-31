@@ -128,7 +128,7 @@ class TokenList extends React.Component {
           <div className="utils__title">
             <strong>Token Contracts List</strong>
             <button className="btn btn-primary pull-right">
-              <Link to="token/create" style={{ color: '#FFF' }}>
+              <Link to="/create" style={{ color: '#FFF' }}>
                 Create Token Contract
               </Link>
             </button>

@@ -24,28 +24,45 @@ const loadableRoutes = {
   '/profile': {
     component: loadable(() => import('pages/Dashboard/ProfilePage')),
   },
-  '/userslist': {
+  '/admin/users': {
     component: loadable(() => import('pages/Dashboard/UsersListPage')),
   },
-  '/tokenlist': {
+  '/token/list': {
     component: loadable(() => import('pages/Dashboard/TokenListPage')),
   },
-  '/token/create': {
+  '/create': {
     component: loadable(() => import('pages/Dashboard/CreateTokenPage')),
   },
-  '/crowdsalelist': {
+  '/token/crowdsale': {
     component: loadable(() => import('pages/Dashboard/CrowdsaleListPage')),
   },
-  '/crowdsale/create': {
+  '/token/crowdsale/create': {
     component: loadable(() => import('pages/Dashboard/CreateCrowdsalePage')),
   },
   '/empty': {
     component: loadable(() => import('pages/DefaultPages/EmptyPage')),
   },
+  '/projects/active': {
+    component: loadable(() => import('pages/Dashboard/ViewProjectsPage')),
+  },
 
   // Dashboards
-  '/dashboard/alpha': {
-    component: loadable(() => import('pages/Dashboard/DashboardAlphaPage')),
+  '/user/dashboard': {
+    component: loadable(() => import('pages/Dashboard/DashboardUserPage')),
+  },
+
+  '/admin/dashboard': {
+    component: loadable(() => import('pages/Dashboard/DashboardUserPage')),
+  },
+
+  '/account': {
+    component: loadable(() => import('pages/Dashboard/AccountPage')),
+  },
+  '/identity' : {
+    component: loadable(() => import('pages/Dashboard/IdentityPage')),
+  },
+  '/wallet' : {
+    component: loadable(() => import('pages/Dashboard/MyWalletPage')),
   },
 }
 

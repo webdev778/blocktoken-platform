@@ -1,8 +1,8 @@
 export default [
   {
-    title: 'Dashboard Alpha',
-    key: 'dashboardAlpha',
-    url: '/dashboard/alpha',
+    title: 'Dashboard',
+    key: 'dashboard',
+    url: '/user/dashboard',
     icon: 'icmn icmn-stack',
   },
   {

@@ -1,7 +1,8 @@
 // @flow
 import React from 'react'
 import { Link, withRouter } from 'react-router-dom'
-import { menuData } from '../Menu/MenuLeft'
+import { menuUser } from '../Menu/MenuLeft'
+import { menuAdmin } from '../Menu/MenuLeft'
 import { reduce } from 'lodash'
 import './style.scss'
 
@@ -67,13 +68,13 @@ class Breadcrumb extends React.Component {
 
   componentWillReceiveProps(newProps) {
     this.setState({
-      breadcrumb: this.getBreadcrumb(newProps, menuData),
+      breadcrumb: this.getBreadcrumb(newProps, menuUser, menuAdmin),
     })
   }
 
   componentDidMount() {
     this.setState({
-      breadcrumb: this.getBreadcrumb(this.props, menuData),
+      breadcrumb: this.getBreadcrumb(this.props, menuUser, menuAdmin),
     })
   }
 
@@ -82,7 +83,7 @@ class Breadcrumb extends React.Component {
     return (
       <div className="breadcrumbBar">
         <div className="breadcrumbBar__path">
-          <Link to={`/dashboard/alpha`} className="text-muted">
+          <Link to={`/user/dashboard`} className="text-muted">
             Home
           </Link>
           {breadcrumb}

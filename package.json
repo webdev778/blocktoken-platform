@@ -60,5 +60,5 @@
     "build": "react-app-rewired build",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://18.222.253.83:4000/"
+  "proxy": "http://18.188.0.108:4000/"
 }

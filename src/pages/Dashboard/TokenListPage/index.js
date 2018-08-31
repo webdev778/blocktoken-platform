@@ -6,7 +6,7 @@ import TokenList from './TokenList/'
 class TokenListPage extends React.Component {
   static defaultProps = {
     pathName: 'Token Contracts List',
-    roles: ['agent', 'administrator'],
+    roles: ['user', 'administrator'],
   }
 
   render() {

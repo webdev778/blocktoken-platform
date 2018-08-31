@@ -5,7 +5,8 @@ import { Link, withRouter } from 'react-router-dom'
 import { reduce } from 'lodash'
 import { setLayoutState } from 'ducks/app'
 import { Scrollbars } from 'react-custom-scrollbars'
-import { default as menuData } from './menuData'
+import { default as menuUser } from './menuUser'
+import menuAdmin from './menuAdmin'
 import './style.scss'
 
 const { Sider } = Layout
@@ -32,6 +33,7 @@ class MenuLeft extends React.Component {
     selectedKeys: '',
     openKeys: [''],
     settingsOpened: this.props.settingsOpened,
+    role : this.props.role,
   }
 
   handleClick = e => {
@@ -153,7 +155,11 @@ class MenuLeft extends React.Component {
   }
 
   componentDidMount() {
-    this.getActiveMenuItem(this.props, menuData)
+    var userRole = window.localStorage.getItem('app.Role');
+    if (userRole === 'user')
+      this.getActiveMenuItem(this.props, menuUser)
+    else if (userRole === 'administrator')
+      this.getActiveMenuItem(this.props, menuAdmin)
   }
 
   componentWillReceiveProps(newProps) {
@@ -166,7 +172,11 @@ class MenuLeft extends React.Component {
       },
       () => {
         if (!newProps.isMobile) {
-          this.getActiveMenuItem(newProps, menuData)
+          var userRole = window.localStorage.getItem('app.Role');
+          if (userRole === 'user')
+            this.getActiveMenuItem(newProps, menuUser)
+          else if (userRole === 'administrator')
+            this.getActiveMenuItem(newProps, menuAdmin)
         }
       },
     )
@@ -175,7 +185,8 @@ class MenuLeft extends React.Component {
   render() {
     const { collapsed, selectedKeys, openKeys, theme } = this.state
     const { isMobile } = this.props
-    const menuItems = this.generateMenuPartitions(menuData)
+    const menuUserItems = this.generateMenuPartitions(menuUser)
+    const menuAdminItems = this.generateMenuPartitions(menuAdmin)
     const paramsMobile = {
       width: 256,
       collapsible: false,
@@ -190,6 +201,7 @@ class MenuLeft extends React.Component {
       breakpoint: 'lg',
     }
     const params = isMobile ? paramsMobile : paramsDesktop
+    const userRole = window.localStorage.getItem('app.Role')
     return (
       <Sider {...params} className="menuLeft">
         <div className="menuLeft__logo">
@@ -222,7 +234,8 @@ class MenuLeft extends React.Component {
                 className={'icmn icmn-cog menuLeft__icon utils__spin-delayed--pseudo-selector'}
               />
             </Menu.Item>
-            {menuItems}
+            {(userRole === 'user') && menuUserItems}
+            {(userRole === 'administrator') && menuAdminItems}
           </Menu>
         </Scrollbars>
       </Sider>
@@ -230,4 +243,4 @@ class MenuLeft extends React.Component {
   }
 }
 
-export { MenuLeft, menuData }
+export { MenuLeft, menuUser, menuAdmin }
