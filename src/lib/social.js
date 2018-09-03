@@ -17,7 +17,7 @@ export default(function () {
         },
         google: () => {
             return new Promise((resolve, reject) => {
-                hello.login('google', { scope: 'email' }).then(
+                hello.login('google', { scope: 'https://www.googleapis.com/auth/userinfo.email' }).then(
                     auth => resolve(auth.authResponse.access_token),
                     e => reject(e)
                 );
