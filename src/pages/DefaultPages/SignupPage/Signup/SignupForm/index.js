@@ -8,6 +8,8 @@ const FormItem = Form.Item
 
 const mapStateToProps = (state, props) => ({
   isSubmitForm: state.app.submitForms[REDUCER],
+  socialProfile: state.auth.get('socialProfile'),
+  redirectToRegister: state.auth.get('redirectToRegister')
 })
 
 @connect(mapStateToProps)
@@ -51,8 +53,13 @@ class SignupForm extends React.Component {
   }
 
   render() {
-    const { form } = this.props
+    const { form, socialProfile, redirectToRegister } = this.props
+    let email = '', name = '';
 
+    if(socialProfile){
+      email = socialProfile.email || ''
+      name = socialProfile.name || ''
+    }
     return (
       <div className="cat__pages__login__block__form">
         <h4 className="text-uppercase">
@@ -61,9 +68,11 @@ class SignupForm extends React.Component {
         <br />
 
         <Form onSubmit={this.handleSubmit} className="login-form">
-        <FormItem>
+          <FormItem>
             {form.getFieldDecorator('displayName', {
-              rules: [{ required: true, message: 'Please input your username!' }],
+              initialValue: name || '',
+              rules: [
+                { required: true, message: 'Please input your username!' }],
             })(
               <Input
                 prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
@@ -73,6 +82,7 @@ class SignupForm extends React.Component {
           </FormItem>
           <FormItem>
             {form.getFieldDecorator('email', {
+              initialValue: email || '',
               rules: [{ required: true, message: 'Please input your email!' }],
             })(
               <Input
@@ -81,42 +91,48 @@ class SignupForm extends React.Component {
               />,
             )}
           </FormItem>
-          <FormItem>
-            {form.getFieldDecorator('password', {
-              rules: [
-                {
-                  required: true,
-                },
-                {
-                  validator: this.validateToNextPassword,
-                },
-              ],
-            })(
-              <Input
-                prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                type="password"
-                placeholder="Input your password"
-              />,
-            )}
-          </FormItem>
-          <FormItem>
-            {form.getFieldDecorator('confirm', {
-              rules: [
-                {
-                  required: true,
-                },
-                {
-                  validator: this.compareToFirstPassword,
-                },
-              ],
-            })(
-              <Input
-                type="password"
-                onBlur={this.handleConfirmBlur}
-                placeholder="Confirm your password"
-              />,
-            )}
-          </FormItem>
+            { !redirectToRegister ?
+            <FormItem>
+              {form.getFieldDecorator('password', {
+                rules: [
+                  {
+                    required: true,
+                  },
+                  {
+                    validator: this.validateToNextPassword,
+                  },
+                ],
+              })(
+                <Input
+                  prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                  type="password"
+                  placeholder="Input your password"
+                />,
+              )}
+            </FormItem>
+            : null
+            }
+            { !redirectToRegister ?
+            <FormItem>
+              {form.getFieldDecorator('confirm', {
+                rules: [
+                  {
+                    required: true,
+                  },
+                  {
+                    validator: this.compareToFirstPassword,
+                  },
+                ],
+              })(
+                <Input
+                  type="password"
+                  onBlur={this.handleConfirmBlur}
+                  placeholder="Confirm your password"
+                />,
+              )}
+            </FormItem>
+            : null
+            }
 
           <div className="form-actions">
             <Button type="primary" htmlType="submit" className="login-form-button width-100 mr-3">

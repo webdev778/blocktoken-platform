@@ -3,13 +3,16 @@ import { push } from 'react-router-redux'
 import { pendingTask, begin, end } from 'react-redux-spinner'
 import { notification } from 'antd'
 import * as AuthAPI from 'lib/api/auth'
+import {fromJS, toJS} from 'immutable'
+import * as authActions from './auth'
+import {bindActionCreators} from 'redux'
 
 const REDUCER = 'app'
 const NS = `@@${REDUCER}/`
 
-const _setFrom = createAction(`${NS}SET_FROM`)
-const _setLoading = createAction(`${NS}SET_LOADING`)
-const _setHideLogin = createAction(`${NS}SET_HIDE_LOGIN`)
+export const _setFrom = createAction(`${NS}SET_FROM`)
+export const _setLoading = createAction(`${NS}SET_LOADING`)
+export const _setHideLogin = createAction(`${NS}SET_HIDE_LOGIN`)
 
 export const setUserState = createAction(`${NS}SET_USER_STATE`)
 export const setUpdatingContent = createAction(`${NS}SET_UPDATING_CONTENT`)
@@ -18,6 +21,10 @@ export const deleteDialogForm = createAction(`${NS}DELETE_DIALOG_FORM`)
 export const addSubmitForm = createAction(`${NS}ADD_SUBMIT_FORM`)
 export const deleteSubmitForm = createAction(`${NS}DELETE_SUBMIT_FORM`)
 export const setLayoutState = createAction(`${NS}SET_LAYOUT_STATE`)
+
+export const goToPage = (path) => (dispatch, getState) => {
+  dispatch(push(path))
+}
 
 export const setLoading = isLoading => {
   const action = _setLoading(isLoading)
@@ -126,11 +133,13 @@ export async function signup(displayName, email, password, dispatch) {
   // Use Axios there to get User Auth Token with Basic Method Authentication
   try{
     console.log(displayName + ", " + email + ", " + password);
+
     const result = await AuthAPI.localRegister({displayName, email, password})
     console.log(result);
 
-    dispatch(push('/login'))
-    dispatch(_setFrom(''))
+    window.localStorage.setItem('app.Role', 'user')
+    dispatch(_setHideLogin(true))
+    dispatch(push('/user/dashboard'))
     
     notification.open({
       type: 'success',
@@ -150,7 +159,46 @@ export async function signup(displayName, email, password, dispatch) {
   }
 }
 
-export const logout = () => (dispatch, getState) => {
+export async function socialSignup(displayName, dispatch, getState) {
+  // Use Axios there to get User Auth Token with Basic Method Authentication
+  try{
+    const state = getState()
+    const {provider, accessToken} = state.auth.get('socialInfo').toJS()
+
+    const result = await AuthAPI.socialRegister({displayName, provider, accessToken})
+    console.log(result);
+
+    window.localStorage.setItem('app.Role', 'user')
+    dispatch(_setHideLogin(true))
+    dispatch(push('/user/dashboard'))
+    
+    notification.open({
+      type: 'success',
+      message: 'You have successfully signed up!',
+    })
+
+    return true;
+    
+  }catch(err){
+    console.log(err);
+    notification.open({
+      type: 'error',
+      message: 'Sign up failed!',
+    })
+    //dispatch(push('/login'))
+    dispatch(_setFrom(''))
+    return false;
+  }
+}
+
+export const logout = () => async (dispatch, getState) => {
+
+  console.log('----------------------------------')
+  console.log(authActions.logout)
+  const AuthActions = bindActionCreators(authActions, dispatch)
+  const result = await AuthActions.logout()
+  // dispatch(AuthActions.logout);
+  
   dispatch(
     setUserState({
       userState: {
@@ -159,9 +207,11 @@ export const logout = () => (dispatch, getState) => {
       },
     }),
   )
+
   window.localStorage.setItem('app.Authorization', '')
   window.localStorage.setItem('app.Role', '')
   dispatch(push('/login'))
+   
 }
 
 const initialState = {

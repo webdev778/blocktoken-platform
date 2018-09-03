@@ -9,6 +9,7 @@ import createHistory from 'history/createHashHistory'
 import thunk from 'redux-thunk'
 import 'es6-promise/auto'
 import 'setimmediate'
+import penderMiddleware from 'redux-pender';
 
 import { LocaleProvider } from 'antd'
 import enGB from 'antd/lib/locale-provider/en_GB'
@@ -26,7 +27,8 @@ import 'resources/CleanStyles/Vendors/vendors.cleanui.scss'
 
 const history = createHistory()
 const router = routerMiddleware(history)
-const middlewares = [router, thunk]
+const pender = penderMiddleware()
+const middlewares = [router, thunk, pender]
 const isLogger = false
 if (isLogger && process.env.NODE_ENV === 'development') {
   const { logger } = require('redux-logger')
