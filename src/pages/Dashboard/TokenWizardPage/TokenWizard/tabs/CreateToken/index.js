@@ -1,6 +1,5 @@
 import React from 'react'
 import { Form, Icon, Input, Button, Upload } from 'antd'
-import './style.scss'
 
 const FormItem = Form.Item
 
@@ -11,8 +10,8 @@ class CreateToken extends React.Component {
     return (
       <div className="card">
         <div className="card-header">
-          <div className="utils__title">
-            <strong>Create Token Contract</strong>
+          <div className="utils__title text-center" >
+            <strong>Token Contract</strong>
           </div>
         </div>
         <div className="card-body">

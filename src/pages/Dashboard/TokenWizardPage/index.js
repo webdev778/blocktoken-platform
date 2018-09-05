@@ -1,11 +1,11 @@
 import React from 'react'
 import Page from 'components/LayoutComponents/Page'
 import Helmet from 'react-helmet'
-import CreateToken from './CreateToken/'
+import TokenWizard from './TokenWizard/'
 
-class CreateTokenPage extends React.Component {
+class TokenWizardPage extends React.Component {
   static defaultProps = {
-    pathName: 'Create Token Contract',
+    pathName: 'Token Wizard',
     roles: ['user', 'administrator'],
   }
 
@@ -13,11 +13,11 @@ class CreateTokenPage extends React.Component {
     const props = this.props
     return (
       <Page {...props}>
-        <Helmet title="Create Token Contract" />
-        <CreateToken />
+        <Helmet title="Token Wizard" />
+        <TokenWizard />
       </Page>
     )
   }
 }
 
-export default CreateTokenPage
+export default TokenWizardPage

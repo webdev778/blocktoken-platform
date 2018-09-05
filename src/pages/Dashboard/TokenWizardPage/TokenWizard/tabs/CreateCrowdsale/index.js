@@ -1,9 +1,8 @@
 import React from 'react'
-import { Form, Icon, Input, Button, Tabs, Checkbox } from 'antd'
+import { Form, Icon, Input, Button, Tabs, Checkbox, Select } from 'antd'
 import IcoContract from './tabs/ico-contract/IcoContract'
 import Bonuses from './tabs/bonuses/Bonuses'
 import Vesting from './tabs/vesting/Vesting'
-import './style.scss'
 
 const FormItem = Form.Item
 const TabPane = Tabs.TabPane
@@ -30,8 +29,8 @@ class CreateCrowdsale extends React.Component {
     return (
       <div className="card">
         <div className="card-header">
-          <div className="utils__title">
-            <strong>Create Crowdsale Contract</strong>
+          <div className="utils__title text-center">
+            <strong>Crowdsale Contract</strong>
           </div>
         </div>
         <div className="card-body">
@@ -42,7 +41,8 @@ class CreateCrowdsale extends React.Component {
                   <label className="form-label">
                     <strong>Token Contract</strong>
                   </label>
-                  <Input type="text" placeholder="Select token contract" required />
+                  <Select placeholder="Select token contract">
+                  </Select>
                   <Checkbox
                     onChange={() => {
                       this.handleOnValueChange(

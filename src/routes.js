@@ -30,14 +30,11 @@ const loadableRoutes = {
   '/token/list': {
     component: loadable(() => import('pages/Dashboard/TokenListPage')),
   },
-  '/create': {
-    component: loadable(() => import('pages/Dashboard/CreateTokenPage')),
-  },
   '/token/crowdsale': {
     component: loadable(() => import('pages/Dashboard/CrowdsaleListPage')),
   },
-  '/token/crowdsale/create': {
-    component: loadable(() => import('pages/Dashboard/CreateCrowdsalePage')),
+  '/token-wizard': {
+    component: loadable(() => import('pages/Dashboard/TokenWizardPage')),
   },
   '/empty': {
     component: loadable(() => import('pages/DefaultPages/EmptyPage')),

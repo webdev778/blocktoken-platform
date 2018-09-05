@@ -1,14 +1,10 @@
 import React from 'react'
 import { Table, Icon, Input, Button } from 'antd'
-import { Link } from 'react-router-dom'
+import Details from './Details'
+import ICOStatus from './ICOStatus'
 import tableData from './data.json'
 import axios from 'axios'
 import './style.scss'
-
-import EyeIcon from '../../../../assets/images/eye.png'
-import DetailIcon from '../../../../assets/images/detail.png'
-import ICOIcon from '../../../../assets/images/ico.png'
-import WhitelistIcon from '../../../../assets/images/whitelist.png'
 
 const defaultPagination = {
   pageSizeOptions: ['10', '50', '100', '250'],
@@ -27,6 +23,8 @@ class CrowdsaleList extends React.Component {
     filterDropdownVisible: false,
     searchText: '',
     filtered: false,
+    viewDetails: false,
+    viewICOStatus: false,
   }
 
   handleTableChange = (pagination, filters, sorter) => {
@@ -58,6 +56,14 @@ class CrowdsaleList extends React.Component {
       document.body.appendChild(link)
       link.click()
     })
+  }
+
+  handleOnClickDetails = () => {
+    this.setState({viewDetails: !this.state.viewDetails})
+  }
+
+  handleOnClickICOStatus = () => {
+    this.setState({viewICOStatus: !this.state.viewICOStatus})
   }
 
   render() {
@@ -118,16 +124,16 @@ class CrowdsaleList extends React.Component {
         render: (text, record) => (
           <span>
             <a href="javascript: void(0);" className="mr-2">
-              <img src={EyeIcon} width={16} />
+              <i className="icmn-eye mr-1" width={16} />
+            </a>
+            <a href="javascript: void(0);" className="mr-2" onClick={this.handleOnClickDetails}>
+              <i className="icmn-list mr-1" width={16} />
+            </a>
+            <a href="javascript: void(0);" className="mr-2" onClick={this.handleOnClickICOStatus}>
+              <i className="icmn-wrench mr-1" width={16} />
             </a>
             <a href="javascript: void(0);" className="mr-2">
-              <img src={DetailIcon} width={16} />
-            </a>
-            <a href="javascript: void(0);" className="mr-2">
-              <img src={ICOIcon} width={16} />
-            </a>
-            <a href="javascript: void(0);" className="mr-2">
-              <img src={WhitelistIcon} width={16} />
+              <i className="icmn-quill mr-1" width={16} />
             </a>
           </span>
         ),
@@ -136,24 +142,46 @@ class CrowdsaleList extends React.Component {
 
     return (
       <div className="card">
-        <div className="card-header">
-          <div className="utils__title">
-            <strong>Crowdsale Contracts List</strong>
-            <button className="btn btn-primary pull-right">
-              <Link to="crowdsale/create" style={{ color: '#FFF' }}>
-                Create Crowdsale Contract
-              </Link>
-            </button>
+        {
+          this.state.viewDetails && 
+          <div>
+            <span>
+              <a href="javascript: void(0);" className="mr-2 pull-right" onClick={this.handleOnClickDetails}>
+                <i className="icmn-cross" title="Close" width={16} />
+              </a>
+            </span>
+            <Details/>
           </div>
-        </div>
-        <div className="card-body">
-          <Table
-            columns={columns}
-            dataSource={data}
-            pagination={pager}
-            onChange={this.handleTableChange}
-          />
-        </div>
+        }
+        {
+          this.state.viewICOStatus && 
+          <div>
+            <span>
+              <a href="javascript: void(0);" className="mr-2 pull-right" onClick={this.handleOnClickICOStatus}>
+                <i className="icmn-cross" title="Close" width={16} />
+              </a>
+            </span>
+            <ICOStatus/>
+          </div>
+        }
+        {
+          (!this.state.viewDetails && !this.state.viewICOStatus) &&
+          <div>
+          <div className="card-header">
+            <div className="utils__title">
+              <strong>Crowdsale Contracts List</strong>
+            </div>
+          </div>
+          <div className="card-body">
+            <Table
+              columns={columns}
+              dataSource={data}
+              pagination={pager}
+              onChange={this.handleTableChange}
+            />
+          </div>
+          </div>
+        }
       </div>
     )
   }

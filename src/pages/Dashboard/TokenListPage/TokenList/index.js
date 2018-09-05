@@ -1,6 +1,7 @@
 import React from 'react'
 import { Table, Icon, Input, Button } from 'antd'
 import { Link } from 'react-router-dom'
+import Balances from './Balances'
 import tableData from './data.json'
 import axios from 'axios'
 import './style.scss'
@@ -26,6 +27,7 @@ class TokenList extends React.Component {
     filterDropdownVisible: false,
     searchText: '',
     filtered: false,
+    viewBalance: false,
   }
 
   handleTableChange = (pagination, filters, sorter) => {
@@ -57,6 +59,11 @@ class TokenList extends React.Component {
       document.body.appendChild(link)
       link.click()
     })
+  }
+
+  handleOnClickBalances = () => 
+  {
+    this.setState({viewBalance: !this.state.viewBalance});
   }
 
   render() {
@@ -107,8 +114,8 @@ class TokenList extends React.Component {
             <a href="javascript: void(0);" className="mr-2">
               <i className="icmn-eye mr-1" title="View on etherscan.io" width={16} />
             </a>
-            <a href="javascript: void(0);" className="mr-2">
-              <i className="icmn-cog mr-1" title="View balances" width={16} />
+            <a href="javascript: void(0);" className="mr-2" onClick={this.handleOnClickBalances}>
+                <i className="icmn-cog mr-1" title="View balances" width={16} />
             </a>
             <a
               href="javascript: void(0);"
@@ -124,24 +131,33 @@ class TokenList extends React.Component {
 
     return (
       <div className="card">
-        <div className="card-header">
-          <div className="utils__title">
-            <strong>Token Contracts List</strong>
-            <button className="btn btn-primary pull-right">
-              <Link to="/create" style={{ color: '#FFF' }}>
-                Create Token Contract
-              </Link>
-            </button>
+        { this.state.viewBalance ?
+        <div>
+          <span>
+            <a href="javascript: void(0);" className="mr-2 pull-right" onClick={this.handleOnClickBalances}>
+              <i className="icmn-cross" title="Close" width={16} />
+            </a>
+          </span>
+          <Balances/>
+        </div>
+        
+        :
+        <div>
+          <div className="card-header">
+            <div className="utils__title">
+              <strong>Token Contracts List</strong>
+            </div>
+          </div>
+          <div className="card-body">
+            <Table
+              columns={columns}
+              dataSource={data}
+              pagination={pager}
+              onChange={this.handleTableChange}
+            />
           </div>
         </div>
-        <div className="card-body">
-          <Table
-            columns={columns}
-            dataSource={data}
-            pagination={pager}
-            onChange={this.handleTableChange}
-          />
-        </div>
+        }
       </div>
     )
   }
