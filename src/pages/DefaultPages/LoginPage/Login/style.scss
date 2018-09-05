@@ -17,6 +17,8 @@
     overflow-y: auto;
     overflow-x: hidden;
 
+    .particles-container { position: absolute; top: 0; left: 0; height: 100vh; width: 100vw; }
+
   }
 
   &__block {
@@ -45,6 +47,7 @@
       background-color: $white;
       position: relative;
       box-shadow: 0 10px 40px -20px rgba(0,0,50,.2),  0 10px 80px -20px rgba(0,0,50,.1);
+      z-index: 3;
     }
     &__form {
       position: relative;
