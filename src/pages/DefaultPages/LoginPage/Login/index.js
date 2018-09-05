@@ -2,6 +2,8 @@ import React from 'react'
 import LoginForm from './LoginForm'
 import './style.scss'
 
+const particlesJS = window.particlesJS
+
 class Login extends React.Component {
   state = {
     backgroundImage: 'url(resources/images/login/main-bg.jpg)',
@@ -10,6 +12,8 @@ class Login extends React.Component {
 
   componentDidMount() {
     document.getElementsByTagName('body')[0].style.overflow = 'hidden'
+
+    particlesJS.load('particles-js', '/resources/particles.json');  
   }
 
   componentWillUnmount() {
@@ -47,7 +51,7 @@ class Login extends React.Component {
                   marketing of your initial token offering.
                 </h2>
               </div>
-              <div className="main-login__block__inner">
+              <div className="main-login__block__inner" style={{'z-index': 3}}>
                 <div className="main-login__block__form">
                   <LoginForm email={this.state.restoredEmail} />
                 </div>
@@ -68,6 +72,7 @@ class Login extends React.Component {
               </div>
             </div>
           </div>
+          <div id="particles-js" className="particles-container particles-js"></div>
         </div>
         <div className="main-login__footer text-center">
           <ul className="list-unstyled list-inline">
