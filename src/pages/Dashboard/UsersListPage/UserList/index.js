@@ -1,8 +1,8 @@
 import React from 'react'
 import { Table, Icon, Input, Button } from 'antd'
 import { Link } from 'react-router-dom'
-import tableData from './data.json'
 import './style.scss'
+import * as UserAPI from 'lib/api/users';
 
 const defaultPagination = {
   pageSizeOptions: ['10', '50', '100', '250'],
@@ -15,12 +15,29 @@ const defaultPagination = {
 
 class UsersList extends React.Component {
   state = {
-    tableData: tableData.data,
-    data: tableData.data,
+    tableData: null,
+    data: null,
     pager: { ...defaultPagination },
     filterDropdownVisible: false,
     searchText: '',
     filtered: false,
+  }
+
+  async componentDidMount() {
+    try {
+      const result = await UserAPI.getUserList()
+
+      if (result.data)
+      {
+        this.setState({
+          tableData: result.data.users,
+          data: result.data.users,
+        });
+
+      }
+    }catch(e){
+      console.log(e)
+    }
   }
 
   onInputChange = e => {
@@ -78,22 +95,16 @@ class UsersList extends React.Component {
 
     const columns = [
       {
-        title: 'Avatar',
-        dataIndex: 'avatar',
-        key: 'avatar',
-        render: text => (
-          <a href="javascript: void(0);" className="usersList__avatar">
-            <Link to="/profile">
-              <img src={text} alt="" />
-            </Link>
-          </a>
-        ),
+        title: 'DisplayName',
+        dataIndex: 'displayName',
+        key: 'displayName',
+        sorter: (a, b) => a.displayName.localeCompare(b.displayName),
       },
       {
         title: 'Email',
         dataIndex: 'email',
         key: 'email',
-        sorter: (a, b) => a.email.length - b.email.length,
+        sorter: (a, b) => a.email.localeCompare(b.email),
         render: text => (
           <a className="utils__link--underlined" href="javascript: void(0);">
             <Link to="/profile">{text}</Link>
@@ -127,10 +138,34 @@ class UsersList extends React.Component {
         },
       },
       {
+        title: 'Fullname',
+        dataIndex: 'fullname',
+        key: 'fullname',
+        sorter: (a, b) => a.fullname.localeCompare(b.fullname),
+      },
+      {
+        title: 'Address',
+        dataIndex: 'address',
+        key: 'address',
+        sorter: (a, b) => a.address.localeCompare(b.address),
+      },
+      {
+        title: 'Company',
+        dataIndex: 'company',
+        key: 'company',
+        sorter: (a, b) => a.company.localeCompare(b.company),
+      },
+      {
+        title: 'Website URL',
+        dataIndex: 'website',
+        key: 'website',
+        sorter: (a, b) => a.website.localeCompare(b.website),
+      },
+      {
         title: 'Role',
         dataIndex: 'role',
         key: 'role',
-        sorter: (a, b) => a.role.length - b.role.length,
+        sorter: (a, b) => a.role.localeCompare(b.role),
       },
       {
         title: 'Action',
@@ -168,4 +203,4 @@ class UsersList extends React.Component {
   }
 }
 
-export default UsersList
+export default UsersList;

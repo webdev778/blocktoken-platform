@@ -5,12 +5,20 @@ export const checkDisplayName = (displayName) => axios.get('/api/v1.0/auth/exist
 export const localRegister = ({
   displayName,
   email,
-  password
+  password,
+  fullname,
+  address,
+  company,
+  website
   //initialMoney: { currency, index }
 }) => axios.post('/api/v1.0/auth/register/local', {
   displayName,
   email,
-  password
+  password,
+  fullname,
+  address,
+  company,
+  website
   //initialMoney: { currency, index }
 })
 export const localLogin = ({email, password}) => axios.post('/api/v1.0/auth/login/local', {
@@ -21,11 +29,19 @@ export const socialLogin = ({provider, accessToken}) => axios.post('/api/v1.0/au
 });
 export const socialRegister = ({
   displayName,
+  fullname,
+  address,
+  company,
+  website,
   provider,
   accessToken
   //initialMoney: { currency, index } 
 }) => axios.post('/api/v1.0/auth/register/' + provider, {
   displayName,
+  fullname,
+  address,
+  company,
+  website,
   accessToken
   //initialMoney: { currency, index }
 });

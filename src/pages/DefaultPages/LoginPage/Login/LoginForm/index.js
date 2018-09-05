@@ -1,15 +1,14 @@
 import React from 'react'
+import DimmerSpinner from 'components/CleanComponents/DimmerSpinner';
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import {bindActionCreators} from 'redux';
 import { FacebookLoginButton, GoogleLoginButton } from 'react-social-login-buttons'
 import { REDUCER, submit } from 'ducks/login'
-import { Form, Input, Icon, Button } from 'antd'
-import social from 'lib/social';
+import { Form, Input, Icon, Button, notification } from 'antd'
 import * as authActions from 'ducks/auth';
 import * as appActions from 'ducks/app';
-import { push } from 'react-router-redux'
-import { message } from 'antd'
+import { message } from 'antd';
 
 const FormItem = Form.Item
 
@@ -67,10 +66,14 @@ class LoginForm extends React.Component {
       AppActions.goToPage('/user/dashboard');
       AppActions.deleteSubmitForm(REDUCER);
       // dispatch(push('/user/dashboard'))
-        
-      message.success('Successfully logined!')
+
+      notification.open({
+        type: 'success',
+        message: 'You have successfully logged in!',
+      })
 
     } catch (e) {
+      AppActions.deleteSubmitForm(REDUCER);
       return;
     }
   }
@@ -144,6 +147,7 @@ class LoginForm extends React.Component {
             </div>
           </div>
         </Form>
+        <DimmerSpinner visible={isSubmitForm}/>
       </div>
     )
   }
@@ -153,7 +157,7 @@ export default connect(
   (state) => ({
     isSubmitForm: state.app.submitForms[REDUCER],
     socialInfo: state.auth.get('socialInfo'),
-    redirectToRegister: state.auth.get('redirectToRegister')
+    redirectToRegister: state.auth.get('redirectToRegister'),
   }),
   (dispatch) => ({
       AppActions: bindActionCreators(appActions, dispatch),

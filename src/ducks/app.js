@@ -44,18 +44,9 @@ export const initAuth = roles => (dispatch, getState) => {
   // Use Axios there to get User Data by Auth Token with Bearer Method Authentication
 
   const userRole = window.localStorage.getItem('app.Role')
-  const state = getState()
+  const email = window.localStorage.getItem('app.Email');
 
-  const users = {
-    administrator: {
-      email: 'admin@mediatec.org',
-      role: 'administrator',
-    },
-    user: {
-      email: 'agent@mediatec.org',
-      role: 'user',
-    },
-  }
+  const state = getState()
 
   const setUser = userState => {
     dispatch(
@@ -66,27 +57,33 @@ export const initAuth = roles => (dispatch, getState) => {
       }),
     )
     if (!roles.find(role => role === userRole)) {
-      if (!(state.routing.location.pathname === '/dashboard')) {
-        dispatch(push('/dashboard'))
+      if (userRole === 'administrator')
+      {
+        if (!(state.routing.location.pathname === '/admin/dashboard')) {
+          dispatch(push('/admin/dashboard'))
+        }
       }
+      else if (userRole === 'user')
+      {
+        if (!(state.routing.location.pathname === '/user/dashboard')) {
+          dispatch(push('/user/dashboard'))
+        }
+      }
+      
       return Promise.resolve(false)
     }
     return Promise.resolve(true)
   }
 
-  switch (userRole) {
-    case 'administrator':
-      return setUser(users.administrator, userRole)
-
-    case 'user':
-      return setUser(users.agent, userRole)
-
-    default:
-      const location = state.routing.location
-      const from = location.pathname + location.search
-      dispatch(_setFrom(from))
-      dispatch(push('/login'))
-      return Promise.reject()
+  if (userRole === 'administrator' || userRole === 'user')
+    return setUser({email:email, role:userRole}, userRole)
+  else
+  {
+    const location = state.routing.location
+    const from = location.pathname + location.search
+    dispatch(_setFrom(from))
+    dispatch(push('/login'))
+    return Promise.reject()
   }
 }
 
@@ -96,6 +93,7 @@ export async function login(email, password, dispatch) {
     const result = await AuthAPI.localLogin({email, password})
     if (email === 'admin@blocktoken.ai' && password === '123123')
     {
+      window.localStorage.setItem('app.Email', 'admin@blocktoken.ai')
       window.localStorage.setItem('app.Role', 'administrator')
       dispatch(_setHideLogin(true))
       dispatch(push('/admin/dashboard'))
@@ -107,6 +105,7 @@ export async function login(email, password, dispatch) {
       return true;
     }
     
+    window.localStorage.setItem('app.Email', email);
     window.localStorage.setItem('app.Role', 'user')
     dispatch(_setHideLogin(true))
     dispatch(push('/user/dashboard'))
@@ -129,13 +128,13 @@ export async function login(email, password, dispatch) {
   }
 }
 
-export async function signup(displayName, email, password, dispatch) {
+export async function signup(displayName, email, password, fullname, address, company, website, dispatch) {
   // Use Axios there to get User Auth Token with Basic Method Authentication
   try{
-    console.log(displayName + ", " + email + ", " + password);
+    //console.log(displayName + ", " + email + ", " + password);
 
-    const result = await AuthAPI.localRegister({displayName, email, password})
-    console.log(result);
+    const result = await AuthAPI.localRegister({displayName, email, password, fullname, address, company, website})
+    //console.log(result);
 
     window.localStorage.setItem('app.Role', 'user')
     dispatch(_setHideLogin(true))
@@ -159,14 +158,14 @@ export async function signup(displayName, email, password, dispatch) {
   }
 }
 
-export async function socialSignup(displayName, dispatch, getState) {
+export async function socialSignup(displayName, fullname, address, company, website, dispatch, getState) {
   // Use Axios there to get User Auth Token with Basic Method Authentication
   try{
     const state = getState()
     const {provider, accessToken} = state.auth.get('socialInfo').toJS()
 
-    const result = await AuthAPI.socialRegister({displayName, provider, accessToken})
-    console.log(result);
+    const result = await AuthAPI.socialRegister({displayName,fullname, address, company, website, provider, accessToken})
+    //console.log(result);
 
     window.localStorage.setItem('app.Role', 'user')
     dispatch(_setHideLogin(true))
