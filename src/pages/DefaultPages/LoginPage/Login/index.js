@@ -51,7 +51,7 @@ class Login extends React.Component {
                   marketing of your initial token offering.
                 </h2>
               </div>
-              <div className="main-login__block__inner" style={{'z-index': 3}}>
+              <div className="main-login__block__inner">
                 <div className="main-login__block__form">
                   <LoginForm email={this.state.restoredEmail} />
                 </div>
