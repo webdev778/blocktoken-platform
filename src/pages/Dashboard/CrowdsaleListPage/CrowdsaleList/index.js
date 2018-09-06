@@ -2,7 +2,6 @@ import React from 'react'
 import { Table, Icon, Input, Button } from 'antd'
 import Details from './Details'
 import ICOStatus from './ICOStatus'
-import tableData from './data.json'
 import axios from 'axios'
 import './style.scss'
 
@@ -17,15 +16,29 @@ const defaultPagination = {
 
 class CrowdsaleList extends React.Component {
   state = {
-    tableData: tableData.data,
-    data: tableData.data,
+    tableData: null,
+    data: null,
     pager: { ...defaultPagination },
     filterDropdownVisible: false,
     searchText: '',
     filtered: false,
     viewDetails: false,
     viewICOStatus: false,
+    address: null,
   }
+
+  componentDidMount() {
+    axios.get('/api/v1.0/contract/crowdsale')
+      .then((result) => {
+        console.log(result);
+        if (result.data) {
+          this.setState({
+            tableData: result.data.contracts,
+            data: result.data.contracts,
+          })
+        }
+      });
+    }
 
   handleTableChange = (pagination, filters, sorter) => {
     if (this.state.pager) {
@@ -58,8 +71,8 @@ class CrowdsaleList extends React.Component {
     })
   }
 
-  handleOnClickDetails = () => {
-    this.setState({viewDetails: !this.state.viewDetails})
+  handleOnClickDetails(address){
+    this.setState({address: address, viewDetails: !this.state.viewDetails});
   }
 
   handleOnClickICOStatus = () => {
@@ -74,59 +87,54 @@ class CrowdsaleList extends React.Component {
         title: 'Token Name',
         dataIndex: 'token_name',
         key: 'token_name',
-        sorter: (a, b) => a.token_name.length - b.token_name.length,
+        render: (text, record) => (record.token_contract.name),
       },
       {
         title: 'Token Symbol',
         dataIndex: 'token_symbol',
         key: 'token_symbol',
-        sorter: (a, b) => a.token_symbol.length - b.token_symbol.length,
+        render: (text, record) => (record.token_contract.symbol),
       },
       {
         title: 'Minimum Cap',
         dataIndex: 'min_cap',
         key: 'min_cap',
-        sorter: (a, b) => a.min_cap.length - b.min_cap.length,
       },
       {
         title: 'Maximum Cap',
         dataIndex: 'max_cap',
         key: 'max_cap',
-        sorter: (a, b) => a.max_cap.length - b.max_cap.length,
       },
       {
         title: 'Token Price',
-        dataIndex: 'token_price',
-        key: 'token_price',
-        sorter: (a, b) => a.token_price.length - b.token_price.length,
+        dataIndex: 'token_price_wei',
+        key: 'token_price_wei',
       },
       {
         title: 'Duration Days',
-        dataIndex: 'duration',
-        key: 'duration',
-        sorter: (a, b) => a.duration.length - b.duration.length,
+        dataIndex: 'campaign_duration_days',
+        key: 'campaign_duration_days',
       },
       {
         title: 'Network',
         dataIndex: 'network',
         key: 'network',
-        sorter: (a, b) => a.network.length - b.network.length,
       },
       {
         title: 'Whitelisting',
-        dataIndex: 'whitelisting',
-        key: 'whitelisting',
-        sorter: (a, b) => a.whitelisting.length - b.whitelisting.length,
+        dataIndex: 'is_whitelisting_enabled',
+        key: 'is_whitelisting_enabled',
+        render: (text, record) => (record.is_whitelisting_enabled ? 'Enabled' : 'Disabled'),
       },
       {
         title: 'Action',
         key: 'action',
         render: (text, record) => (
           <span>
-            <a href="javascript: void(0);" className="mr-2">
+            <a href={`http://${record.network}.etherscan.io/address/${record.contract_address}`} className="mr-2">
               <i className="icmn-eye mr-1" width={16} />
             </a>
-            <a href="javascript: void(0);" className="mr-2" onClick={this.handleOnClickDetails}>
+            <a href="javascript: void(0);" className="mr-2" onClick={this.handleOnClickDetails(record.contract_address)}>
               <i className="icmn-list mr-1" width={16} />
             </a>
             <a href="javascript: void(0);" className="mr-2" onClick={this.handleOnClickICOStatus}>
@@ -144,14 +152,7 @@ class CrowdsaleList extends React.Component {
       <div className="card">
         {
           this.state.viewDetails && 
-          <div>
-            <span>
-              <a href="javascript: void(0);" className="mr-2 pull-right" onClick={this.handleOnClickDetails}>
-                <i className="icmn-cross" title="Close" width={16} />
-              </a>
-            </span>
-            <Details/>
-          </div>
+          <Details address = {this.state.address} />
         }
         {
           this.state.viewICOStatus && 

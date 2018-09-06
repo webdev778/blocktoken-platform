@@ -1,14 +1,8 @@
 import React from 'react'
 import { Table, Icon, Input, Button } from 'antd'
-import { Link } from 'react-router-dom'
 import Balances from './Balances'
-import tableData from './data.json'
 import axios from 'axios'
 import './style.scss'
-
-import EyeIcon from '../../../../assets/images/eye.png'
-import ManageIcon from '../../../../assets/images/manage.png'
-import DownloadIcon from '../../../../assets/images/download.png'
 
 const defaultPagination = {
   pageSizeOptions: ['10', '50', '100', '250'],
@@ -21,14 +15,27 @@ const defaultPagination = {
 
 class TokenList extends React.Component {
   state = {
-    tableData: tableData.data,
-    data: tableData.data,
+    tableData: null,
+    data: null,
     pager: { ...defaultPagination },
     filterDropdownVisible: false,
     searchText: '',
     filtered: false,
     viewBalance: false,
   }
+
+  componentDidMount() {
+    axios.get('/api/v1.0/contract/token')
+      .then((result) => {
+        console.log(result);
+        if (result.data) {
+          this.setState({
+            tableData: result.data.tokens,
+            data: result.data.tokens,
+          })
+        }
+      });
+    }
 
   handleTableChange = (pagination, filters, sorter) => {
     if (this.state.pager) {
@@ -72,46 +79,40 @@ class TokenList extends React.Component {
     const columns = [
       {
         title: 'Token Name',
-        dataIndex: 'token_name',
-        key: 'token_name',
-        sorter: (a, b) => a.token_name.length - b.token_name.length,
+        dataIndex: 'name',
+        key: 'name',
       },
       {
         title: 'Token Symbol',
-        dataIndex: 'token_symbol',
-        key: 'token_symbol',
-        sorter: (a, b) => a.token_symbol.length - b.token_symbol.length,
+        dataIndex: 'symbol',
+        key: 'symbol',
       },
       {
         title: 'Token Version',
-        dataIndex: 'token_version',
-        key: 'token_version',
-        sorter: (a, b) => a.token_version.length - b.token_version.length,
+        dataIndex: 'version',
+        key: 'version',
       },
       {
         title: 'Initial Supply',
         dataIndex: 'initial_supply',
         key: 'initial_supply',
-        sorter: (a, b) => a.initial_supply.length - b.initial_supply.length,
       },
       {
         title: 'Decimal Points',
-        dataIndex: 'dec_points',
-        key: 'dec_points',
-        sorter: (a, b) => a.dec_points.length - b.dec_points.length,
+        dataIndex: 'decimal_points',
+        key: 'decimal_points',
       },
       {
         title: 'Network',
         dataIndex: 'network',
         key: 'network',
-        sorter: (a, b) => a.network.length - b.network.length,
       },
       {
         title: 'Action',
         key: 'action',
         render: (text, record) => (
           <span>
-            <a href="javascript: void(0);" className="mr-2">
+            <a href={`http://${record.network}.etherscan.io/token/${record.contract_address}`} className="mr-2">
               <i className="icmn-eye mr-1" title="View on etherscan.io" width={16} />
             </a>
             <a href="javascript: void(0);" className="mr-2" onClick={this.handleOnClickBalances}>
