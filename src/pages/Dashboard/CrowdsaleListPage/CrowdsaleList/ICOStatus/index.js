@@ -90,19 +90,19 @@ class ICOStatus extends React.Component {
                   </label>
                   <div className="row-lg-6">
                     <div className="col-md-6">
-                      <FormItem><button type="button" class="ico-control-button btn btn-md btn-primary" style={{width:"150px"}}>Start ICO</button></FormItem>
+                      <FormItem><button type="button" className="ico-control-button btn btn-md btn-primary" style={{width:"150px"}}>Start ICO</button></FormItem>
                     </div>
                     <div className="col-md-6">
-                      <FormItem><button type="button" class="ico-control-button btn btn-md btn-success" style={{width:"150px"}} disabled="">Advance MainSale</button></FormItem>
+                      <FormItem><button type="button" className="ico-control-button btn btn-md btn-success" style={{width:"150px"}} disabled="">Advance MainSale</button></FormItem>
                     </div>
                     <div className="col-md-6">
-                      <FormItem><button type="button" class="ico-control-button btn btn-md btn-danger" style={{width:"150px"}}>Emergency Stop</button></FormItem>
+                      <FormItem><button type="button" className="ico-control-button btn btn-md btn-danger" style={{width:"150px"}}>Emergency Stop</button></FormItem>
                     </div>
                     <div className="col-md-6">
-                      <FormItem><button disabled="" type="button" class="ico-control-button btn btn-md btn-warning" style={{width:"150px"}}>Emergency Start</button></FormItem>
+                      <FormItem><button disabled="" type="button" className="ico-control-button btn btn-md btn-warning" style={{width:"150px"}}>Emergency Start</button></FormItem>
                     </div>
                     <div className="col-md-6">
-                      <FormItem><button type="button" class="ico-control-button btn btn-md btn-info" style={{width:"150px"}}>Finalize</button></FormItem>
+                      <FormItem><button type="button" className="ico-control-button btn btn-md btn-info" style={{width:"150px"}}>Finalize</button></FormItem>
                     </div>
                   </div>
                 </FormItem>
