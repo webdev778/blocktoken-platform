@@ -73,6 +73,7 @@ class CrowdsaleList extends React.Component {
 
   handleOnClickDetails(address){
     this.setState({address: address, viewDetails: !this.state.viewDetails});
+    console.log(this.state.viewDetails);
   }
 
   handleOnClickICOStatus = (address) => {
@@ -153,6 +154,7 @@ class CrowdsaleList extends React.Component {
 
     return (
       <div className="card">
+
         {
           this.state.viewDetails && 
           <Details address = {this.state.address} onClose = { this.handleCloseDetail }/>

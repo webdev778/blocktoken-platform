@@ -82,7 +82,7 @@ export default [
       {
         title: 'Token Wizard',
         key: 'token_wizard',
-        url: '/admin/token-wizard',
+        url: '/token-wizard',
       },
       {
         title: 'Smart Contracts',
