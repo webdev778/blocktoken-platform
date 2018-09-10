@@ -16,6 +16,16 @@ export default [
         url: '/admin/users',
       },
       {
+        title: 'Tokens',
+        key: 'admin_tokens',
+        url: '/token/list',
+      },
+      {
+        title: 'Smart Contracts',
+        key: 'admin_crowdsales',
+        url: '/token/crowdsale',
+      },
+      {
         title: 'Identity',
         key: 'admin_identity',
         url: '/admin/identity',
@@ -29,16 +39,6 @@ export default [
         title: 'Contributors to Syndicates',
         key: 'admin_cont-syn',
         url: '/admin/cont-syn',
-      },
-      {
-        title: 'Tokens',
-        key: 'admin_tokens',
-        url: '/admin/tokens',
-      },
-      {
-        title: 'Smart Contracts',
-        key: 'admin_crowdsales',
-        url: '/admin/crowdsales',
       },
       {
         title: 'Syndicates',
@@ -87,7 +87,7 @@ export default [
       {
         title: 'Smart Contracts',
         key: 'crowdsale',
-        url: '/token/crowdsale',
+        url: '/token/crowdsales',
       },
       {
         title: 'Create a Syndicate',

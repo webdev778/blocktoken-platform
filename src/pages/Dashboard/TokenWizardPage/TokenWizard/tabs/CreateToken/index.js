@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Icon, Input, Button } from 'antd'
+import { Form, Icon, Input, message } from 'antd'
 
 import spinner from '../../../../../../assets/images/spinner.gif';
 import abi from '../../../../../../contracts/TokenAbi';
@@ -30,10 +30,10 @@ class CreateToken extends React.Component {
     e.preventDefault();
     console.log("Deploying start");
     if (typeof window.web3 === 'undefined') {
-      alert('Please enable metamask.');
+      message.warning('Please enable metamask.');
       return false;
     } else if (window.web3.eth.defaultAccount === undefined) {
-      alert('Please unlock metamask.');
+      message.warning('Please unlock metamask.');
       return false;
     }
 
@@ -76,7 +76,7 @@ class CreateToken extends React.Component {
           isSpinnerVisible: false,
           contractDeploymentStatus
         });
-        alert(contractDeploymentStatus);
+        message.success(contractDeploymentStatus);
 
         axios.post('/api/v1.0/contract/token',
           {

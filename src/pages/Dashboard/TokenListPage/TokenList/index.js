@@ -22,6 +22,7 @@ class TokenList extends React.Component {
     searchText: '',
     filtered: false,
     viewBalance: false,
+    address: null
   }
 
   componentDidMount() {
@@ -68,13 +69,17 @@ class TokenList extends React.Component {
     })
   }
 
-  handleOnClickBalances = () => 
+  handleOnClickBalances = (address) => 
   {
-    this.setState({viewBalance: !this.state.viewBalance});
+    this.setState({address, viewBalance: !this.state.viewBalance});
+  }
+
+  handleCloseBalances = () => {
+    this.setState({ viewBalance: !this.state.viewBalance })
   }
 
   render() {
-    let { pager, data } = this.state
+    let { pager, data, address } = this.state
 
     const columns = [
       {
@@ -115,7 +120,7 @@ class TokenList extends React.Component {
             <a href={`http://${record.network}.etherscan.io/token/${record.contract_address}`} className="mr-2">
               <i className="icmn-eye mr-1" title="View on etherscan.io" width={16} />
             </a>
-            <a href="javascript: void(0);" className="mr-2" onClick={this.handleOnClickBalances}>
+            <a href="javascript: void(0);" className="mr-2" onClick={() => { this.handleOnClickBalances(record.contract_address)}}>
                 <i className="icmn-cog mr-1" title="View balances" width={16} />
             </a>
             <a
@@ -132,16 +137,9 @@ class TokenList extends React.Component {
 
     return (
       <div className="card">
-        { this.state.viewBalance ?
-        <div>
-          <span>
-            <a href="javascript: void(0);" className="mr-2 pull-right" onClick={this.handleOnClickBalances}>
-              <i className="icmn-cross" title="Close" width={16} />
-            </a>
-          </span>
-          <Balances/>
-        </div>
-        
+        { 
+          this.state.viewBalance ?
+          <Balances address={this.state.address} onClose={this.handleCloseBalances} />
         :
         <div>
           <div className="card-header">

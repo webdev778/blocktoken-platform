@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Icon, Input, Button, Tabs, Checkbox, Select } from 'antd'
+import { Form, Icon, Input, message, Tabs, Checkbox, Select } from 'antd'
 import IcoContract from './tabs/ico-contract/IcoContract'
 import Bonuses from './tabs/bonuses/Bonuses'
 import Vesting from './tabs/vesting/Vesting'
@@ -19,6 +19,8 @@ import axios from "axios/index";
 
 const FormItem = Form.Item
 const TabPane = Tabs.TabPane
+const Option = Select.Option
+
 
 class CreateCrowdsale extends React.Component {
   constructor(props){
@@ -64,10 +66,10 @@ class CreateCrowdsale extends React.Component {
     e.preventDefault();
 
     if (typeof window.web3 === 'undefined') {
-      alert('Please enable metamask.');
+      message.warning('Please enable metamask.');
       return false;
     } else if (window.web3.eth.defaultAccount === undefined) {
-      alert('Please unlock metamask.');
+      message.warning('Please unlock metamask.');
       return false;
     }
 
@@ -122,7 +124,7 @@ class CreateCrowdsale extends React.Component {
             decimalUnits: '',
             selectedTokenContract: null,
           });
-          alert('Something is wrong with token contract. Please try again.');
+          message.warning('Something is wrong with token contract. Please try again.');
         }
       });
   };
@@ -165,10 +167,10 @@ class CreateCrowdsale extends React.Component {
                     <strong>Token Contract</strong>
                   </label>
                   <Select placeholder="Select token contract" onChange={this.handleOnTokenContractChange} required value={this.state.tokenAddress}>
-                    <option value="">Select token contract</option>
+                    <Option value="">Select token contract</Option>
                     {
                       this.state.tokenContracts.map((contract) => (
-                        <option value={contract.contract_address}>{contract.name}</option>
+                        <Option value={contract.contract_address}>{contract.name}</Option>
                       ))
                     }
                   </Select>
