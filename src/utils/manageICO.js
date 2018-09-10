@@ -1,7 +1,8 @@
 import crowdsaleAbi from '../contracts/CrowdsaleAbi';
+import { message } from 'antd'
 
-const ICOContract = window.web3.eth.contract(crowdsaleAbi);
-const clientAddress = window.web3.eth.defaultAccount;
+const ICOContract = (window.web3 !== undefined) ? window.web3.eth.contract(crowdsaleAbi) : message.warning('Please enable metamask.')
+const clientAddress = (window.web3 !== undefined) ? window.web3.eth.defaultAccount : message.warning('Please unlock metamask.')
 
 export default {
   startICO: (crowdsaleAddress) => {
