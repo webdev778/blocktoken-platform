@@ -213,7 +213,7 @@ class SignupForm extends React.Component {
             </FormItem>
           </div>
           <Recaptcha
-            sitekey="6LclSG4UAAAAAApRMVKVnZjJhbQcSmjr5kwVELHO"
+            sitekey="6Lckh28UAAAAAGJRg2tsIJ9m1x5MLsJlggQ5IV7Y"
             render="explicit"
             onloadCallback={this.recaptchaLoaded}
             verifyCallback={this.verifyCallback}
