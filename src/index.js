@@ -24,6 +24,7 @@ import 'bootstrap/dist/css/bootstrap.min.css' // bootstrap styles
 import 'resources/AntStyles/AntDesign/antd.cleanui.scss'
 import 'resources/CleanStyles/Core/core.cleanui.scss'
 import 'resources/CleanStyles/Vendors/vendors.cleanui.scss'
+import social from 'lib/social'
 
 const history = createHistory()
 const router = routerMiddleware(history)
@@ -35,6 +36,8 @@ if (isLogger && process.env.NODE_ENV === 'development') {
   middlewares.push(logger)
 }
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(...middlewares)))
+
+window.social = social
 
 ReactDOM.render(
   <Provider store={store}>
