@@ -164,16 +164,12 @@ class Balances extends React.Component {
 
   handleOnClickDeleteAddress = (address) => {
     const {selectedContract} = this.state;
-    console.log(selectedContract.team_addresses);
+    console.log(address);
     selectedContract.team_addresses = selectedContract.team_addresses.filter(addr => {
       console.log(addr);
       return addr !== address;
     });
 
-    console.log("after"+selectedContract.team_addresses);
-
-
-    console.log(selectedContract);
     axios.patch('/api/v1.0/contract/token/' + selectedContract._id, {team_addresses: selectedContract.team_addresses})
       .then(() => {
         this.setState({
@@ -203,7 +199,7 @@ class Balances extends React.Component {
         key: 'action',
         render: (text, record) => (
           <span>
-            <a href="javascript: void(0);" className="mr-2" onClick = {() => {this.handleOnClickDeleteAddress(record.contract_address)}}>
+            <a href="javascript: void(0);" className="mr-2" onClick = {() => {this.handleOnClickDeleteAddress(record.address)}}>
               <i className="icmn-cross mr-1" width={16} />
             </a>
           </span>

@@ -168,7 +168,7 @@ class Whitelist extends React.Component {
         key: 'action',
         render: (text, record) => (
           <span>
-            <a href="javascript: void(0);" className="mr-2" onClick = {() => {this.handleOnClickDeleteAddress(record.contract_address)}}>
+            <a href="javascript: void(0);" className="mr-2" onClick = {() => {this.handleOnClickDeleteAddress(record.address)}}>
               <i className="icmn-cross mr-1" width={16} />
               {
                 isSpinnerVisible ? (
