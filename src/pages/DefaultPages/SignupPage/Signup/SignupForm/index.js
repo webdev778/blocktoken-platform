@@ -63,6 +63,8 @@ class SignupForm extends React.Component {
 
   validateToNextPassword = (rule, value, callback) => {
     const form = this.props.form
+    if (value.length < 6)
+      callback('Password must be at least 6 characters!')
     if (value && this.state.confirmDirty) {
       form.validateFields(['confirm'], { force: true })
     }

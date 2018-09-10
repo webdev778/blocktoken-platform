@@ -73,6 +73,7 @@ class CrowdsaleList extends React.Component {
 
   handleOnClickDetails(address){
     this.setState({address: address, viewDetails: !this.state.viewDetails});
+    console.log(this.state.viewDetails);
   }
 
   handleOnClickICOStatus = () => {
@@ -134,7 +135,7 @@ class CrowdsaleList extends React.Component {
             <a href={`http://${record.network}.etherscan.io/address/${record.contract_address}`} className="mr-2">
               <i className="icmn-eye mr-1" width={16} />
             </a>
-            <a href="javascript: void(0);" className="mr-2" onClick={this.handleOnClickDetails(record.contract_address)}>
+            <a href="javascript: void(0);" className="mr-2" onClick={this.handleOnClickDetails}>
               <i className="icmn-list mr-1" width={16} />
             </a>
             <a href="javascript: void(0);" className="mr-2" onClick={this.handleOnClickICOStatus}>
@@ -150,23 +151,8 @@ class CrowdsaleList extends React.Component {
 
     return (
       <div className="card">
+
         {
-          this.state.viewDetails && 
-          <Details address = {this.state.address} />
-        }
-        {
-          this.state.viewICOStatus && 
-          <div>
-            <span>
-              <a href="javascript: void(0);" className="mr-2 pull-right" onClick={this.handleOnClickICOStatus}>
-                <i className="icmn-cross" title="Close" width={16} />
-              </a>
-            </span>
-            <ICOStatus/>
-          </div>
-        }
-        {
-          (!this.state.viewDetails && !this.state.viewICOStatus) &&
           <div>
           <div className="card-header">
             <div className="utils__title">

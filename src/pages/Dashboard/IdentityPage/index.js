@@ -1,8 +1,9 @@
 import React from 'react'
 import Page from 'components/LayoutComponents/Page'
 import Helmet from 'react-helmet'
+import Identity from './Identity/index';
 
-class Identity extends React.Component {
+class IdentityPage extends React.Component {
   static defaultProps ={
     pathName: 'Identity',
     roles: ['user', 'administrator',]
@@ -12,12 +13,10 @@ class Identity extends React.Component {
     return (
       <Page {...props}>
         <Helmet title="Identity" />
-        <div>
-          Identity Page
-        </div>
+        <Identity />
       </Page>
     )
   }
 }
 
-export default Identity
+export default IdentityPage

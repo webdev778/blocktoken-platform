@@ -1,16 +1,12 @@
 import React from 'react'
 import PaymentCard from 'components/CleanComponents/PaymentCard'
-import PaymentAccount from 'components/CleanComponents/PaymentAccount'
-import PaymentTx from 'components/CleanComponents/PaymentTx'
-import ChartCard from 'components/CleanComponents/ChartCard'
 import { Button, Input, Icon, Table, Alert, Card, Avatar } from 'antd'
-import { tableData } from './data.json'
 
 const { Meta } = Card;
 
 class DashboardUser extends React.Component {
   state = {
-    tableData: tableData,
+    tableData: null,
   }
 
   render() {
