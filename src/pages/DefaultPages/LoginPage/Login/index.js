@@ -66,7 +66,7 @@ class Login extends React.Component {
                   </div>
                   <div className="main-login__block__sidebar__place">
                     <i className="icmn-location mr-3" />
-                    New York, USA
+                    Sydney, Australia
                   </div>
                 </div>
               </div>

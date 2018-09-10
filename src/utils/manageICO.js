@@ -1,7 +1,12 @@
 import crowdsaleAbi from '../contracts/CrowdsaleAbi';
+  
+let ICOContract = null;
+let clientAddress = null;
 
-const ICOContract = window.web3.eth.contract(crowdsaleAbi);
-const clientAddress = window.web3.eth.defaultAccount;
+if(window.web3){
+  ICOContract = window.web3.eth.contract(crowdsaleAbi);
+  clientAddress = window.web3.eth.defaultAccount;
+}
 
 export default {
   startICO: (crowdsaleAddress) => {
