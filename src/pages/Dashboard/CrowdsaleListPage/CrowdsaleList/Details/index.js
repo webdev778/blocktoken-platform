@@ -15,21 +15,20 @@ class Details extends React.Component {
     }
   }
 
-  componentDidMount() {
-    axios.get('/api/v1.0/contract/getCrowdsaleContractByAddress/' + this.props.address)
-      .then((res) => {
-        if (res.data.contracts) {
-          this.setState({
-            contract: res.data.contracts[0],
-          });
-          console.log(this.state.contract);
-        } else {
-          this.setState({
-            contract: {}
-          });
-          alert('Something is wrong with crowdsale contract. Please try again.');
-        }
-      });
+  async componentDidMount() {
+    const { address } = this.props
+
+    try{
+
+      const res = await axios.get('/api/v1.0/contract/getCrowdsaleContractByAddress/' + address)
+      const { crowdsaleContract: contract } = res.data
+      console.log( contract )
+      if(contract) {
+        this.setState({ contract });        
+      }
+    }catch ( e ){
+      console.log( e )
+    }
   }
 
   render() {
@@ -39,7 +38,7 @@ class Details extends React.Component {
     return (
       <div className="card">
         <span>
-          <a href="javascript: void(0);" className="mr-2 pull-right">
+          <a href="javascript: void(0);" onClick={ this.props.onClose } className="mr-2 pull-right">
             <i className="icmn-cross" title="Close" width={16} />
           </a>
         </span>

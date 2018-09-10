@@ -80,6 +80,9 @@ class CrowdsaleList extends React.Component {
     this.setState({viewICOStatus: !this.state.viewICOStatus})
   }
 
+  handleCloseDetail = () => {
+    this.setState({ viewDetails: !this.state.viewDetails })
+  }
   render() {
     let { pager, data } = this.state
 
@@ -135,10 +138,10 @@ class CrowdsaleList extends React.Component {
             <a href={`http://${record.network}.etherscan.io/address/${record.contract_address}`} className="mr-2">
               <i className="icmn-eye mr-1" width={16} />
             </a>
-            <a href="javascript: void(0);" className="mr-2" onClick={this.handleOnClickDetails}>
+            <a href="javascript: void(0);" className="mr-2" onClick={() => { this.handleOnClickDetails(record.contract_address)}}>
               <i className="icmn-list mr-1" width={16} />
             </a>
-            <a href="javascript: void(0);" className="mr-2" onClick={this.handleOnClickICOStatus}>
+            <a href="javascript: void(0);" className="mr-2" onClick={ this.handleOnClickICOStatus }>
               <i className="icmn-wrench mr-1" width={16} />
             </a>
             <a href="javascript: void(0);" className="mr-2">
@@ -153,6 +156,22 @@ class CrowdsaleList extends React.Component {
       <div className="card">
 
         {
+          this.state.viewDetails && 
+          <Details address = {this.state.address} onClose = { this.handleCloseDetail }/>
+        }
+        {
+          this.state.viewICOStatus && 
+          <div>
+            <span>
+              <a href="javascript: void(0);" className="mr-2 pull-right" onClick={this.handleOnClickICOStatus}>
+                <i className="icmn-cross" title="Close" width={16} />
+              </a>
+            </span>
+            <ICOStatus/>
+          </div>
+        }
+        {
+          (!this.state.viewDetails && !this.state.viewICOStatus) &&
           <div>
           <div className="card-header">
             <div className="utils__title">
@@ -165,6 +184,7 @@ class CrowdsaleList extends React.Component {
               dataSource={data}
               pagination={pager}
               onChange={this.handleTableChange}
+              rowKey = "_id"
             />
           </div>
           </div>
