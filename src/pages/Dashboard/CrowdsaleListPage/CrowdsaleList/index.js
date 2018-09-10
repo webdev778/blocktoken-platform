@@ -75,15 +75,15 @@ class CrowdsaleList extends React.Component {
     this.setState({address: address, viewDetails: !this.state.viewDetails});
   }
 
-  handleOnClickICOStatus = () => {
-    this.setState({viewICOStatus: !this.state.viewICOStatus})
+  handleOnClickICOStatus = (address) => {
+    this.setState({address, viewICOStatus: !this.state.viewICOStatus})
   }
 
   handleCloseDetail = () => {
     this.setState({ viewDetails: !this.state.viewDetails })
   }
   render() {
-    let { pager, data } = this.state
+    let { pager, data, address } = this.state
 
     const columns = [
       {
@@ -140,7 +140,7 @@ class CrowdsaleList extends React.Component {
             <a href="javascript: void(0);" className="mr-2" onClick={() => { this.handleOnClickDetails(record.contract_address)}}>
               <i className="icmn-list mr-1" width={16} />
             </a>
-            <a href="javascript: void(0);" className="mr-2" onClick={ this.handleOnClickICOStatus }>
+            <a href="javascript: void(0);" className="mr-2" onClick={ () => this.handleOnClickICOStatus(record.contract_address) }>
               <i className="icmn-wrench mr-1" width={16} />
             </a>
             <a href="javascript: void(0);" className="mr-2">
@@ -165,7 +165,7 @@ class CrowdsaleList extends React.Component {
                 <i className="icmn-cross" title="Close" width={16} />
               </a>
             </span>
-            <ICOStatus/>
+            <ICOStatus address={this.state.address}/>
           </div>
         }
         {
