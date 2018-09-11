@@ -6,10 +6,19 @@
     color: white;
   }
 
+  .ant-tabs-tab-active{
+    background: #0AC29E;
+    color: #0190fe;
+  }  
+
   .ant-tabs-content{
     .ant-tabs-tab{
       background: white;
       color: black;  
     }
+    .ant-tabs-tab-active{
+      color: #0190fe;
+    }  
+  
   }
 }
