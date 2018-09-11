@@ -36,7 +36,7 @@ class TokenWizard extends React.Component {
         <div className="card-body">
           <Form onSubmit={this.handleSubmit} className="login-form">
             <div className="col">                
-              <Tabs defaultActiveKey="1" tabPosition="right" size="large">
+              <Tabs defaultActiveKey="1" tabPosition="top" size="large">
                 <TabPane tab={<span><Icon type="home" />Create Token</span>} key="1">
                   <CreateToken />
                 </TabPane>
