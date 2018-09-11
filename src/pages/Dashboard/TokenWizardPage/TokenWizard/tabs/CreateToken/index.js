@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Icon, Input, message } from 'antd'
+import { Form, Icon, Input, message,Button } from 'antd'
 
 import spinner from '../../../../../../assets/images/spinner.gif';
 import abi from '../../../../../../contracts/TokenAbi';
@@ -70,13 +70,14 @@ class CreateToken extends React.Component {
       // If we have an address property, the contract was deployed
       if (res.address) {
         const {network} = this.state;
-        const contractDeploymentStatus = 'Your contract has been deployed at http://' + network + '.etherscan.io/address/' + res.address;
+        const contractDeploymentStatus = `Your contract has been deployed at <a href="http://${network}.etherscan.io/address/${res.address}">http://${network}.etherscan.io/address/${res.address}</a>`;
+        const contractDeploymentSuccessMsg = `Your contract has been deployed at http://${network}.etherscan.io/address/${res.address}`;
 
         this.setState({
           isSpinnerVisible: false,
           contractDeploymentStatus
         });
-        message.success(contractDeploymentStatus);
+        message.success(contractDeploymentSuccessMsg);
 
         axios.post('/api/v1.0/contract/token',
           {
@@ -200,10 +201,11 @@ class CreateToken extends React.Component {
                 </FormItem>
               </div>
             </div>
-            <button className="btn btn-primary pull-right" type="submit">
+            <Button type="primary" className="btn btn-primary pull-right" htmlType="submit" size="large"
+              disabled = {isSpinnerVisible}>
               Deploy
-            </button>
-            <span className="pull-right deployment-status">{contractDeploymentStatus}</span>
+            </Button>
+            <span className="pull-right deployment-status" style={{padding: '1em'}}><div dangerouslySetInnerHTML={{__html: contractDeploymentStatus}}></div></span>
 
             {
               isSpinnerVisible ? (
