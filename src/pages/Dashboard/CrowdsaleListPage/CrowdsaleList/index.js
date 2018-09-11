@@ -140,7 +140,7 @@ class CrowdsaleList extends React.Component {
         key: 'action',
         render: (text, record) => (
           <span>
-            <a href={`http://${record.network}.etherscan.io/address/${record.contract_address}`} className="mr-2">
+            <a target="_blank" href={`http://${record.network}.etherscan.io/address/${record.contract_address}`} className="mr-2">
               <i className="icmn-eye mr-1" width={16} />
             </a>
             <a href="javascript: void(0);" className="mr-2" onClick={() => { this.handleOnClickDetails(record.contract_address)}}>

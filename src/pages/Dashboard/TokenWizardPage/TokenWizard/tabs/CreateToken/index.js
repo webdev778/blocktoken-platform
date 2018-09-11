@@ -70,7 +70,7 @@ class CreateToken extends React.Component {
       // If we have an address property, the contract was deployed
       if (res.address) {
         const {network} = this.state;
-        const contractDeploymentStatus = `Your contract has been deployed at <a href="http://${network}.etherscan.io/address/${res.address}">http://${network}.etherscan.io/address/${res.address}</a>`;
+        const contractDeploymentStatus = `Your contract has been deployed at <a target="_blank" href="http://${network}.etherscan.io/address/${res.address}">http://${network}.etherscan.io/address/${res.address}</a>`;
         const contractDeploymentSuccessMsg = `Your contract has been deployed at http://${network}.etherscan.io/address/${res.address}`;
 
         this.setState({
