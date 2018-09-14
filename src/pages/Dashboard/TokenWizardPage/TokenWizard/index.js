@@ -34,18 +34,18 @@ class TokenWizard extends React.Component {
           </div>
         </div>
         <div className="card-body">
-          <Form onSubmit={this.handleSubmit} className="login-form">
-            <div className="col">                
-              <Tabs defaultActiveKey="1" tabPosition="right" size="large">
-                <TabPane tab={<span><Icon type="home" />Create Token</span>} key="1">
-                  <CreateToken />
-                </TabPane>
-                <TabPane tab={<span><Icon type="trophy" />Create Crowdsale</span>} key="2">
-                  <CreateCrowdsale />
-                </TabPane>
-              </Tabs>
+            <div className="col">     
+              <div className="token-wizard">
+                <Tabs defaultActiveKey="1" tabPosition="top" size="large">
+                  <TabPane tab={<span className="mainTab"><Icon type="home" />[STEP-1] Token Creator </span>} key="1">
+                    <CreateToken />
+                  </TabPane>
+                  <TabPane tab={<span className="mainTab"><Icon type="trophy" />[STEP-2] Smart Contract </span>} key="2">
+                    <CreateCrowdsale />
+                  </TabPane>
+                </Tabs>
+              </div>
             </div>
-          </Form>
         </div>
       </div>
     )

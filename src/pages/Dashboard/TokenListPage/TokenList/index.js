@@ -117,7 +117,7 @@ class TokenList extends React.Component {
         key: 'action',
         render: (text, record) => (
           <span>
-            <a href={`http://${record.network}.etherscan.io/token/${record.contract_address}`} className="mr-2">
+            <a target="_blank" href={`http://${record.network}.etherscan.io/token/${record.contract_address}`} className="mr-2">
               <i className="icmn-eye mr-1" title="View on etherscan.io" width={16} />
             </a>
             <a href="javascript: void(0);" className="mr-2" onClick={() => { this.handleOnClickBalances(record.contract_address)}}>

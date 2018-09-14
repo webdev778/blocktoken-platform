@@ -14,6 +14,7 @@ class Login extends React.Component {
     document.getElementsByTagName('body')[0].style.overflow = 'hidden'
 
     particlesJS.load('particles-js', '/resources/particles.json');  
+    particlesJS.load('particles-js-1', '/resources/particles1.json');  
   }
 
   componentWillUnmount() {
@@ -68,6 +69,7 @@ class Login extends React.Component {
                     <i className="icmn-location mr-3" />
                     Sydney, Australia
                   </div>
+                  <div id="particles-js-1" className="particles-container"></div>                  
                 </div>
               </div>
             </div>
