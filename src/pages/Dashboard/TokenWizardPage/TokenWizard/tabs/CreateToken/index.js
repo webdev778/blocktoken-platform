@@ -143,7 +143,6 @@ class CreateToken extends React.Component {
     const {initialSupply, publicTokenName, decimalUnits, tokenSymbol, tokenVersion, isSpinnerVisible, contractDeploymentStatus} = this.state;
 
     return (
-      <Page>
       <div className="card">
         <div className="card-header">
           <div className="utils__title text-center" >
@@ -221,7 +220,6 @@ class CreateToken extends React.Component {
           </Form>
         </div>
       </div>
-      </Page>
     )
   }
 }
