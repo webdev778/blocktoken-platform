@@ -100,7 +100,7 @@ class Identity extends React.Component {
               {
                 (status == 2 || status == 5) &&
                 <div>
-                  <a>
+                  <a href="javascript: void(0);">
                     <PaymentCard
                       icon={'lnr lnr-license'}
                       name={'KYC'}
