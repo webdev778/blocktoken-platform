@@ -97,42 +97,26 @@ class Identity extends React.Component {
           (selectMode == 0) ?
           <div className="row">
             <div className="col-lg-6 text-center">
-              {
-                (status == 2 || status == 5) &&
-                <div>
-                  <a href="javascript: void(0);">
-                    <PaymentCard
-                      icon={'lnr lnr-license'}
-                      name={'KYC'}
-                    />
-                  </a>
+              <div>
+                <a href="javascript: void(0);">
+                  <PaymentCard
+                    icon={'lnr lnr-license'}
+                    name={'KYC'}
+                  />
+                </a>
+                {
+                  (status == 2 || status == 5) &&
                   <Tag color="#87d068">Verification Success</Tag>
-                </div>
-              }
-              {
-                (status == 1 || status == 4) &&
-                <div>
-                  <a>
-                    <PaymentCard
-                      icon={'lnr lnr-license'}
-                      name={'KYC'}
-                    />
-                  </a>
+                }
+                {
+                  (status == 1 || status == 4) &&
                   <Tag color="#2db7f5">Review in your verification</Tag>
-                </div>
-              }
-              {
-                (status == 0 || status == 3) &&
-                <div>
-                  <a onClick={this.KYCClick}>
-                    <PaymentCard
-                      icon={'lnr lnr-license'}
-                      name={'KYC'}
-                    />
-                  </a>
+                }
+                {
+                  (status == 0 || status == 3) &&
                   <Tag color="#f50">You have to verify</Tag>
-                </div>
-              }
+                }
+              </div>
             </div>
             <div className="col-lg-6 text-center">
               <a onClick={this.TFAClick}>
