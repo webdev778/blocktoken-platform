@@ -98,7 +98,7 @@ class Identity extends React.Component {
           <div className="row">
             <div className="col-lg-6 text-center">
               <div>
-                <a href="javascript: void(0);">
+                <a href="javascript: void(0);" onClick={this.KYCClick}>
                   <PaymentCard
                     icon={'lnr lnr-license'}
                     name={'KYC'}
@@ -119,7 +119,7 @@ class Identity extends React.Component {
               </div>
             </div>
             <div className="col-lg-6 text-center">
-              <a onClick={this.TFAClick}>
+              <a href="javascript: void(0);" onClick={this.TFAClick}>
                 <PaymentCard
                   icon={'lnr lnr-briefcase'}
                   name={'2FA'}
