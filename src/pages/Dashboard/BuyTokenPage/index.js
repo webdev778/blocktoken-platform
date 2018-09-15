@@ -133,7 +133,6 @@ class BuyTokenPage extends React.Component {
               </div>
             </div>
             <div className="row utils__content">
-                  HAHA
             </div>
           </div>
           <Button type="primary">Purchase Token</Button>
