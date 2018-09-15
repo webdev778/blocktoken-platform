@@ -21,13 +21,6 @@ const mapStateToProps = (state, props) => ({
 )
 class ProfileMenu extends React.Component {
   state = {
-    count: 7,
-  }
-
-  addCount = () => {
-    this.setState({
-      count: this.state.count + 1,
-    })
   }
 
   render() {
@@ -77,12 +70,9 @@ class ProfileMenu extends React.Component {
           overlay={menu}
           trigger={['click']}
           placement="bottomRight"
-          onVisibleChange={this.addCount}
         >
           <a className="ant-dropdown-link" href="/">
-            <Badge count={count}>
-              <Avatar className="topbar__avatar" shape="square" size="large" icon="user" />
-            </Badge>
+            <Avatar className="topbar__avatar" shape="square" size="large" icon="user" />
           </a>
         </Dropdown>
       </div>

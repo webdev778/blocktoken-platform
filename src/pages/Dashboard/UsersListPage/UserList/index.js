@@ -98,85 +98,45 @@ class UsersList extends React.Component {
         title: 'DisplayName',
         dataIndex: 'displayName',
         key: 'displayName',
-        sorter: (a, b) => a.displayName.localeCompare(b.displayName),
       },
       {
         title: 'Email',
         dataIndex: 'email',
         key: 'email',
-        sorter: (a, b) => a.email.localeCompare(b.email),
-        render: text => (
-          <a className="utils__link--underlined" href="javascript: void(0);">
-            <Link to="/profile">{text}</Link>
-          </a>
-        ),
-        filterDropdown: (
-          <div className="custom-filter-dropdown">
-            <Input
-              ref={ele => (this.searchInput = ele)}
-              placeholder="Search email"
-              value={this.state.searchText}
-              onChange={this.onInputChange}
-              onPressEnter={this.onSearch}
-            />
-            <Button type="primary" onClick={this.onSearch}>
-              Search
-            </Button>
-          </div>
-        ),
-        filterIcon: (
-          <Icon type="search" style={{ color: this.state.filtered ? '#108ee9' : '#aaa' }} />
-        ),
-        filterDropdownVisible: this.state.filterDropdownVisible,
-        onFilterDropdownVisibleChange: visible => {
-          this.setState(
-            {
-              filterDropdownVisible: visible,
-            },
-            () => this.searchInput && this.searchInput.focus(),
-          )
-        },
       },
       {
         title: 'Fullname',
         dataIndex: 'fullname',
         key: 'fullname',
-        sorter: (a, b) => a.fullname.localeCompare(b.fullname),
       },
       {
         title: 'Address',
         dataIndex: 'address',
         key: 'address',
-        sorter: (a, b) => a.address.localeCompare(b.address),
       },
       {
         title: 'Company',
         dataIndex: 'company',
         key: 'company',
-        sorter: (a, b) => a.company.localeCompare(b.company),
       },
       {
         title: 'Website URL',
         dataIndex: 'website',
         key: 'website',
-        sorter: (a, b) => a.website.localeCompare(b.website),
       },
       {
         title: 'Role',
         dataIndex: 'role',
         key: 'role',
-        sorter: (a, b) => a.role.localeCompare(b.role),
+        render: (text, record) => (record.auth_status === 9 ? 'SuperAdmin' : (record.auth_status > 2 ? 'Admin' : 'User')),
       },
       {
         title: 'Action',
         key: 'action',
         render: (text, record) => (
           <span>
-            <a href="javascript: void(0);" className="mr-2">
-              <i className="icmn-pencil mr-1" /> <Link to="/profile"> View </Link>
-            </a>
             <a href="javascript: void(0);">
-              <i className="icmn-cross mr-1" /> Remove
+              <i className="icmn-cross mr-1" />
             </a>
           </span>
         ),

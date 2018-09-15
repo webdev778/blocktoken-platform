@@ -1,56 +1,53 @@
 import React from 'react'
-import { Form, Button, Row, Col, Timeline, Input, Card, Upload } from 'antd'
+import { Form, Button, Steps, notification, Tag, message } from 'antd'
 import './style.scss'
 import PaymentCard from 'components/CleanComponents/PaymentCard'
+import POI from './POI'
+import POA from './POA'
 
-const FormItem = Form.Item
-const {Meta} = Card;
+const Step = Steps.Step;
+
+const kyc_steps = [{
+  title: 'Proof of Identity',
+  content: <POI onValueChange={this.handleOnValueChange} variables={this.state}/>,
+}, {
+  title: 'Proof of Address',
+  content: <POA/>,
+}];
 
 @Form.create()
 class Identity extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectMode: 0
+      selectMode: 0,
+      kyc_current: 0,
     };
   }
 
   KYCClick = () => {
     this.setState({selectMode: 1})
   }
-
+  
   TFAClick = () => {
     this.setState({selectMode: 2})
   }
 
   onClose = () => {
-    this.setState({selectMode: 0})
+    this.setState({selectMode: 0, kyc_current: 0})
+  }
+
+  handleOnValueChange = (key, val) => {
+    this.setState({
+      [key]: val,
+    })
   }
 
   render() {
-    const { getFieldDecorator } = this.props.form
     const { selectMode } = this.state;
+    const { kyc_current } = this.state;
+    const status = window.localStorage.getItem('app.Status')
 
-    const fileList = [{
-      uid: -1,
-      name: 'xxx.png',
-      status: 'done',
-      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-      thumbUrl: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-    }, {
-      uid: -2,
-      name: 'yyy.png',
-      status: 'done',
-      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-      thumbUrl: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-    }];
-
-    const props = {
-      action: '//jsonplaceholder.typicode.com/posts/',
-      listType: 'picture',
-      defaultFileList: [...fileList],
-    };
-  
     return (
       <div className="card">
         <div className="card-header">
@@ -70,104 +67,74 @@ class Identity extends React.Component {
         </div>
         <div className="card-body">
         {
-          (selectMode === 1) ?
-          <Timeline>
-            <Timeline.Item color="black">
-              <p><strong>1. PERSONAL INFORMATION</strong></p>
-              <div className="row">
-                <div className="col-lg-6">
-                  <FormItem label="First Name">
-                    {getFieldDecorator('firstname', {
-                      initialValue: '',
-                      rules: [{ required: true, message: 'Please input your First Name!' }],
-                    })(<Input />)}
-                  </FormItem>
-                </div>
-                <div className="col-lg-6">
-                  <FormItem label="Address">
-                    {getFieldDecorator('address', {
-                      initialValue: '',
-                      rules: [{ required: true, message: 'Please input your Address!' }],
-                    })(<Input />)}
-                  </FormItem>
-                </div>
-                <div className="col-lg-6">
-                  <FormItem label="Last Name">
-                    {getFieldDecorator('lastname', {
-                      initialValue: '',
-                      rules: [{ required: true, message: 'Please input your Last Name!' }],
-                    })(<Input />)}
-                  </FormItem>
-                </div>
+          (selectMode == 1) ?
+            <div className="col-lg-9">
+              <Steps current={kyc_current}>
+                {kyc_steps.map(item => <Step key={item.title} title={item.title} />)}
+              </Steps>
+              <div className="steps-content">
+                {
+                  (kyc_current == 0) &&
+                  <POI onValueChange={this.handleOnValueChange} variables={this.state} onClose={this.onClose}/>
+                }
+                {
+                  (kyc_current == 1) &&
+                  <POA onValueChange={this.handleOnValueChange} variables={this.state} onClose={this.onClose}/>
+                }
               </div>
-            </Timeline.Item>
-            <Timeline.Item color="black">
-              <p><strong>2. PERSONAL DOCUMENTS</strong></p>
-              <Card title="Select Document" bordered={false}>
-                <Row gutter={30}>
-                  <Col span={8}>
-                    <Upload {...props}>
-                      <Card
-                        bordered={false}
-                        hoverable
-                        style={{ width:200, height: 300 }}
-                        cover={<img class="center" alt="passport" src="https://i.ebayimg.com/images/g/yf0AAOSwjqVZBTcJ/s-l640.jpg" />}
-                      >
-                      </Card>
-                    </Upload>
-                  </Col>
-                  <Col span={8}>
-                    <Upload {...props}>
-                      <Card
-                        bordered={false}
-                        hoverable
-                        style={{ width:200, height: 300 }}
-                        cover={<img class="center" alt="identity" src="https://thumb1.shutterstock.com/display_pic_with_logo/3185162/767911606/stock-vector-passport-id-identity-card-of-sexy-woman-767911606.jpg" />}
-                      >
-                      </Card>
-                    </Upload>
-                  </Col>
-                  <Col span={8}>
-                    <Upload {...props}>
-                      <Card
-                        bordered={false}
-                        hoverable
-                        style={{ width:200, height: 300 }}
-                        cover={<img alt="driver" align="bottom" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0kFzcbzARVb4Ed9o6Nwao6QDHGliH4QaO7GUAMftlVsQEPFUDlw"/>}
-                      >
-                      </Card>
-                    </Upload>
-                  </Col>
-                </Row>
-                
-              </Card>
-            </Timeline.Item>
-            <Timeline.Item color="black"></Timeline.Item>
-            <Button type="primary" className="mr-3 pull-right">
-              Save
-            </Button>
-          </Timeline>
+              
+            </div>
           : null
         }
 
         {
-          (selectMode === 2) ? 
+          (selectMode == 2) ? 
           <div></div>
           : null
         }
           
         {
-          (selectMode === 0) ?
+          (selectMode == 0) ?
           <div className="row">
-            <div className="col-lg-6">
-              <a onClick={this.KYCClick}>
-                <PaymentCard
-                  icon={'lnr lnr-license'}
-                  name={'KYC'}
-                />
-              </a>
+            <div className="col-lg-6 text-center">
+              {
+                (status == 2 || status == 5) &&
+                <div>
+                  <a>
+                    <PaymentCard
+                      icon={'lnr lnr-license'}
+                      name={'KYC'}
+                    />
+                  </a>
+                  <Tag color="#87d068">Verification Success</Tag>
+                </div>
+              }
+              {
+                (status == 1 || status == 4) &&
+                <div>
+                  <a>
+                    <PaymentCard
+                      icon={'lnr lnr-license'}
+                      name={'KYC'}
+                    />
+                  </a>
+                  <Tag color="#2db7f5">Review in your verification</Tag>
+                </div>
+              }
+              {
+                (status == 0 || status == 3) &&
+                <div>
+                  <a onClick={this.KYCClick}>
+                    <PaymentCard
+                      icon={'lnr lnr-license'}
+                      name={'KYC'}
+                    />
+                  </a>
+                  <Tag color="#f50">You have to verify</Tag>
+                </div>
+              }
             </div>
-            <div className="col-lg-6">
+            <div className="col-lg-6 text-center">
               <a onClick={this.TFAClick}>
                 <PaymentCard
                   icon={'lnr lnr-briefcase'}

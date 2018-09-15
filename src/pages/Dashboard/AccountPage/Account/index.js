@@ -1,10 +1,9 @@
 import React from 'react'
-import { Form, Button, Card, notification, Input, Row, Col } from 'antd'
+import {Row, Col, Form, Card} from 'antd'
 import './style.scss'
 
 import PersonalInfo from './PersonalInfo'
 import Password from './Password'
-const FormItem = Form.Item
 
 @Form.create()
 class Account extends React.Component {

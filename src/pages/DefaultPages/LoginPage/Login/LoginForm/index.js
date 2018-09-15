@@ -3,7 +3,7 @@ import DimmerSpinner from 'components/CleanComponents/DimmerSpinner';
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import {bindActionCreators} from 'redux';
-import { FacebookLoginButton, GoogleLoginButton } from 'react-social-login-buttons'
+import { FacebookLoginButton, GoogleLoginButton, LinkedInLoginButton  } from 'react-social-login-buttons'
 import { REDUCER, submit } from 'ducks/login'
 import { Form, Input, Icon, Button, notification } from 'antd'
 import * as authActions from 'ducks/auth';
@@ -137,6 +137,8 @@ class LoginForm extends React.Component {
             <GoogleLoginButton align="center" onClick={()=> handleSocialLogin('google')} />
             <br />
             <FacebookLoginButton align="center" onClick={()=> handleSocialLogin('facebook')}/>
+            <br />
+            <LinkedInLoginButton  align="center" onClick={()=> handleSocialLogin('linkedin')}/>
             <div className="mb-4">
               <br />
               <br />

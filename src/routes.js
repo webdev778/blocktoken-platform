@@ -27,6 +27,9 @@ const loadableRoutes = {
   '/admin/users': {
     component: loadable(() => import('pages/Dashboard/UsersListPage')),
   },
+  '/admin/identity': {
+    component: loadable(() => import('pages/Dashboard/IdentityListPage')),
+  },
   '/token/list': {
     component: loadable(() => import('pages/Dashboard/TokenListPage')),
   },
@@ -35,6 +38,12 @@ const loadableRoutes = {
   },
   '/token-wizard': {
     component: loadable(() => import('pages/Dashboard/TokenWizardPage')),
+  },
+  '/token-wizard/token': {
+    component: loadable(() => import('pages/Dashboard/TokenWizardPage/TokenWizard/tabs/CreateToken')),
+  },
+  '/token-wizard/crowdsale': {
+    component: loadable(() => import('pages/Dashboard/TokenWizardPage/TokenWizard/tabs/CreateCrowdsale')),
   },
   '/empty': {
     component: loadable(() => import('pages/DefaultPages/EmptyPage')),
@@ -47,7 +56,7 @@ const loadableRoutes = {
   '/user/dashboard': {
     component: loadable(() => import('pages/Dashboard/DashboardUserPage')),
   },
-
+  
   '/admin/dashboard': {
     component: loadable(() => import('pages/Dashboard/DashboardUserPage')),
   },
@@ -60,6 +69,9 @@ const loadableRoutes = {
   },
   '/wallet' : {
     component: loadable(() => import('pages/Dashboard/MyWalletPage')),
+  },
+  '/buytoken': {
+    component: loadable(() => import('pages/Dashboard/BuyTokenPage')),
   },
 }
 

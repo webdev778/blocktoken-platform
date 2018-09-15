@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import PaymentCard from 'components/CleanComponents/PaymentCard'
 import { Button, Input, Icon, Table, Alert, Card, Avatar } from 'antd'
 
@@ -44,15 +45,35 @@ class DashboardUser extends React.Component {
         sorter: (a, b) => a.salary - b.salary,
       },
     ]
-
+    const status = window.localStorage.getItem('app.Status')
+    console.log(status);
     return (
       <div>
-        <Alert
-          message="User Warnings"
-          description="You have to complete verifications."
-          type="warning"
-          showIcon
-        />
+        {
+          (status == 0 || status == 3) &&
+          <Alert
+            message="You have to complete verifications."
+            type="warning"
+            showIcon
+          />
+        }
+        {
+          (status == 1 || status == 4) &&
+          <Alert
+            message="Review in your verification."
+            type="info"
+            showIcon
+          />
+        }
+        {
+          (status == 2 || status == 5) &&
+          <Alert
+            message="Verification Complete."
+            type="success"
+            showIcon
+          />
+        }
+        
         <div className="row mt-4">
           <div className="col-lg-6">
             <div className="card" style={{height: "300px"}}>
@@ -86,16 +107,20 @@ class DashboardUser extends React.Component {
         
         <div className="row">
           <div className="col-lg-4">
-            <PaymentCard
-              icon={'lnr lnr-license'}
-              name={'Complete Verification'}
-            />
+            <Link to='/identity'>
+              <PaymentCard
+                icon={'lnr lnr-license'}
+                name={'Complete Verification'}
+              />
+            </Link>
           </div>
           <div className="col-lg-4">
-            <PaymentCard
-              icon={'lnr lnr-cart'}
-              name={'Buy Tokens'}
-            />
+            <Link to='/buytoken'>
+              <PaymentCard
+                icon={'lnr lnr-cart'}
+                name={'Buy Tokens'}
+              />
+            </Link>
           </div>
           <div className="col-lg-4">
             <PaymentCard
@@ -106,10 +131,12 @@ class DashboardUser extends React.Component {
         </div>
         <div className="row">
           <div className="col-lg-4">
-            <PaymentCard
-              icon={'lnr lnr-eye'}
-              name={'Launch a Token & Crowdsale Smart Contract'}
-            />
+            <Link to='/token-wizard'>
+              <PaymentCard
+                icon={'lnr lnr-eye'}
+                name={'Launch a Token & Crowdsale Smart Contract'}
+              />
+            </Link>
           </div>
           <div className="col-lg-4">
             <PaymentCard

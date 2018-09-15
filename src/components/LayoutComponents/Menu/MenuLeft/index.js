@@ -188,13 +188,13 @@ class MenuLeft extends React.Component {
     const menuUserItems = this.generateMenuPartitions(menuUser)
     const menuAdminItems = this.generateMenuPartitions(menuAdmin)
     const paramsMobile = {
-      width: 256,
+      width: 255,
       collapsible: false,
       collapsed: false,
       onCollapse: this.onCollapse,
     }
     const paramsDesktop = {
-      width: 256,
+      width: 255,
       collapsible: true,
       collapsed: collapsed,
       onCollapse: this.onCollapse,
@@ -211,7 +211,7 @@ class MenuLeft extends React.Component {
             </div>
           ) : (
             <div className="menuLeft__logoContainer">
-              <img src="resources/images/logo-inverse.png" alt="" />
+              <img src="https://dev.blocktoken.ai/wp-content/uploads/thegem-logos/logo_5ed388aa7c69b61be6aa09babaeee6a4_1x.png" alt="" />
             </div>
           )}
         </div>
@@ -228,12 +228,12 @@ class MenuLeft extends React.Component {
             mode="inline"
             className="menuLeft__navigation"
           >
-            {/* <Menu.Item key={'settings'}>
+            <Menu.Item key={'settings'}>
               <span className="menuLeft__item-title">Theme Settings</span>
               <span
                 className={'icmn icmn-cog menuLeft__icon utils__spin-delayed--pseudo-selector'}
               />
-            </Menu.Item> */}
+            </Menu.Item>
             {(userRole === 'user') && menuUserItems}
             {(userRole === 'administrator') && menuAdminItems}
           </Menu>

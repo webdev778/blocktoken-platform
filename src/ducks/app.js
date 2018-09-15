@@ -91,6 +91,7 @@ export async function login(email, password, dispatch) {
   // Use Axios there to get User Auth Token with Basic Method Authentication
   try{
     const result = await AuthAPI.localLogin({email, password})
+    window.localStorage.setItem('app.Status', result.data.auth_status)
     if (email === 'admin@blocktoken.ai' && password === '123123')
     {
       window.localStorage.setItem('app.Email', 'admin@blocktoken.ai')

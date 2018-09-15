@@ -95,9 +95,9 @@ class Layout extends React.Component {
               <BackTop />
               <Routes />
               <Menu isMobile={isMobile} />
-              <SettingsSider />
+              <SettingsSider style={{zIndex: 1000}}/>
               <AntLayout>
-                <AntHeader>
+                <AntHeader style={{ position: 'fixed', zIndex: 99, width:'85%'}}>
                   <TopBar />
                 </AntHeader>
                 <AntContent style={{ height: '100%' }}>

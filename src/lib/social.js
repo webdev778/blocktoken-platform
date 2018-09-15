@@ -2,7 +2,8 @@ import hello from 'hellojs';
 
 hello.init({
     facebook: 457534721401204,
-    google: '613507272855-5e9c8l9ga38upksv91mc1oveh3bsli26.apps.googleusercontent.com'
+    google: '613507272855-5e9c8l9ga38upksv91mc1oveh3bsli26.apps.googleusercontent.com',
+    linkedin: '81j0mo6ktnfioy'
 }, {redirect_uri: '/redirect.html'});
 
 export default(function () {
@@ -22,6 +23,14 @@ export default(function () {
                     e => reject(e)
                 );
             })
-        }
+        },
+        linkedin: () => {
+            return new Promise((resolve, reject) => {
+                hello.login('linkedin', { scope: 'email' }).then(
+                    auth => resolve(auth.authResponse.access_token),
+                    e => reject(e)
+                );
+            })
+        },
     }
 })();

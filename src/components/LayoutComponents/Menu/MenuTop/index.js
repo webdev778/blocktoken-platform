@@ -4,7 +4,8 @@ import { Menu } from 'antd'
 import { Link, withRouter } from 'react-router-dom'
 import { reduce } from 'lodash'
 import { setLayoutState } from 'ducks/app'
-import { default as menuData } from './menuData'
+import { default as menuUser } from './menuUser'
+import menuAdmin from './menuAdmin'
 import './style.scss'
 
 const SubMenu = Menu.SubMenu
@@ -138,7 +139,11 @@ class MenuTop extends React.Component {
   }
 
   componentWillMount() {
-    this.getActiveMenuItem(this.props, menuData)
+    var userRole = window.localStorage.getItem('app.Role');
+    if (userRole === 3)
+      this.getActiveMenuItem(this.props, menuAdmin)
+    else
+      this.getActiveMenuItem(this.props, menuUser)
   }
 
   componentWillReceiveProps(newProps) {
@@ -150,7 +155,11 @@ class MenuTop extends React.Component {
       },
       () => {
         if (!newProps.isMobile) {
-          this.getActiveMenuItem(newProps, menuData)
+          var userRole = window.localStorage.getItem('app.Role');
+          if (userRole === 3)
+            this.getActiveMenuItem(newProps, menuAdmin)
+          else
+            this.getActiveMenuItem(newProps, menuUser)
         }
       },
     )
@@ -158,14 +167,11 @@ class MenuTop extends React.Component {
 
   render() {
     const { selectedKeys, openKeys, theme } = this.state
-    const menuItems = this.generateMenuPartitions(menuData)
+    const menuUserItems = this.generateMenuPartitions(menuUser)
+    const menuAdminItems = this.generateMenuPartitions(menuAdmin)
+    const userRole = window.localStorage.getItem('app.Role')
     return (
       <div className="menuTop">
-        <div className="menuTop__logo">
-          <div className="menuTop__logoContainer">
-            <img src="resources/images/logo-inverse.png" alt="" />
-          </div>
-        </div>
         <Menu
           theme={theme}
           onClick={this.handleClick}
@@ -179,11 +185,11 @@ class MenuTop extends React.Component {
             <span className="menuTop__item-title">Settings</span>
             <span className={'icmn icmn-cog menuTop__icon utils__spin-delayed--pseudo-selector'} />
           </Menu.Item>
-          {menuItems}
+          {(userRole === 3) ? menuAdminItems : menuUserItems}
         </Menu>
       </div>
     )
   }
 }
 
-export { MenuTop, menuData }
+export { MenuTop, menuUser, menuAdmin }

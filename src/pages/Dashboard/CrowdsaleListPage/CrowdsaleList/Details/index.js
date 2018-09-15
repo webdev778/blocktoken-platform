@@ -1,6 +1,5 @@
 import React from 'react'
-import { Form, Icon, Input, Button, Select, Card, Table } from 'antd'
-import { Link } from 'react-router-dom'
+import { Form, Select} from 'antd'
 import axios from 'axios/index'
 
 const FormItem = Form.Item
@@ -22,7 +21,6 @@ class Details extends React.Component {
 
       const res = await axios.get('/api/v1.0/contract/getCrowdsaleContractByAddress/' + address)
       const { crowdsaleContract: contract } = res.data
-      console.log( contract )
       if(contract) {
         this.setState({ contract });        
       }

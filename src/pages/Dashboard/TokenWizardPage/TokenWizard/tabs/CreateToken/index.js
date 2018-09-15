@@ -1,6 +1,7 @@
 import React from 'react'
 import { Form, Icon, Input, message,Button } from 'antd'
 
+import Page from 'components/LayoutComponents/Page'
 import spinner from '../../../../../../assets/images/spinner.gif';
 import abi from '../../../../../../contracts/TokenAbi';
 import bytecode from '../../../../../../contracts/TokenBytecode';
@@ -142,6 +143,7 @@ class CreateToken extends React.Component {
     const {initialSupply, publicTokenName, decimalUnits, tokenSymbol, tokenVersion, isSpinnerVisible, contractDeploymentStatus} = this.state;
 
     return (
+      <Page>
       <div className="card">
         <div className="card-header">
           <div className="utils__title text-center" >
@@ -219,6 +221,7 @@ class CreateToken extends React.Component {
           </Form>
         </div>
       </div>
+      </Page>
     )
   }
 }

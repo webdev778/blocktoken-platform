@@ -9,7 +9,7 @@ const NotFoundPage = () =>
         <div className="col-lg-8">
           <div className="login__header__logo">
             <a href="javascript: void(0);">
-              <img src="resources/images/login/logo.png"/>
+              <img src="https://dev.blocktoken.ai/wp-content/uploads/thegem-logos/logo_5ed388aa7c69b61be6aa09babaeee6a4_1x.png"/>
             </a>
           </div>
         </div>
@@ -22,12 +22,8 @@ const NotFoundPage = () =>
             <div className="login__block__form">
               <form id="form-validation" name="form-validation" method="POST">
                 <div className="text-center mb-3">
-                  <Avatar src="resources/images/avatars/5.jpg" border="true" size="90" />
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAd92BE5kwUXqyG2jFgNgVkj_kb-5n575zAOGA6nHB-NDsNzNi" />
                 </div>
-                <h2 style={{ color: '#514d6a' }} className="text-center">
-                  <i className="icmn-lock" />
-                  <strong>Work In Progress</strong>
-                </h2>
                 <br />
               </form>
             </div>
