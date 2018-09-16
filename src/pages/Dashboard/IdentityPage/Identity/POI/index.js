@@ -1,6 +1,7 @@
 import React from 'react'
 import { Form, Input, DatePicker, Col, TimePicker, Select, Cascader, InputNumber, Upload, Button, Icon, Card, message, notification } from 'antd'
 import idverify from '../../../../../assets/images/id_verify.png';
+import axios from 'axios'
 import * as UserAPI from 'lib/api/users';
 
 const FormItem = Form.Item;
@@ -56,7 +57,11 @@ class POI extends React.Component {
                 expires = this.state.expires;
             })
 
-            const result = await UserAPI.savePoI({firstname, lastname, gender, birthday, country, type, number, expires, front:'1', end:'2'})
+            console.log(this.state.fileList[0]);
+            
+            const formData = new FormData();
+            formData.append('file', this.state.file[0]);
+            const result = await axios.post('/api/v1.0/identity/idreg', formData, {headers: {'Content-Type': 'multipart/form-data'}});
             console.log(result);
             if (result.data)
             {
@@ -78,12 +83,12 @@ class POI extends React.Component {
     }
 
     handleChange = ({ fileList }) => {
-        this.setState({ fileList })
         console.log(this.state.fileList);
     }
-    uploadFile = () => {
+    
+    handleFileUpload = (event) => {
+        this.setState({fileList: event.target.files});
     }
-
     render() {
         const { getFieldDecorator } = this.props.form
         const countryOptions = countryData.map(country => <Option key={country}>{country}</Option>);
@@ -129,10 +134,8 @@ class POI extends React.Component {
                 
                 <div className="card-body">
                     <Upload
-                        data={this.uploadFile}
-                        fileList={fileList}
-                        listType='picture'
-                        multiple='true'
+                        listType="picture"
+                        multiple="true"
                         onChange={this.handleChange}  >
                         <div className="row">
                             <div className="col-lg-4">
@@ -145,8 +148,9 @@ class POI extends React.Component {
                                 <p>Ensure you upload the <strong>front</strong> and <strong>back</strong> of your Driver's License or National ID Card.</p>
                             </div>
                         </div>
-                    </Upload>   
-
+                    </Upload>
+                    <input label='upload file' type='file' multiple="multiple" onChange={this.handleFileUpload} />
+                    
                 </div>
                 <div className="card-body">
                     <FormItem label="ID Issuing Country:" labelCol={{ span: 5 }} wrapperCol={{ span: 12 }}>
