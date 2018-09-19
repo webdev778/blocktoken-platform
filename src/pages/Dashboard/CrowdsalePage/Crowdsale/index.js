@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import { Form, Icon, Input, message, Tabs, Checkbox, Select } from 'antd'
+import { Form, Icon, Input, message, Tabs, Checkbox, Select, Button } from 'antd'
 import IcoContract from './tabs/ico-contract/IcoContract'
 import Bonuses from './tabs/bonuses/Bonuses'
 import Vesting from './tabs/vesting/Vesting'
