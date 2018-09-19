@@ -1,19 +1,19 @@
 import React from 'react'
-import { Form, Icon, Input, message, Tabs, Checkbox, Select } from 'antd'
+import { Form, Icon, Input, message, Tabs, Checkbox, Select, Button } from 'antd'
 import IcoContract from './tabs/ico-contract/IcoContract'
 import Bonuses from './tabs/bonuses/Bonuses'
 import Vesting from './tabs/vesting/Vesting'
-import deployCrowdSale from '../../../../../../utils/deployCrowdsale';
-import allocateTokens from '../../../../../../utils/allocateTokens';
-import deployWhitelist from '../../../../../../utils/deployWhitelist';
-import initializeToken from '../../../../../../utils/initializeToken';
-import initializeVesting from '../../../../../../utils/initializeVesting';
-import initializeWhitelist from '../../../../../../utils/initializeWhitelist';
-import saveToDatabase from '../../../../../../utils/saveToDatabase';
+import deployCrowdSale from 'utils/deployCrowdsale';
+import allocateTokens from 'utils/allocateTokens';
+import deployWhitelist from 'utils/deployWhitelist';
+import initializeToken from 'utils/initializeToken';
+import initializeVesting from 'utils/initializeVesting';
+import initializeWhitelist from 'utils/initializeWhitelist';
+import saveToDatabase from 'utils/saveToDatabase';
 
 import {networks} from '../../../../../../constants';
 
-import spinner from '../../../../../../assets/images/spinner.gif';
+import spinner from 'assets/images/spinner.gif';
 import axios from "axios/index";
 
 
@@ -61,18 +61,35 @@ class CreateCrowdsale extends React.Component {
     };
   }
 
-  deployCrowdsaleContract = (e) => {
+  deployCrowdsaleContract = async (e) => {
 
     e.preventDefault();
 
     if (typeof window.web3 === 'undefined') {
       message.warning('Please enable metamask.');
-      return false;
+      return;
     } else if (window.web3.eth.defaultAccount === undefined) {
       message.warning('Please unlock metamask.');
-      return false;
+      return;
     }
 
+    const setState = this.setState.bind(this);
+
+    try{
+      const crowdsaleAddress = await deployCrowdSale(this.state, setState);
+      setState({ crowdsaleAddress });
+      await allocateTokens(this.state, setState, crowdsaleAddress);      
+      const whitelistAddress = await deployWhitelist(this.state, setState);
+      setState({ whitelistAddress });
+      await initializeWhitelist(this.state, setState, whitelistAddress);
+      await initializeVesting(this.state, setState);
+      await initializeToken(this.state, setState);
+      saveToDatabase(this.state, this.props);
+    }catch(e){
+      console.log(e);      
+    }
+
+    /*
     const sequence = Promise.resolve();
     const setState = this.setState.bind(this);
 
@@ -98,6 +115,7 @@ class CreateCrowdsale extends React.Component {
     }).then(() => {
       saveToDatabase(this.state, this.props);
     });
+    */
   };
 
   handleOnValueChange = (key, val) => {
@@ -131,6 +149,14 @@ class CreateCrowdsale extends React.Component {
 
   componentDidMount() {
     let network = '';
+
+    if (typeof window.web3 === 'undefined') {
+      message.warning('Please enable metamask.');
+      return;
+    } else if (window.web3.eth.defaultAccount === undefined) {
+      message.warning('Please unlock metamask.');
+      return;
+    }
 
     axios.get('/api/v1.0/contract/token')
       .then((result) => {
@@ -235,9 +261,10 @@ class CreateCrowdsale extends React.Component {
                 )}
               </Tabs>
             </div>
-            <button className="btn btn-primary pull-right" type="submit">
+            <Button type="primary" htmlType="submit" className="btn btn-primary pull-right" size="large"
+              disabled = {isSpinnerVisible}>
               Deploy
-            </button>
+            </Button>
             <span className="pull-right deployment-status">{contractDeploymentStatus}</span>
 
             {
