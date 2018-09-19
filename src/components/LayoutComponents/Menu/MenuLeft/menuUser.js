@@ -96,7 +96,7 @@ export default [
       {
         title: 'Token Wizard',
         key: 'tokenWizard',
-        url: '/token-wizard',
+        url: '/token-wizard/crowdsale',
       },
       {
         title: 'Tokens',

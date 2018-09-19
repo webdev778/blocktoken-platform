@@ -1,0 +1,214 @@
+@import '../../../resources/mixins';
+
+body.themeLight div.drawer-content {
+  background-color: #f4f6f7 !important;
+  overflow-y: auto;
+}
+
+body {
+  padding-top: rem(67);
+  @media (max-width: 1100px) {
+    padding-top: rem(55);
+  }
+}
+
+.BTtopBar {
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  width: 100%;
+
+  .hidden-xl {
+    @media (max-width: $xl-max-width) {
+      display: none;
+    }
+  }
+
+  .drawer .drawer-mask {
+    left: 0;
+    right: 0;
+  }
+
+  .header {
+    background-color: transparent;
+    background-image: linear-gradient(160deg, #b241b1 0%, #0b052e 100%);
+    position: relative;
+    z-index: 1000;
+
+    &__content {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      align-items: center;
+    }
+
+    &__logoImg {
+      width: 135px;
+
+      @media (max-width: 1100px) {
+        width: 100px;
+        margin-top: 6px;
+        margin-bottom: 6px;
+      }
+    }
+
+    &__nav {
+      margin-left: auto;
+
+      @media (max-width: 1100px) {
+        padding-bottom: rem(30);
+      }
+    }
+
+    &__navList {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      align-items: center;
+
+      @media (max-width: 1100px) {
+        flex-direction: column;
+        width: 255px;
+        align-items: initial;
+      }
+    }
+
+    &__menuItem {
+      padding: 0px 8px;
+      position: relative;
+
+      @media (max-width: 1100px) {
+        padding-left: 0;
+        padding-right: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+
+        &:hover {
+        .header__menuLink {
+          color: #00bcd4;
+        }
+
+        .header__subMenu {
+          visibility: visible;
+          opacity: 1;
+          transform: translateY(0px);
+          transition: transform 0.3s linear, opacity 0.3s linear, visibility 0.3s linear;
+        }
+      }
+    }
+
+    &__menuLink {
+      padding: 15px 8px;
+      color: $white;
+      line-height: rem(25);
+      font-size: rem(13);
+      font-family: 'Montserrat', sans-serif;
+      display: block;
+      transition: color 1s;
+      white-space: nowrap;
+      cursor: pointer;
+
+      @media (max-width: 1100px) {
+        color: #5f727f;
+        padding-left: 30px;
+        padding-right: 30px;
+        border-bottom: 1px solid #dfe5e8;
+      }
+
+      &--button {
+        padding: 3px 15px 3px 15px;
+        -webkit-border-radius: 25px;
+        -moz-border-radius: 25px;
+        border-radius: 25px;
+        border: 1px solid $white;
+        background-color: transparent;
+
+        @media(max-width: 1100px) {
+          text-align: center;
+          margin-top: 20px;
+          margin-left: 30px;
+          margin-right: 30px;
+        }
+      }
+
+      &--buttonFilled {
+        background-color: #ff687e;
+        border-color: #ff687e;
+      }
+    }
+
+    &__subMenu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 280px;
+      transform: translateY(20px);
+      transition: transform 0.1s linear, opacity 0.1s linear, visibility 0.1s linear;
+      opacity: 0;
+      list-style: none;
+      visibility: hidden;
+      margin: 0;
+      padding: 0;
+
+      @media(max-width: 1100px) {
+        position: relative;
+        width: auto;
+        transform: none;
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+
+    &__subMenuItem {
+      border-top: 1px solid #dfe5e8;
+
+      &:first-child {
+        border-top: none;
+      }
+
+      @media (max-width: 1100px) {
+        border-top: none;
+        border-bottom: 1px solid #dfe5e8;
+      }
+    }
+
+    &__subMenuLink {
+      display: block;
+      color: #5f727f;
+      line-height: rem(20);
+      font-size: rem(14);
+      font-family: 'Source Sans Pro', sans-serif;
+      padding: 15px 30px;
+      position: relative;
+      background-color: #f4f6f7;
+      transition: color 1s, background-color 1s;
+
+      @media(max-width: 1100px) {
+        padding-left: 50px;
+      }
+
+        &:hover {
+        background-color: $white;
+        color: #3c3950;
+        &::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          width: 3px;
+          background-color: #00bcd4;
+        }
+      }
+    }
+  }
+}

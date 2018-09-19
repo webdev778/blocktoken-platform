@@ -1,9 +1,13 @@
 @import '../../../../resources/mixins';
 
 .menuLeft {
+  position: relative;
+
+  .ant-layout-sider-trigger {
+    position: sticky;
+  }
 
   .ant-layout-sider-children {
-    position: fixed;
     height: 100%;
     width: 255px;
     transition: width .3s;
@@ -23,7 +27,6 @@
   &__logoContainer {
     height: 64px;
     padding: 13px 20px 15px 22px;
-    background: #1b114C;
     img {
       height: 36px;
     }
@@ -166,14 +169,6 @@
   display: none;
 }
 
-.ant-layout-sider-has-trigger{
-  padding-bottom: 64px !important;
-}
-
-.ant-layout-sider
-{
-  border-right-color: #1b114C !important;
-}
 .ant-layout-sider-zero-width-trigger {
   top: 10px !important;
 }

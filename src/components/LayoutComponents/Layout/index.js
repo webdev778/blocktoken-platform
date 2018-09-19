@@ -4,6 +4,8 @@ import { Spinner } from 'react-redux-spinner'
 import { BackTop, Layout as AntLayout } from 'antd'
 import Routes from 'routes'
 import TopBar from 'components/LayoutComponents/TopBar'
+import BTtopBar from 'components/LayoutComponents/BTtopBar'
+import BTfooter from 'components/LayoutComponents/BTfooter'
 import Footer from 'components/LayoutComponents/Footer'
 import Menu from 'components/LayoutComponents/Menu'
 import Content from 'components/LayoutComponents/Content'
@@ -44,6 +46,7 @@ const query = {
 }
 
 let isMobile
+
 enquireScreen(b => {
   isMobile = b
 })
@@ -94,21 +97,23 @@ class Layout extends React.Component {
               <Spinner />
               <BackTop />
               <Routes />
-              <Menu isMobile={isMobile} />
-              <SettingsSider style={{zIndex: 1000}}/>
-              <AntLayout>
-                <AntHeader>
-                  <TopBar />
-                </AntHeader>
-                <AntContent style={{ height: '100%' }}>
-                  <Content />
-                </AntContent>
-                {/*
-                <AntFooter>
-                  <Footer />
-                </AntFooter>
-                  */}
+              <BTtopBar/>
+              <AntLayout style={{marginTop:'-6px'}}>
+                <Menu isMobile={isMobile} />
+                <SettingsSider />
+                <AntLayout>
+                  <AntHeader>
+                    <TopBar />
+                  </AntHeader>
+                  <AntContent style={{ height: '100%' }}>
+                    <Content />
+                  </AntContent>
+                  {/* <AntFooter>
+                    <Footer />
+                  </AntFooter> */}
+                </AntLayout>
               </AntLayout>
+              <BTfooter/>
             </AntLayout>
           </div>
         )}

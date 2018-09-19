@@ -22,7 +22,7 @@ const NotFoundPage = () =>
             <div className="login__block__form">
               <form id="form-validation" name="form-validation" method="POST">
                 <div className="text-center mb-3">
-                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAd92BE5kwUXqyG2jFgNgVkj_kb-5n575zAOGA6nHB-NDsNzNi" />
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrYCayUrFQbZOOIrUPsf7eYbbC_dMa9Qo4CMcM528xfZHblybk" />
                 </div>
                 <br />
               </form>

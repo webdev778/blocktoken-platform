@@ -33,7 +33,6 @@ class MenuLeft extends React.Component {
     selectedKeys: '',
     openKeys: [''],
     settingsOpened: this.props.settingsOpened,
-    role : this.props.role,
   }
 
   handleClick = e => {
@@ -88,6 +87,14 @@ class MenuLeft extends React.Component {
 
     if (collapsed) {
       path = ['']
+    }
+    if (pathname === '/token-wizard/crowdsale' || pathname === '/token-wizard/token')
+    {
+      if (path.length == 0)
+      {
+        path.push(items[5]);
+        activeMenuItem = path[0].children[0];
+      }
     }
 
     this.setState({
@@ -188,13 +195,13 @@ class MenuLeft extends React.Component {
     const menuUserItems = this.generateMenuPartitions(menuUser)
     const menuAdminItems = this.generateMenuPartitions(menuAdmin)
     const paramsMobile = {
-      width: 255,
+      width: 256,
       collapsible: false,
       collapsed: false,
       onCollapse: this.onCollapse,
     }
     const paramsDesktop = {
-      width: 255,
+      width: 256,
       collapsible: true,
       collapsed: collapsed,
       onCollapse: this.onCollapse,
@@ -204,17 +211,6 @@ class MenuLeft extends React.Component {
     const userRole = window.localStorage.getItem('app.Role')
     return (
       <Sider {...params} className="menuLeft">
-        <div className="menuLeft__logo">
-          {params.collapsed ? (
-            <div className="menuLeft__logoContainer menuLeft__logoContainer--collapsed">
-              <img src="resources/images/logo-inverse-mobile.png" alt="" />
-            </div>
-          ) : (
-            <div className="menuLeft__logoContainer">
-              <img src="https://dev.blocktoken.ai/wp-content/uploads/thegem-logos/logo_5ed388aa7c69b61be6aa09babaeee6a4_1x.png" alt="" />
-            </div>
-          )}
-        </div>
         <Scrollbars
           autoHide
           style={{ height: isMobile ? 'calc(100vh - 64px)' : 'calc(100vh - 112px)' }}
