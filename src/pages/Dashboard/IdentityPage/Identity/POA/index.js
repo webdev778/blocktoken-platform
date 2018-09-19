@@ -9,27 +9,6 @@ const countryData = [
 
 const FormItem = Form.Item;
 const Option = Select.Option;
-const props = {
-    name: 'file',
-    action: '//jsonplaceholder.typicode.com/posts/',
-    headers: {
-        authorization: 'authorization-text',
-    },
-    onChange(info) {
-        if (info.file.status !== 'uploading') {
-            console.log(info.file, info.fileList);
-        }
-        if (info.file.status === 'done') {
-            message.success(`${info.file.name} file uploaded successfully`);
-        } else if (info.file.status === 'error') {
-            message.error(`${info.file.name} file upload failed.`);
-        }
-    },
-};
-//Change Function for Birthday and ExpiredDay
-function onDateIssueChange(date, dateString) {
-    console.log(date, dateString);
-}
 
 @Form.create()
 class POA extends React.Component {
@@ -37,6 +16,7 @@ class POA extends React.Component {
         super(props);
         this.state = {
           issued_date: '',
+          fileList: []
         };
     }
 
@@ -44,25 +24,32 @@ class POA extends React.Component {
         this.setState({issued_date: dateString})
     }
 
+    handleChange = ({ fileList }) => {
+        this.setState({fileList});
+    }
+
     kyc_done = async () => {
         try {
             
-            let address='', city='', state='', postcode='', country='', institution_name='', doc_type='', issued_date='';
+            const formData = new FormData();
+            console.log(this.state.fileList[0]);
+            formData.append('file', this.state.fileList[0].originFileObj);
             
             this.props.form.validateFields((err, values) => {
                 if (err)
                     return;
-                address = values.address;
-                city = values.city;
-                state = values.state;
-                postcode = values.postcode;
-                country = values.country;
-                institution_name = values.institution_name;
-                doc_type = values.doc_type
-                issued_date = this.state.issued_date;
+
+                formData.append('address', values.address);
+                formData.append('city', values.city);
+                formData.append('state', values.state);
+                formData.append('postcode', values.postcode);
+                formData.append('country', values.country);
+                formData.append('institution_name', values.institution_name);
+                formData.append('doc_type', values.doc_type);
+                formData.append('issued_date', this.state.issued_date);
             })
 
-            const result = await UserAPI.savePoA({address, city, state, postcode, country, institution_name, doc_type, issued_date, bankimg:'1'})
+            const result = await UserAPI.savePoA(formData, {headers: {'Content-Type': 'multipart/form-data'}})
             console.log(result);
             if (result.data)
             {
@@ -133,7 +120,10 @@ class POA extends React.Component {
                 </div>
                 
                 <div className="card-body">
-                    <Upload {...props}>
+                    <Upload
+                        action = '//jsonplaceholder.typicode.com/posts/'
+                        listType="picture"
+                        onChange={this.handleChange}>
                         <div className="row">
                             <div className="col-lg-4">
                                 <a href="javascript: void(0);">

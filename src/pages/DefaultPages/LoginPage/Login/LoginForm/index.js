@@ -65,7 +65,6 @@ class LoginForm extends React.Component {
       AppActions._setHideLogin(true);
       AppActions.goToPage('/user/dashboard');
       AppActions.deleteSubmitForm(REDUCER);
-      // dispatch(push('/user/dashboard'))
 
       notification.open({
         type: 'success',

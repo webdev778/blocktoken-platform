@@ -1,9 +1,9 @@
 import React from 'react'
 import Page from 'components/LayoutComponents/Page'
 import Helmet from 'react-helmet'
-import TokenWizard from './TokenWizard/'
+import CreateCrowdsale from './Crowdsale/'
 
-class TokenWizardPage extends React.Component {
+class CrowdsalePage extends React.Component {
   static defaultProps = {
     pathName: 'Token Wizard',
     roles: ['user', 'administrator'],
@@ -14,10 +14,10 @@ class TokenWizardPage extends React.Component {
     return (
       <Page {...props}>
         <Helmet title="Token Wizard" />
-        <TokenWizard />
+        <CreateCrowdsale />
       </Page>
     )
   }
 }
 
-export default TokenWizardPage
+export default CrowdsalePage

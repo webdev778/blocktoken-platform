@@ -1,11 +1,11 @@
 import React from 'react'
 import Page from 'components/LayoutComponents/Page'
 import Helmet from 'react-helmet'
-import Profile from './Profile'
+import CreateToken from './Token/'
 
-class ProfileAppPage extends React.Component {
+class TokenPage extends React.Component {
   static defaultProps = {
-    pathName: 'Profile',
+    pathName: 'Token Wizard',
     roles: ['user', 'administrator'],
   }
 
@@ -13,11 +13,11 @@ class ProfileAppPage extends React.Component {
     const props = this.props
     return (
       <Page {...props}>
-        <Helmet title="Profile" />
-        <Profile />
+        <Helmet title="Token Wizard" />
+        <CreateToken />
       </Page>
     )
   }
 }
 
-export default ProfileAppPage
+export default TokenPage

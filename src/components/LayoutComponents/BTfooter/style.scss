@@ -1,0 +1,111 @@
+@import '../../../resources/mixins';
+
+.BTfooter {
+  .footer {
+    background-color: #110633;
+    margin: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    padding: rem(40) rem(10) rem(30);
+
+    .utils__content {
+      overflow-x: visible;
+    }
+
+    &__logoLink {
+      display: inline-block;
+      vertical-align: top;
+      margin-bottom: rem(21);
+
+      img {
+        width: 135px;
+      }
+    }
+
+    &__partitions {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+    }
+
+    &__partition {
+      flex-grow: 0;
+      flex-basis: 25%;
+      padding-left: rem(21);
+      padding-right: rem(21);
+
+      &--logoTitle {
+        flex-basis: 50%;
+        padding-right: rem(60);
+      }
+
+      @media(max-width: $md-max-width) {
+        flex-basis: 50%;
+        margin-bottom: rem(42);
+      }
+
+      @media(max-width: $xs-max-width) {
+        flex-basis: 100%;
+      }
+
+      &--logoTitle {
+        @media(max-width: $md-max-width) {
+          flex-basis: 100%;
+        }
+      }
+    }
+
+    &__partitionContent {
+      font-size: rem(14);
+      color: #99a9b5;
+    }
+
+    &__partitionTitle {
+      margin-bottom: rem(30);
+
+      h4 {
+        color: $white;
+        font-weight: 700;
+        font-size: rem(16);
+        font-family: 'Montserrat', sans-serif;
+        text-transform: uppercase;
+
+        &::after {
+          content: '';
+          margin-left: rem(10);
+          display: inline-block;
+          width: 0;
+          height: 0;
+          border: 4px solid transparent;
+          border-bottom: 4px solid #f44336;
+          border-left: 4px solid #f44336;
+        }
+      }
+    }
+
+    &__navList {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    &__navItem {
+      display: block;
+      margin-bottom: rem(14);
+    }
+
+    &__navLink {
+      color: #99a9b5;
+      transition: all 0.2s linear;
+      font-size: rem(14);
+      line-height: rem(18);
+      font-family: 'Source Sans Pro', sans-serif;
+
+      &:hover {
+        color: #00bcd4;
+      }
+    }
+  }
+}
