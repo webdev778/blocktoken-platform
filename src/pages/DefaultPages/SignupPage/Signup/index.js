@@ -21,7 +21,7 @@ class Login extends React.Component {
             <div className="col-lg-12">
               <div className="main-login__header__logo">
                 <a href="javascript: void(0);">
-                  <img src="resources/images/login/logo.png" alt="Clean UI Admin Template" />
+                  <img src="resources/images/login/logo.png" alt="BlockToken" />
                 </a>
               </div>
             </div>

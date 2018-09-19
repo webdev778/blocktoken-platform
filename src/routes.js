@@ -21,7 +21,7 @@ const loadableRoutes = {
   '/signup': {
     component: loadable(() => import('pages/DefaultPages/SignupPage')),
   },
-  '/confirmation': {
+  '/confirm': {
     component: loadable(() => import('pages/DefaultPages/ConfirmPage')),
   },
   '/admin/users': {
@@ -66,6 +66,9 @@ const loadableRoutes = {
   },
   '/buytoken': {
     component: loadable(() => import('pages/Dashboard/BuyTokenPage')),
+  },
+  '/confirmation/:token/' : {
+    component: loadable(() => import('pages/DefaultPages/VerifyPage')),
   },
 }
 

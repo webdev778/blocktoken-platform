@@ -46,7 +46,7 @@ class Identity extends React.Component {
   render() {
     const { selectMode } = this.state;
     const { kyc_current } = this.state;
-    const status = window.localStorage.getItem('app.Status')
+    const status = window.localStorage.getItem('app.KYC')
 
     return (
       <div className="card">

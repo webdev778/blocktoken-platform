@@ -45,7 +45,7 @@ class DashboardUser extends React.Component {
         sorter: (a, b) => a.salary - b.salary,
       },
     ]
-    const status = window.localStorage.getItem('app.Status')
+    const status = window.localStorage.getItem('app.KYC')
     console.log(status);
     return (
       <div>

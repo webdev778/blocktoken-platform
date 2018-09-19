@@ -10,7 +10,7 @@ class BTfooter extends React.Component {
                         <div className="footer__partition footer__partition--logoTitle">
                             <a href="https://dev.blocktoken.ai/" className="footer__logoLink">
                                 <img
-                                    src="logo-top_1x.png"
+                                    src="https://dev.blocktoken.ai/wp-content/uploads/thegem-logos/logo_5ed388aa7c69b61be6aa09babaeee6a4_1x.png"
                                     alt="logo"/>
                             </a>
                             <div className="footer__partitionContent">
