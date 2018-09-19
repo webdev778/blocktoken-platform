@@ -118,7 +118,7 @@ class BTtopBar extends React.Component {
                         <div className="header__content">
                             <a href="https://dev.blocktoken.ai/" className="header__logoLink">
                                 <img className="header__logoImg"
-                                     src="logo-top_1x.png" srcSet="logo-top_1x.png 1x, logo-top_2x.png 2x, logo-top_2x.png 3x" alt="BlockToken ICO Platform"
+                                     src="https://dev.blocktoken.ai/wp-content/uploads/thegem-logos/logo_5ed388aa7c69b61be6aa09babaeee6a4_1x.png" alt="BlockToken ICO Platform"
                                 />
                             </a>
                             {mobileMenu ?

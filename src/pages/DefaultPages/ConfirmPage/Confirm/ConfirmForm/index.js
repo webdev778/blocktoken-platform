@@ -8,6 +8,7 @@ class ConfirmForm extends React.Component {
   resend = async () => {
     try {
       const result = await AuthAPI.resendEmail();
+      console.log(result);
       if (result.data)
       {
         notification.open({
@@ -41,7 +42,6 @@ class ConfirmForm extends React.Component {
           <div className="form-actions">
             <Button
               type="primary"
-              htmlType="submit"
               className="login-form-button width-100 mr-3"
               onClick={this.resend}
             >

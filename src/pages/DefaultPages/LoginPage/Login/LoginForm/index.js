@@ -8,7 +8,6 @@ import { REDUCER, submit } from 'ducks/login'
 import { Form, Input, Icon, Button, notification } from 'antd'
 import * as authActions from 'ducks/auth';
 import * as appActions from 'ducks/app';
-import { message } from 'antd';
 
 const FormItem = Form.Item
 
@@ -39,7 +38,7 @@ class LoginForm extends React.Component {
       const { socialInfo } = this.props;
       console.log(socialInfo);
       
-      await AuthActions.socialLogin({
+      const result = await AuthActions.socialLogin({
         provider,
         accessToken: socialInfo.get('accessToken')
       });
@@ -60,17 +59,22 @@ class LoginForm extends React.Component {
         return;
       }
 
-      window.localStorage.setItem('app.Role', 'user')
+      if (result.data.auth_status > 0)
+      {
+        window.localStorage.setItem('app.Role', 'user')
+        window.localStorage.setItem('app.Status', result.data.auth_status);
+        window.localStorage.setItem('app.KYC', result.data.kyc_status);
+        AppActions._setHideLogin(true);
+        AppActions.goToPage('/user/dashboard');
 
-      AppActions._setHideLogin(true);
-      AppActions.goToPage('/user/dashboard');
+        notification.open({
+          type: 'success',
+          message: 'You have successfully logged in!',
+        })
+      }
+      else
+        AppActions.goToPage('/confirm');
       AppActions.deleteSubmitForm(REDUCER);
-
-      notification.open({
-        type: 'success',
-        message: 'You have successfully logged in!',
-      })
-
     } catch (e) {
       AppActions.deleteSubmitForm(REDUCER);
       return;

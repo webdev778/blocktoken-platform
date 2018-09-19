@@ -92,6 +92,7 @@ export async function login(email, password, dispatch) {
   try{
     const result = await AuthAPI.localLogin({email, password})
     window.localStorage.setItem('app.Status', result.data.auth_status)
+    window.localStorage.setItem('app.KYC', result.data.kyc_status)
     if (email === 'admin@blocktoken.ai' && password === '123123')
     {
       window.localStorage.setItem('app.Email', 'admin@blocktoken.ai')
@@ -106,16 +107,21 @@ export async function login(email, password, dispatch) {
       return true;
     }
     
-    window.localStorage.setItem('app.Email', email);
-    window.localStorage.setItem('app.Role', 'user')
-    dispatch(_setHideLogin(true))
-    dispatch(push('/user/dashboard'))
-      
-    notification.open({
-      type: 'success',
-      message: 'You have successfully logged in!',
-    })
-
+    if (result.data.auth_status > 0)
+    {
+      window.localStorage.setItem('app.Email', email);
+      window.localStorage.setItem('app.Role', 'user')
+      dispatch(_setHideLogin(true))
+      dispatch(push('/user/dashboard'))
+      notification.open({
+        type: 'success',
+        message: 'You have successfully logged in!',
+      })  
+    }
+    else
+    {
+      dispatch(push('/confirm'))
+    }
     return true;
     
   }catch(err){
@@ -135,11 +141,11 @@ export async function signup(displayName, email, password, fullname, address, co
     //console.log(displayName + ", " + email + ", " + password);
 
     const result = await AuthAPI.localRegister({displayName, email, password, fullname, address, company, website})
-    //console.log(result);
+    console.log(result);
 
-    window.localStorage.setItem('app.Role', 'user')
-    dispatch(_setHideLogin(true))
-    dispatch(push('/user/dashboard'))
+    //window.localStorage.setItem('app.Role', 'user')
+    //dispatch(_setHideLogin(true))
+    dispatch(push('/confirm'))
     
     notification.open({
       type: 'success',
@@ -168,9 +174,9 @@ export async function socialSignup(displayName, fullname, address, company, webs
     const result = await AuthAPI.socialRegister({displayName,fullname, address, company, website, provider, accessToken})
     //console.log(result);
 
-    window.localStorage.setItem('app.Role', 'user')
-    dispatch(_setHideLogin(true))
-    dispatch(push('/user/dashboard'))
+    //window.localStorage.setItem('app.Role', 'user')
+    //dispatch(_setHideLogin(true))
+    dispatch(push('/confirm'))
     
     notification.open({
       type: 'success',
