@@ -130,7 +130,7 @@ export async function login(email, password, dispatch) {
     if (err.message === 'Request failed with status code 402')
       message = 'Your password is wrong.';
     else if (err.message === 'Request failed with status code 403')
-      message = 'User does not exist.'
+      message = 'Email is not registered.'
     notification.open({
       type: 'error',
       message: message,
