@@ -139,7 +139,7 @@ class Details extends React.Component {
                     <FormItem>
                     <div className="row">
                         <div className="col-lg-12">
-                            <img src={'https://s3.amazonaws.com/blocktoken.ai/' + bank_info.bankimg} alt="Bank Bill" />
+                            <img src={'https://s3.amazonaws.com/blocktoken.ai/' + bank_info.bankimg} width="768" height="1024" alt="Bank Bill" />
                         </div>
                     </div>
                     </FormItem>
