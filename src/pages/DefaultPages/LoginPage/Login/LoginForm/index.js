@@ -35,14 +35,12 @@ class LoginForm extends React.Component {
 
       await AuthActions.providerLogin(provider);
 
-      const { socialInfo } = this.props;
-      console.log(socialInfo);
-      
+      const { socialInfo } = this.props;      
       const result = await AuthActions.socialLogin({
         provider,
         accessToken: socialInfo.get('accessToken')
       });
-      
+
       const { redirectToRegister } = this.props;
   
       if(redirectToRegister) {
@@ -61,9 +59,12 @@ class LoginForm extends React.Component {
 
       if (result.data.auth_status > 0)
       {
+
+        window.localStorage.setItem('app.Email', result.data.email)
+        window.localStorage.setItem('app.Name', result.data.displayName)
         window.localStorage.setItem('app.Role', 'user')
-        window.localStorage.setItem('app.Status', result.data.auth_status);
-        window.localStorage.setItem('app.KYC', result.data.kyc_status);
+        window.localStorage.setItem('app.Status', result.data.auth_status)
+        window.localStorage.setItem('app.KYC', result.data.kyc_status)
         AppActions._setHideLogin(true);
         AppActions.goToPage('/user/dashboard');
 

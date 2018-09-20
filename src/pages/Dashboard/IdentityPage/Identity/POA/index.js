@@ -127,7 +127,7 @@ class POA extends React.Component {
                         <div className="row">
                             <div className="col-lg-4">
                                 <a href="javascript: void(0);">
-                                    <img src={bankverify} width="200"/>
+                                    <img src={bankverify} width="200" alt="bank"/>
                                 </a>
                             </div>
                             <div className="col-lg-8">

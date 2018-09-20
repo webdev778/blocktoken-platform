@@ -125,7 +125,7 @@ class POI extends React.Component {
                         <div className="row">
                             <div className="col-lg-4">
                                 <a href="javascript: void(0);">
-                                    <img src={idverify} width="200"/>
+                                    <img src={idverify} width="200" alt="id"/>
                                 </a>
                             </div>
                             <div className="col-lg-8">

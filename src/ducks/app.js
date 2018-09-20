@@ -44,7 +44,8 @@ export const initAuth = roles => (dispatch, getState) => {
   // Use Axios there to get User Data by Auth Token with Bearer Method Authentication
 
   const userRole = window.localStorage.getItem('app.Role')
-  const email = window.localStorage.getItem('app.Email');
+  const email = window.localStorage.getItem('app.Email')
+  const displayName = window.localStorage.getItem('app.Name')
 
   const state = getState()
 
@@ -76,7 +77,7 @@ export const initAuth = roles => (dispatch, getState) => {
   }
 
   if (userRole === 'administrator' || userRole === 'user')
-    return setUser({email:email, role:userRole}, userRole)
+    return setUser({email:email, role:userRole, name:displayName}, userRole)
   else
   {
     const location = state.routing.location
@@ -93,9 +94,10 @@ export async function login(email, password, dispatch) {
     const result = await AuthAPI.localLogin({email, password})
     window.localStorage.setItem('app.Status', result.data.auth_status)
     window.localStorage.setItem('app.KYC', result.data.kyc_status)
+    window.localStorage.setItem('app.Email', email);
+    window.localStorage.setItem('app.Name', result.data.displayName)
     if (email === 'admin@blocktoken.ai' && password === '123123')
     {
-      window.localStorage.setItem('app.Email', 'admin@blocktoken.ai')
       window.localStorage.setItem('app.Role', 'administrator')
       dispatch(_setHideLogin(true))
       dispatch(push('/admin/dashboard'))
@@ -109,13 +111,12 @@ export async function login(email, password, dispatch) {
     
     if (result.data.auth_status > 0)
     {
-      window.localStorage.setItem('app.Email', email);
       window.localStorage.setItem('app.Role', 'user')
       dispatch(_setHideLogin(true))
       dispatch(push('/user/dashboard'))
       notification.open({
         type: 'success',
-        message: 'You have successfully logged in!',
+        message: 'Login success!',
       })  
     }
     else
@@ -125,10 +126,16 @@ export async function login(email, password, dispatch) {
     return true;
     
   }catch(err){
+    let message = '';
+    if (err.message === 'Request failed with status code 402')
+      message = 'Your password is wrong.';
+    else if (err.message === 'Request failed with status code 403')
+      message = 'User does not exist.'
     notification.open({
       type: 'error',
-      message: 'Your email and password does not match!',
+      message: message,
     })
+
     dispatch(push('/login'))
     dispatch(_setFrom(''))
     return false;
@@ -141,8 +148,7 @@ export async function signup(displayName, email, password, fullname, address, co
     //console.log(displayName + ", " + email + ", " + password);
 
     const result = await AuthAPI.localRegister({displayName, email, password, fullname, address, company, website})
-    console.log(result);
-
+  
     //window.localStorage.setItem('app.Role', 'user')
     //dispatch(_setHideLogin(true))
     dispatch(push('/confirm'))
@@ -155,9 +161,12 @@ export async function signup(displayName, email, password, fullname, address, co
     return true;
     
   }catch(err){
+    let message = '';
+    if (err.message === 'Request failed with status code 409')
+      message = 'Your information conflicted.';
     notification.open({
       type: 'error',
-      message: 'Sign up failed!',
+      message: message,
     })
     //dispatch(push('/login'))
     dispatch(_setFrom(''))
@@ -171,12 +180,14 @@ export async function socialSignup(displayName, fullname, address, company, webs
     const state = getState()
     const {provider, accessToken} = state.auth.get('socialInfo').toJS()
 
-    const result = await AuthAPI.socialRegister({displayName,fullname, address, company, website, provider, accessToken})
+    const result = await AuthAPI.socialRegister({displayName, fullname, address, company, website, provider, accessToken})
     //console.log(result);
-
-    //window.localStorage.setItem('app.Role', 'user')
-    //dispatch(_setHideLogin(true))
-    dispatch(push('/confirm'))
+    const socialProfile = state.auth.get('socialProfile');
+    window.localStorage.setItem('app.Email', socialProfile.email);
+    window.localStorage.setItem('app.Name', socialProfile.name);
+    window.localStorage.setItem('app.Role', 'user')
+    dispatch(_setHideLogin(true))
+    dispatch(push('/user/dashboard'))
     
     notification.open({
       type: 'success',

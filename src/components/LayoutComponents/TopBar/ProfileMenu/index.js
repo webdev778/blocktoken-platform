@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { logout } from 'ducks/app'
-import { Menu, Dropdown, Avatar, Badge } from 'antd'
+import { Menu, Dropdown, Avatar } from 'antd'
 
 const mapDispatchToProps = dispatch => ({
   logout: event => {
@@ -30,30 +30,21 @@ class ProfileMenu extends React.Component {
       <Menu selectable={false}>
         <Menu.Item>
           <div className="rfq__widget__system-status__item">
-            <strong>Hello, {userState.role}</strong>
-            <div>
-              <strong>Billing Plan:</strong> Professional
-              <br />
-            </div>
-
+            <strong>Hello, {userState.name}</strong>
             <div>
               <strong>Role:</strong> {userState.role}
             </div>
-          </div>
-        </Menu.Item>
-        <Menu.Divider />
-        <Menu.Item>
-          <div className="rfq__widget__system-status__item">
-            <strong>Email:</strong> {userState.email}
-            <br />
-            <strong>Phone:</strong> +1-800-MEDIATEC
+            <div className="rfq__widget__system-status__item">
+              <strong>Email:</strong> {userState.email}
+              <br />
+            </div>
           </div>
         </Menu.Item>
         <Menu.Divider />
         <Menu.Item>
           <a href="javascript: void(0);">
             <i className="topbar__dropdownMenuIcon icmn-user" />{' '}
-            <Link to="/profile">Edit Profile</Link>
+            <Link to="/account">Edit Profile</Link>
           </a>
         </Menu.Item>
         <Menu.Divider />

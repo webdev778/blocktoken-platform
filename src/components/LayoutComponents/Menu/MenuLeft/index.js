@@ -90,7 +90,7 @@ class MenuLeft extends React.Component {
     }
     if (pathname === '/token-wizard/crowdsale' || pathname === '/token-wizard/token')
     {
-      if (path.length == 0)
+      if (!path.length)
       {
         path.push(items[5]);
         activeMenuItem = path[0].children[0];

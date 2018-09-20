@@ -78,10 +78,10 @@ class Details extends React.Component {
                     <div className="row">
                         <div className="col-lg-6">
 
-                            <img src={'https://s3.amazonaws.com/blocktoken.ai/' + id_info.id_front} width="500" height="320" />
+                            <img src={'https://s3.amazonaws.com/blocktoken.ai/' + id_info.id_front} width="500" height="320" alt="ID Card Front" />
                         </div>
                         <div className="col-lg-6">
-                            <img src={'https://s3.amazonaws.com/blocktoken.ai/' + id_info.id_back} width="500" height="320" />
+                            <img src={'https://s3.amazonaws.com/blocktoken.ai/' + id_info.id_back} width="500" height="320" alt="ID Card Back" />
                         </div>
                     </div>
                     </FormItem>
@@ -139,7 +139,7 @@ class Details extends React.Component {
                     <FormItem>
                     <div className="row">
                         <div className="col-lg-12">
-                            <img src={'https://s3.amazonaws.com/blocktoken.ai/' + bank_info.bankimg} />
+                            <img src={'https://s3.amazonaws.com/blocktoken.ai/' + bank_info.bankimg} alt="Bank Bill" />
                         </div>
                     </div>
                     </FormItem>

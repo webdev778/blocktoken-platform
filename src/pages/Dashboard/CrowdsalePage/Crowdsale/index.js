@@ -261,6 +261,7 @@ class CreateCrowdsale extends React.Component {
                               className="pull-right"
                               src={spinner}
                               width="32"
+                              alt="Spinner"
                             />
                           ) : null
                         }

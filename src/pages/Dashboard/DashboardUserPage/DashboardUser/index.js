@@ -46,11 +46,11 @@ class DashboardUser extends React.Component {
       },
     ]
     const status = window.localStorage.getItem('app.KYC')
-    console.log(status);
+
     return (
       <div>
         {
-          (status == 0 || status == 3) &&
+          (Number(status) === 0) &&
           <Alert
             message="You have to complete verifications."
             type="warning"
@@ -58,7 +58,7 @@ class DashboardUser extends React.Component {
           />
         }
         {
-          (status == 1 || status == 4) &&
+          (Number(status) === 1) &&
           <Alert
             message="Review in your verification."
             type="info"
@@ -66,7 +66,7 @@ class DashboardUser extends React.Component {
           />
         }
         {
-          (status == 2 || status == 5) &&
+          (Number(status) === 2) &&
           <Alert
             message="Verification Complete."
             type="success"
@@ -131,7 +131,7 @@ class DashboardUser extends React.Component {
         </div>
         <div className="row">
           <div className="col-lg-4">
-            <Link to='/token-wizard'>
+            <Link to='/token-wizard/token'>
               <PaymentCard
                 icon={'lnr lnr-eye'}
                 name={'Launch a Token & Crowdsale Smart Contract'}

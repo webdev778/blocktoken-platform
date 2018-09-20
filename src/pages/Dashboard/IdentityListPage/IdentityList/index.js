@@ -47,7 +47,7 @@ class IdentityList extends React.Component {
   handleOnClickDetails = (status, id) => {
     this.setState({status:status});
     this.setState({user_id:id})
-    if (status != 0 && status != 3)
+    if (Number(status) !== 0)
       this.setState({viewDetails: !this.state.viewDetails});
   }
 
@@ -103,7 +103,7 @@ class IdentityList extends React.Component {
     return (
       <div className="card">
         {
-          (this.state.status != 0 && this.state.status != 3 && this.state.viewDetails) ? 
+          (Number(this.state.status) !== 0 && this.state.viewDetails) ? 
           <Details user_id={this.state.user_id} onClose = { this.handleCloseDetail }/> : null
         }
         {

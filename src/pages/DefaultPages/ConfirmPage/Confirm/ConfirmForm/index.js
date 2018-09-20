@@ -7,22 +7,26 @@ class ConfirmForm extends React.Component {
 
   resend = async () => {
     try {
-      const result = await AuthAPI.resendEmail();
+      const email = window.localStorage.getItem('app.Email');
+      const result = await AuthAPI.resendEmail({email});
       console.log(result);
       if (result.data)
       {
         notification.open({
           type: 'success',
-          message: 'Verify Email',
-          description: 'Resend successfully!'
+          message: result.data
         })
 
       }
     }catch(e){
+      let message = '';
+      if (e.message === 'Request failed with status code 401')
+        message = 'This account has already been verified. Please log in.';
+      else if (e.message === 'Request failed with status code 400')
+        message = 'We were unable to find a user.'
       notification.open({
         type: 'error',
-        message: 'Verify Email',
-        description: 'Resend failure!'
+        message: message,
       })
     }
   }

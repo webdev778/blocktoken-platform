@@ -175,6 +175,7 @@ class Whitelist extends React.Component {
                   <img
                     src={spinner}
                     width="20"
+                    alt="Spinner"
                   />
                 ) : null
               }

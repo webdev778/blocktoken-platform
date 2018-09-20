@@ -54,7 +54,7 @@ class Identity extends React.Component {
           <div className="utils__title">
             <strong>Identity</strong>
             {
-              (selectMode !== 0) ?
+              (Number(selectMode) !== 0) ?
               <span>
                 <a href="javascript: void(0);" className="mr-2 pull-right" onClick={this.onClose}>
                   <i className="icmn-cross" title="Close" width={16} />
@@ -67,18 +67,18 @@ class Identity extends React.Component {
         </div>
         <div className="card-body">
         {
-          (selectMode == 1) ?
+          (Number(selectMode) === 1) ?
             <div className="col-lg-9">
               <Steps current={kyc_current}>
                 {kyc_steps.map(item => <Step key={item.title} title={item.title} />)}
               </Steps>
               <div className="steps-content">
                 {
-                  (kyc_current == 0) &&
+                  (Number(kyc_current) === 0) &&
                   <POI onValueChange={this.handleOnValueChange} variables={this.state} onClose={this.onClose}/>
                 }
                 {
-                  (kyc_current == 1) &&
+                  (Number(kyc_current) === 1) &&
                   <POA onValueChange={this.handleOnValueChange} variables={this.state} onClose={this.onClose}/>
                 }
               </div>
@@ -88,13 +88,13 @@ class Identity extends React.Component {
         }
 
         {
-          (selectMode == 2) ? 
+          (Number(selectMode) === 2) ? 
           <div></div>
           : null
         }
           
         {
-          (selectMode == 0) ?
+          (Number(selectMode) === 0) ?
           <div className="row">
             <div className="col-lg-6 text-center">
               <div>
@@ -105,15 +105,15 @@ class Identity extends React.Component {
                   />
                 </a>
                 {
-                  (status == 2 || status == 5) &&
+                  (Number(status) === 2 || Number(status) === 5) &&
                   <Tag color="#87d068">Verification Success</Tag>
                 }
                 {
-                  (status == 1 || status == 4) &&
+                  (Number(status) === 1 || Number(status) === 4) &&
                   <Tag color="#2db7f5">Review in your verification</Tag>
                 }
                 {
-                  (status == 0 || status == 3) &&
+                  (Number(status) === 0 || Number(status) === 3) &&
                   <Tag color="#f50">You have to verify</Tag>
                 }
               </div>
