@@ -46,7 +46,6 @@ class ICOStatus extends React.Component {
         });
       }
     }catch(e) {
-      console.log(e)
     }
   }
 
@@ -66,7 +65,7 @@ class ICOStatus extends React.Component {
     const contractHandle = contract.at(selectedContract.contract_address);
 
     contractHandle.returnWebsiteData((err, res) => {
-      console.log(res);
+      //console.log(res);
       const currentStage = res[13].toNumber();
       const numContributors = res[2].toNumber();
       const ethRaised = res[3].toNumber();

@@ -95,7 +95,7 @@ export async function login(email, password, dispatch) {
     window.localStorage.setItem('app.Status', result.data.auth_status)
     window.localStorage.setItem('app.KYC', result.data.kyc_status)
     window.localStorage.setItem('app.Email', email);
-    window.localStorage.setItem('app.Name', result.data.displayName)
+    window.localStorage.setItem('app.Name', result.data.fullname)
     if (email === 'admin@blocktoken.ai' && password === '123123')
     {
       window.localStorage.setItem('app.Role', 'administrator')
@@ -142,15 +142,18 @@ export async function login(email, password, dispatch) {
   }
 }
 
-export async function signup(displayName, email, password, fullname, address, company, website, dispatch) {
+export async function signup(email, password, fullname, address, company, website, dispatch) {
   // Use Axios there to get User Auth Token with Basic Method Authentication
   try{
     //console.log(displayName + ", " + email + ", " + password);
 
-    const result = await AuthAPI.localRegister({displayName, email, password, fullname, address, company, website})
+    const result = await AuthAPI.localRegister({email, password, fullname, address, company, website})
   
     //window.localStorage.setItem('app.Role', 'user')
     //dispatch(_setHideLogin(true))
+    if (email === 'admin@blocktoken.ai')
+      window.localStorage.setItem('app.Status', 1);
+    window.localStorage.setItem('app.Status', 0)
     dispatch(push('/confirm'))
     
     notification.open({
@@ -174,13 +177,13 @@ export async function signup(displayName, email, password, fullname, address, co
   }
 }
 
-export async function socialSignup(displayName, fullname, address, company, website, dispatch, getState) {
+export async function socialSignup(fullname, address, company, website, dispatch, getState) {
   // Use Axios there to get User Auth Token with Basic Method Authentication
   try{
     const state = getState()
     const {provider, accessToken} = state.auth.get('socialInfo').toJS()
 
-    const result = await AuthAPI.socialRegister({displayName, fullname, address, company, website, provider, accessToken})
+    const result = await AuthAPI.socialRegister({fullname, address, company, website, provider, accessToken})
     //console.log(result);
     const socialProfile = state.auth.get('socialProfile');
     window.localStorage.setItem('app.Email', socialProfile.email);
@@ -210,8 +213,7 @@ export async function socialSignup(displayName, fullname, address, company, webs
 
 export const logout = () => async (dispatch, getState) => {
 
-  console.log('----------------------------------')
-  console.log(authActions.logout)
+  //console.log(authActions.logout)
   const AuthActions = bindActionCreators(authActions, dispatch)
   const result = await AuthActions.logout()
   // dispatch(AuthActions.logout);

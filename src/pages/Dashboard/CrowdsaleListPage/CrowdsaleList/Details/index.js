@@ -25,7 +25,6 @@ class Details extends React.Component {
         this.setState({ contract });        
       }
     }catch ( e ){
-      console.log( e )
     }
   }
 

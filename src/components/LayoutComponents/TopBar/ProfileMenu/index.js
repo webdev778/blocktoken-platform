@@ -42,10 +42,10 @@ class ProfileMenu extends React.Component {
         </Menu.Item>
         <Menu.Divider />
         <Menu.Item>
-          <a href="javascript: void(0);">
+          <div>
             <i className="topbar__dropdownMenuIcon icmn-user" />{' '}
             <Link to="/account">Edit Profile</Link>
-          </a>
+          </div>
         </Menu.Item>
         <Menu.Divider />
         <Menu.Item>

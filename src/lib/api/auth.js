@@ -3,7 +3,6 @@ import axios from 'axios';
 export const checkEmail = (email) => axios.get('/api/v1.0/auth/exists/email/' + email);
 export const checkDisplayName = (displayName) => axios.get('/api/v1.0/auth/exists/display-name/' + displayName);
 export const localRegister = ({
-  displayName,
   email,
   password,
   fullname,
@@ -12,7 +11,6 @@ export const localRegister = ({
   website
   //initialMoney: { currency, index }
 }) => axios.post('/api/v1.0/auth/register/local', {
-  displayName,
   email,
   password,
   fullname,
@@ -28,7 +26,6 @@ export const socialLogin = ({provider, accessToken}) => axios.post('/api/v1.0/au
   accessToken
 });
 export const socialRegister = ({
-  displayName,
   fullname,
   address,
   company,
@@ -37,7 +34,6 @@ export const socialRegister = ({
   accessToken
   //initialMoney: { currency, index } 
 }) => axios.post('/api/v1.0/auth/register/' + provider, {
-  displayName,
   fullname,
   address,
   company,

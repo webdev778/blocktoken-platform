@@ -32,7 +32,6 @@ class CrowdsaleList extends React.Component {
   componentDidMount() {
     axios.get('/api/v1.0/contract/crowdsale')
       .then((result) => {
-        console.log(result);
         if (result.data) {
           this.setState({
             tableData: result.data.contracts,

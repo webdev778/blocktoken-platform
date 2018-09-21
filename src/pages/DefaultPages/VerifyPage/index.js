@@ -14,9 +14,7 @@ class VerifyPage extends React.Component {
     const { AppActions } = this.props;
 
     try {
-      console.log(this.props.match.params.token);
       const result = await axios.post('/api/v1.0/auth/confirmation/' + this.props.match.params.token)
-      console.log(result);
       if (result.data)
       {
         notification.open({

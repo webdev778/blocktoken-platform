@@ -9,7 +9,6 @@ class ConfirmForm extends React.Component {
     try {
       const email = window.localStorage.getItem('app.Email');
       const result = await AuthAPI.resendEmail({email});
-      console.log(result);
       if (result.data)
       {
         notification.open({

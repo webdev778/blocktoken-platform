@@ -30,7 +30,6 @@ class IdentityList extends React.Component {
   async componentDidMount() {
     try {
       const result = await UserAPI.getUserList()
-      console.log(result);
       if (result.data)
       {
         this.setState({
@@ -68,20 +67,21 @@ class IdentityList extends React.Component {
         title: 'Role',
         dataIndex: 'role',
         key: 'role',
-        render: (text, record) => (record.auth_status === 9 ? 'SuperAdmin' : (record.auth_status > 2 ? 'Admin' : 'User')),
+        render: (text, record) => (record.auth_status === 9 ? 'Admin' : 'User'),
       },
       {
         title: 'Authorization',
         dataIndex: 'auth_status',
         key: 'auth_status',
         render: (text, record) => (
-            (record.auth_status === 0 || record.auth_status === 3) ? 
+          (record.auth_status !== 9) && 
+            (record.kyc_status === 0) ? 
             <Tag color="#f50">Submit</Tag> : 
             (
-              (record.auth_status === 1 || record.auth_status === 4) ?
+              (record.kyc_status === 1) ?
               <Tag color="#108ee9">Review</Tag> : 
               (
-                (record.auth_status === 2 || record.auth_status === 5) ?
+                (record.kyc_status === 2) ?
                 <Tag color="#87d068">Success</Tag> : null
               )
             )            
@@ -117,6 +117,7 @@ class IdentityList extends React.Component {
             <div className="card-body">
               <Table
                 columns={columns}
+                rowKey={record => record.email}
                 dataSource={data}
                 pagination={pager}
                 onChange={this.handleTableChange}

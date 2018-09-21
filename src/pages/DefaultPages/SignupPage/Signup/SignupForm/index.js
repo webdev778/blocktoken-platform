@@ -37,7 +37,6 @@ class SignupForm extends React.Component {
     const { form, dispatch } = this.props
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values)
         if (this.state.isVerified)
           dispatch(submit(values))
 
@@ -85,11 +84,10 @@ class SignupForm extends React.Component {
 
   render() {
     const { form, socialProfile, redirectToRegister } = this.props
-    let email = '', name = '';
-
+    let email = '', fullname = '';
     if(socialProfile){
       email = socialProfile.email || ''
-      name = socialProfile.name || ''
+      fullname = socialProfile.name || ''
     }
     return (
       <div className="cat__pages__login__block__form">
@@ -99,18 +97,6 @@ class SignupForm extends React.Component {
         <br />
 
         <Form onSubmit={this.handleSubmit} className="login-form">
-          <FormItem>
-            {form.getFieldDecorator('displayName', {
-              initialValue: name || '',
-              rules: [
-                { required: true, message: 'Please input your username!' }],
-            })(
-              <Input
-                prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                placeholder="Username"
-              />,
-            )}
-          </FormItem>
           <FormItem>
             {form.getFieldDecorator('email', {
               initialValue: email || '',
@@ -169,7 +155,7 @@ class SignupForm extends React.Component {
           <div className="form-actions">
             <FormItem>
               {form.getFieldDecorator('fullname', {
-                initialValue: '',
+                initialValue: fullname || '',
                 rules: [{ required: true, message: 'Please input your fullname!' }],
               })(
                 <Input

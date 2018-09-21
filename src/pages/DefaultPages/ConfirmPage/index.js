@@ -14,12 +14,13 @@ class ConfirmPage extends React.Component {
   render() {
     const { match, ...props } = this.props
     const status = window.localStorage.getItem('app.Status');
+    console.log(status);
     const { AppActions } = this.props;
     return (
       <Page {...props}>
       {
         (Number(status) === 0) ? 
-        <Confirm match={match} />
+        <Confirm />
         : AppActions.goToPage('/user/dashboard')
       }        
       </Page>

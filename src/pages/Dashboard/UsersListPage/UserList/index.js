@@ -95,11 +95,6 @@ class UsersList extends React.Component {
 
     const columns = [
       {
-        title: 'DisplayName',
-        dataIndex: 'displayName',
-        key: 'displayName',
-      },
-      {
         title: 'Email',
         dataIndex: 'email',
         key: 'email',
@@ -128,7 +123,7 @@ class UsersList extends React.Component {
         title: 'Role',
         dataIndex: 'role',
         key: 'role',
-        render: (text, record) => (record.auth_status === 9 ? 'SuperAdmin' : (record.auth_status > 2 ? 'Admin' : 'User')),
+        render: (text, record) => (record.auth_status === 9 ? 'Admin' : 'User'),
       },
       {
         title: 'Action',
@@ -153,6 +148,7 @@ class UsersList extends React.Component {
         <div className="card-body">
           <Table
             columns={columns}
+            rowKey={record => record.email}
             dataSource={data}
             pagination={pager}
             onChange={this.handleTableChange}

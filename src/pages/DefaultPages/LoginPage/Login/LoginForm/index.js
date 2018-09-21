@@ -47,7 +47,6 @@ class LoginForm extends React.Component {
         // AppActions._setHideLogin(true);
         // get social email
         const social_email = 'social@social.com';
-        console.log(social_email);
         AppActions.goToPage('/signup');
         AppActions.deleteSubmitForm(REDUCER);
         // const { history } = this.props;
@@ -61,7 +60,7 @@ class LoginForm extends React.Component {
       {
 
         window.localStorage.setItem('app.Email', result.data.email)
-        window.localStorage.setItem('app.Name', result.data.displayName)
+        window.localStorage.setItem('app.Name', result.data.fullname)
         window.localStorage.setItem('app.Role', 'user')
         window.localStorage.setItem('app.Status', result.data.auth_status)
         window.localStorage.setItem('app.KYC', result.data.kyc_status)

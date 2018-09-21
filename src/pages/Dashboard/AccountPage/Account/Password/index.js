@@ -18,8 +18,7 @@ class Password extends React.Component {
     
       validateToNextPassword = (rule, value, callback) => {
         const form = this.props.form
-        console.log(value.length);
-    
+   
         if (value.length < 6)
           callback('Password must be at least 6 characters!')
         else if (value) {
@@ -47,7 +46,6 @@ class Password extends React.Component {
           else
           {
             const result = await UserAPI.setPassword({curpassword:oldPwd, newpassword:newPwd})
-            console.log(result);
             if (result.data)
             {
               notification.open({
