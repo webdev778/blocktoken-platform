@@ -73,7 +73,27 @@ class POA extends React.Component {
     render() {
         const { getFieldDecorator } = this.props.form
         const countryOptions = countryData.map(country => <Option key={country}>{country}</Option>);
-        
+        const props = {
+            action: '//jsonplaceholder.typicode.com/posts/',
+            onRemove: (file) => {
+              this.setState(({ fileList }) => {
+                const index = fileList.indexOf(file);
+                const newFileList = fileList.slice();
+                newFileList.splice(index, 1);
+                return {
+                  fileList: newFileList,
+                };
+              });
+            },
+            beforeUpload: (file) => {
+              this.setState(({ fileList }) => ({
+                fileList: [...fileList, file],
+              }));
+              return false;
+            },
+            onChange: this.handleChange,
+            listType: 'picture'
+        };
         return (
             <div>
                 <div className="card-header">
@@ -120,10 +140,7 @@ class POA extends React.Component {
                 </div>
                 
                 <div className="card-body">
-                    <Upload
-                        action = '//jsonplaceholder.typicode.com/posts/'
-                        listType="picture"
-                        onChange={this.handleChange}>
+                    <Upload {...props}>
                         <div className="row">
                             <div className="col-lg-4">
                                 <a href="javascript: void(0);">
