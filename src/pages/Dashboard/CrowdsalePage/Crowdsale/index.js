@@ -13,6 +13,8 @@ import initializeVesting from 'utils/initializeVesting';
 import initializeWhitelist from 'utils/initializeWhitelist';
 import saveToDatabase from 'utils/saveToDatabase';
 
+import * as ContractAPI from 'lib/api/contract';
+
 import {networks} from '../../../../constants';
 
 import spinner from 'assets/images/spinner.gif';
@@ -24,6 +26,7 @@ const TabPane = Tabs.TabPane
 const Option = Select.Option
 
 
+@Form.create()
 class CreateCrowdsale extends React.Component {
   constructor(props){
     super(props);
@@ -63,61 +66,87 @@ class CreateCrowdsale extends React.Component {
     };
   }
 
-  deployCrowdsaleContract = async (e) => {
+  storeContractToDatabase = async () => {
+    const {multisigETH, tokensForTeam, minContributionPreSale, minContributionMainSale, maxContributionETH, maxCap, minCap, tokenPriceWei, campaignDurationDays, firstPeriod,
+    secondPeriod, thirdPeriod, firstBonus, secondBonus, thirdBonus, presaleBonus, vestingDuration, vestingCliff, vestingStart, crowdsaleAddress, network, tokenAddress,
+    isWhitelistingEnabled, isVestingEnabled, whitelistAddress} = this.state;
+
+    const result = await ContractAPI.registCrowdsale(
+          {multisigETH, tokensForTeam, minContributionPreSale, minContributionMainSale, maxContributionETH, maxCap, minCap, tokenPriceWei, campaignDurationDays, firstPeriod,
+        secondPeriod, thirdPeriod, firstBonus, secondBonus, thirdBonus, presaleBonus, vestingDuration, vestingCliff, vestingStart, crowdsaleAddress, network, tokenAddress,
+        isWhitelistingEnabled, isVestingEnabled, whitelistAddress}
+    );
+  }
+
+  deployCrowdsaleContract = (e) => {
 
     e.preventDefault();
 
-    if (typeof window.web3 === 'undefined') {
-      message.warning('Please enable metamask.');
-      return;
-    } else if (window.web3.eth.defaultAccount === undefined) {
-      message.warning('Please unlock metamask.');
+    const { form } = this.props;
+
+    console.log('validate checking...');
+
+    const token_len = this.state.tokenContracts.length
+
+    if(!token_len){
+      message.error('Please deploy more than one token contracts before deploying crowdsale');
       return;
     }
 
-    const setState = this.setState.bind(this);
-
-    try{
-      const crowdsaleAddress = await deployCrowdSale(this.state, setState);
-      setState({ crowdsaleAddress });
-      await allocateTokens(this.state, setState, crowdsaleAddress);      
-      const whitelistAddress = await deployWhitelist(this.state, setState);
-      setState({ whitelistAddress });
-      await initializeWhitelist(this.state, setState, whitelistAddress);
-      await initializeVesting(this.state, setState);
-      await initializeToken(this.state, setState);
-      saveToDatabase(this.state, this.props);
-    }catch(e){
-      console.log(e);      
+    const { tokenAddress } = this.state;
+    if( !tokenAddress ){
+      message.warning('Please select a token');
+      return;
     }
 
-    /*
-    const sequence = Promise.resolve();
-    const setState = this.setState.bind(this);
+    form.validateFieldsAndScroll(async (err, values) => {
+      if (!err) {
+        console.log('Received values of form: ', values);
+        // return;
+      }
 
-    sequence.then(() => {
-      return deployCrowdSale(this.state, setState);
-    }).then((crowdsaleAddress, err) => {
-      setState({
-        crowdsaleAddress: crowdsaleAddress
-      });
-      return allocateTokens(this.state, setState, crowdsaleAddress);
-    }).then(() => {
-      return deployWhitelist(this.state, setState);
-    }).then((whitelistAddress, err) => {
-      console.log('Whitelist address: ', whitelistAddress);
-      setState({
-        whitelistAddress: whitelistAddress
-      });
-      return initializeWhitelist(this.state, setState, whitelistAddress);
-    }).then(() => {
-      return initializeVesting(this.state, setState);
-    }).then(() => {
-      return initializeToken(this.state, setState);
-    }).then(() => {
-      saveToDatabase(this.state, this.props);
+      if (typeof window.web3 === 'undefined') {
+        message.warning('Please enable metamask.');
+        return;
+      } else if (window.web3.eth.defaultAccount === undefined) {
+        message.warning('Please unlock metamask.');
+        return;
+      }
+
+      const setState = this.setState.bind(this);
+
+      try{
+        const crowdsaleAddress = await deployCrowdSale(this.state, setState);
+        console.log('Deployed Phases Successfully Finished.');
+        setState({ crowdsaleAddress });
+
+        await allocateTokens(this.state, setState, crowdsaleAddress);      
+        console.log('AllocateTokens Phases Successfully Finished.');
+
+        const whitelistAddress = await deployWhitelist(this.state, setState);
+        console.log('DeployWhitelist Phases Successfully Finished.');
+        setState({ whitelistAddress });
+
+
+        await initializeWhitelist(this.state, setState, whitelistAddress);
+        console.log('initializeWhitelist Phases Successfully Finished.');
+
+        await initializeVesting(this.state, setState);
+        console.log('initializeVesting Phases Successfully Finished.');
+
+        await initializeToken(this.state, setState);
+        console.log('initializeToken Phases Successfully Finished.');
+
+        const result = await this.storeContractToDatabase();
+        setState({isSpinnerVisible: false});
+        console.log('Save Contract to Database Successfully Finished.');
+      }catch(e){
+        console.log(e);    
+        setState({isSpinnerVisible: false});
+        message.error('Failed to deploy.');
+      }
     });
-    */
+
   };
 
   handleOnValueChange = (key, val) => {
@@ -127,6 +156,7 @@ class CreateCrowdsale extends React.Component {
   }
 
   handleOnTokenContractChange = (event) => {
+    console.log(event)
     this.setState({
       tokenAddress: event
     });
@@ -173,11 +203,28 @@ class CreateCrowdsale extends React.Component {
         network: networks[netId]
       });
     });
+
+    const testState = {
+      multisigETH: '0x0b764c58df739c7456229dcc14eadc3121952e64',
+      decimalUnits: 18,
+      tokensForTeam: 50000,
+      minContributionPreSale: 2000,
+      minContributionMainSale: 500,
+      maxContributionETH: 100,
+      maxCap: 1000000000,
+      minCap: 50000000,
+      tokenPriceWei: 0.001,
+      campaignDurationDays: 30,
+      tokenAddress: '',      
+      whitelistAddress: '',
+    };
+
+    this.setState(testState);
   }
 
   render() {
-    const { form } = this.props
-    const {selectedTokenContract, isSpinnerVisible, contractDeploymentStatus} = this.state;
+    const { getFieldDecorator } = this.props.form
+    const { selectedTokenContract, isSpinnerVisible, contractDeploymentStatus} = this.state;
 
     return (
       <div className="card">
@@ -207,11 +254,10 @@ class CreateCrowdsale extends React.Component {
                               <label className="form-label">
                                 <strong>Token Contract</strong>
                               </label>
-                              <Select placeholder="Select token contract" onChange={this.handleOnTokenContractChange} required value={this.state.tokenAddress}>
-                                <Option value="">Select token contract</Option>
+                              <Select placeholder="Select token contract" onChange={this.handleOnTokenContractChange} required >                                
                                 {
                                   this.state.tokenContracts.map((contract) => (
-                                    <Option value={contract.contract_address}>{contract.name}</Option>
+                                    <Option key={contract} value={contract.contract_address}>{contract.name}</Option>
                                   ))
                                 }
                               </Select>
