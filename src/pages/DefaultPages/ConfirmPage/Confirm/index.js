@@ -54,7 +54,7 @@ class Confirm extends React.Component {
               </div>
               <div className="main-login__block__inner">
                 <div className="main-login__block__form">
-                  <ConfirmForm email={this.state.restoredEmail} />
+                  <ConfirmForm />
                 </div>
                 <div className="main-login__block__sidebar">
                   <h4 className="main-login__block__sidebar__title text-white">

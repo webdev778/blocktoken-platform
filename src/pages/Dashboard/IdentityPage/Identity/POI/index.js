@@ -33,8 +33,9 @@ class POI extends React.Component {
     kyc_next = async () => {
         try {
             const formData = new FormData();
-            formData.append('file', this.state.fileList[0].originFileObj);
-            formData.append('file', this.state.fileList[1].originFileObj);
+            console.log(this.state.fileList);
+            formData.append('file', this.state.fileList[0]);
+            formData.append('file', this.state.fileList[1]);
 
             this.props.form.validateFields((err, values) => {
                 if (err)
@@ -92,9 +93,15 @@ class POI extends React.Component {
                 }
                 else
                 {
-                    // this.setState(({ fileList }) => ({
-                    //     fileList: [...fileList, file],
-                    // }));
+                    this.setState(({ fileList }) => {
+                        const tempFileList = fileList.slice();
+                        tempFileList.push(file);
+                        const newFileList = [...new Map(tempFileList.map(file => [file.name, file])).values()];
+                        return {
+                            fileList: newFileList,
+                        }
+
+                    });
                 }
                 return false;
             },
@@ -124,7 +131,9 @@ class POI extends React.Component {
                         {getFieldDecorator('gender', {
                             rules: [{ required: true, message: 'Please select an gender!' }],
                         })(
-                        <Select placeholder="Select an Gender..." style={{ width: 300 }}>
+                        <Select
+                            placeholder="Select an Gender..." 
+                            style={{ width: 300 }} >
                             <Option value="Male">Male</Option>
                             <Option value="Female">Female</Option>
                         </Select>
@@ -141,7 +150,7 @@ class POI extends React.Component {
                 </div>
                 
                 <div className="card-body">
-                    <Upload {...props}>
+                    <Upload {...props} fileList={this.state.fileList}>
                         <div className="row">
                             <div className="col-lg-4">
                                 <a href="javascript: void(0);">
@@ -161,7 +170,12 @@ class POI extends React.Component {
                         {getFieldDecorator('country', {
                             rules: [{ required: true, message: 'Please select your issuing country!' }],
                         })(
-                        <Select placeholder="Select issuing country..." style={{ width: 300 }}>
+                        <Select 
+                            placeholder="Select issuing country..." 
+                            style={{ width: 300 }}
+                            showSearch 
+                            optionFilterProp="children"
+                            filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0} >
                             <Option value="">Select issuing country...</Option>
                             {countryOptions}
                         </Select>

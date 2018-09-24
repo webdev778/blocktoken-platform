@@ -2,7 +2,7 @@ import React from 'react'
 import SignupForm from './SignupForm'
 import './style.scss'
 
-class Login extends React.Component {
+class Signup extends React.Component {
   state = {}
 
   componentDidMount() {
@@ -85,4 +85,4 @@ class Login extends React.Component {
   }
 }
 
-export default Login
+export default Signup

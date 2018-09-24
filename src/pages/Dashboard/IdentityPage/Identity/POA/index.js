@@ -24,16 +24,12 @@ class POA extends React.Component {
         this.setState({issued_date: dateString})
     }
 
-    handleChange = ({ fileList }) => {
-        this.setState({fileList});
-    }
-
     kyc_done = async () => {
         try {
             
             const formData = new FormData();
-            console.log(this.state.fileList[0]);
-            formData.append('file', this.state.fileList[0].originFileObj);
+            console.log(this.state.fileList);
+            formData.append('file', this.state.fileList[0]);
             
             this.props.form.validateFields((err, values) => {
                 if (err)
@@ -92,9 +88,14 @@ class POA extends React.Component {
                 }
                 else
                 {
-                    // this.setState(({ fileList }) => ({
-                    //     fileList: [...fileList, file],
-                    // }));
+                    this.setState(({ fileList }) => {
+                        const tempFileList = fileList.slice();
+                        tempFileList.push(file);
+                        const newFileList = [...new Map(tempFileList.map(file => [file.name, file])).values()];
+                        return {
+                            fileList: newFileList,
+                        }
+                    });
                 }
                 return false;
             },
@@ -135,7 +136,12 @@ class POA extends React.Component {
                         {getFieldDecorator('country', {
                             rules: [{ required: true, message: 'Please select your country!' }],
                         })(
-                        <Select placeholder="Select your country" style={{ width: 300 }}>
+                        <Select 
+                            placeholder="Select your country" 
+                            style={{ width: 300 }}
+                            showSearch 
+                            optionFilterProp="children"
+                            filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0} >
                             <Option value="">Select your country</Option>
                             {countryOptions}
                         </Select>
@@ -147,7 +153,7 @@ class POA extends React.Component {
                 </div>
                 
                 <div className="card-body">
-                    <Upload {...props}>
+                    <Upload {...props} fileList={this.state.fileList}>
                         <div className="row">
                             <div className="col-lg-4">
                                 <a href="javascript: void(0);">
