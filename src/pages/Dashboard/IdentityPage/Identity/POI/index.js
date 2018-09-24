@@ -68,10 +68,6 @@ class POI extends React.Component {
           })
         }
     }
-
-    handleChange = ({ fileList }) => {
-        this.setState({fileList});
-    }
     
     render() {
         const { getFieldDecorator } = this.props.form
@@ -80,23 +76,29 @@ class POI extends React.Component {
         const props = {
             action: '//jsonplaceholder.typicode.com/posts/',
             onRemove: (file) => {
-              this.setState(({ fileList }) => {
-                const index = fileList.indexOf(file);
-                const newFileList = fileList.slice();
-                newFileList.splice(index, 1);
-                return {
-                  fileList: newFileList,
-                };
-              });
+                this.setState(({ fileList }) => {
+                    const index = fileList.indexOf(file);
+                    const newFileList = fileList.slice();
+                    newFileList.splice(index, 1);
+                    return {
+                    fileList: newFileList,
+                    };
+                });
             },
             beforeUpload: (file) => {
-              this.setState(({ fileList }) => ({
-                fileList: [...fileList, file],
-              }));
-              return false;
+                const isLt5M = file.size / 1024 / 1024 < 5;
+                if (!isLt5M) {
+                    message.error("Image must smaller than 5MB!");
+                }
+                else
+                {
+                    // this.setState(({ fileList }) => ({
+                    //     fileList: [...fileList, file],
+                    // }));
+                }
+                return false;
             },
             multiple: true,
-            onChange: this.handleChange,
             listType: 'picture'
         };
 
@@ -148,7 +150,8 @@ class POI extends React.Component {
                             </div>
                             <div className="col-lg-8">
                                 <p>Please upload a Government issued ID such as a <strong>Passport</strong>, current <strong>Driver's License</strong> or <strong>National ID Card.</strong></p>
-                                <p>Ensure you upload the <strong>front</strong> and <strong>back</strong> of your Driver's License or National ID Card.</p>
+                                <p>Ensure you upload the <strong>front</strong> and <strong>back</strong> of your Driver's License or National ID Card.</p><br />
+                                <p><strong>Maximum Image Size is 5MB.</strong></p>
                             </div>
                         </div>
                     </Upload>

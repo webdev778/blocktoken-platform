@@ -86,10 +86,17 @@ class POA extends React.Component {
               });
             },
             beforeUpload: (file) => {
-              this.setState(({ fileList }) => ({
-                fileList: [...fileList, file],
-              }));
-              return false;
+                const isLt5M = file.size / 1024 / 1024 < 5;
+                if (!isLt5M) {
+                    message.error("Image must smaller than 5MB!");
+                }
+                else
+                {
+                    // this.setState(({ fileList }) => ({
+                    //     fileList: [...fileList, file],
+                    // }));
+                }
+                return false;
             },
             onChange: this.handleChange,
             listType: 'picture'
