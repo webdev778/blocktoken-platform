@@ -1,6 +1,6 @@
 
 # Blocktoken ICO Platform Dashboard
-Please click here[https://dash.blocktoken.ai] to go to our dashboard.
+Please click https://dash.blocktoken.ai to go to our dashboard.
 
 ## Stack
   ### Backend
