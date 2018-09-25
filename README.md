@@ -1,6 +1,6 @@
 
 # Blocktoken ICO Platform Dashboard
-https://dash.blocktoken.ai
+Please click here[https://dash.blocktoken.ai] to go to our dashboard.
 
 ## Stack
   ### Backend
@@ -17,13 +17,36 @@ https://dash.blocktoken.ai
    2. Redux-thunnk, Redux-pender
    3. Web3js / Metamask
    4. Google, Facebook, LinkedIn API
-   5. react-app-rewired
+   5. React-app-rewired
    6. Antd UI components
    7. Axios
 
 ## Key Features
-   1. Admin Dashboard 
-      - KYC
-      - Email Verification
-   2. User Dashboard 
-      - 
+   1. Authentication
+      - Social Login/Signup              
+      - Email Verification           
+      - KYC      
+      - 2FA            
+      
+   2. Admin Dashboard 
+      - Identity Approve
+      - User Management      
+      - Token Management
+      - ICO Management   
+      - Syndicates         
+      - Projects         
+      - Referral System               
+      - Airdrop
+      
+   3. User Dashboard 
+      - My Profile
+      - Token Creator 
+      - Crowdsale Creator
+      - Token Manage
+      - Buy Token
+      - Projects
+      - Syndicates
+      - Referral
+      - Airdrop
+   4. Background Notifiaction System       
+      - Email Notifiaction on user action     
