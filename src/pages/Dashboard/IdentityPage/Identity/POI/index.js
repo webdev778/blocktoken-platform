@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Input, DatePicker, Col, TimePicker, Select, Cascader, InputNumber, Upload, Button, Icon, Card, message, notification } from 'antd'
+import { Form, Input, DatePicker, Select, Upload, Button, message, notification } from 'antd'
 import idverify from '../../../../../assets/images/id_verify.png';
 import DimmerSpinner from 'components/CleanComponents/DimmerSpinner';
 import * as UserAPI from 'lib/api/users';

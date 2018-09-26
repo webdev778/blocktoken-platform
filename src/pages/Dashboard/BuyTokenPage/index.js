@@ -1,7 +1,7 @@
 import React from 'react'
 import Page from 'components/LayoutComponents/Page'
 import Helmet from 'react-helmet'
-import { Form, Select, Input, Button, InputNumber  } from 'antd';
+import { Form, Select, Input, Button, InputNumber } from 'antd';
 
 const Option = Select.Option;
 const FormItem = Form.Item
@@ -24,7 +24,7 @@ function onChange(value) {
 
 @Form.create()
 class BuyTokenPage extends React.Component {
-  static defaultProps ={
+  static defaultProps = {
     pathName: 'BuyTokenPage',
     roles: ['user', 'administrator',]
   }
@@ -64,29 +64,29 @@ class BuyTokenPage extends React.Component {
             </div>
           </div>
           <div className="card-body">
-            <div className = "col-xl-9">
+            <div className="col-xl-9">
               <Form className="form">
                 <FormItem label="Token Pricing" labelCol={{ span: 5 }} wrapperCol={{ span: 12 }}>
-                {getFieldDecorator('token_pricing', {
-                  initialValue: '',
-                  rules: [{ required: true, message: 'Please input your token pricing!' }],
-                })(<Input style={{ width: 300 }} />)}
+                  {getFieldDecorator('token_pricing', {
+                    initialValue: '',
+                    rules: [{ required: true, message: 'Please input your token pricing!' }],
+                  })(<Input style={{ width: 300 }} />)}
                 </FormItem>
                 <FormItem label="Bonus" labelCol={{ span: 5 }} wrapperCol={{ span: 12 }}>
-                {getFieldDecorator('bonus', {
+                  {getFieldDecorator('bonus', {
                     initialValue: '',
                     rules: [{ required: true, message: 'Please input your address!' }],
                   })(<Input style={{ width: 300 }} />)}
                 </FormItem>
                 <FormItem label="Time left this stage" labelCol={{ span: 5 }} wrapperCol={{ span: 12 }}>
-                {getFieldDecorator('time_left', {
-                  initialValue: '',
-                  rules: [{ required: true, message: 'Please input time left in this stage!' }],
-                })(<Input style={{ width: 300 }} />)}
+                  {getFieldDecorator('time_left', {
+                    initialValue: '',
+                    rules: [{ required: true, message: 'Please input time left in this stage!' }],
+                  })(<Input style={{ width: 300 }} />)}
                 </FormItem>
                 <FormItem label="Smart Contract Address" labelCol={{ span: 5 }} wrapperCol={{ span: 12 }}>
-                {getFieldDecorator('smart_contract', {
-                  initialValue: '',
+                  {getFieldDecorator('smart_contract', {
+                    initialValue: '',
                     rules: [{ required: true, message: 'Please input your smart contract address!' }],
                   })(<Input style={{ width: 300 }} />)}
                 </FormItem>
@@ -102,7 +102,7 @@ class BuyTokenPage extends React.Component {
           </div>
           <div className="card-body">
             <div className="row utils__title">
-              <div className = "col-xl-4">
+              <div className="col-xl-4">
                 <InputNumber
                   defaultValue={1000}
                   formatter={value => `$ ${value}`.replace(/B(?=(d{3})+(?!d))/g, ',')}
@@ -111,7 +111,7 @@ class BuyTokenPage extends React.Component {
                   style={{ width: 300 }}
                 />
               </div>
-              <div className = "col-xl-4">
+              <div className="col-xl-4">
                 <InputNumber
                   defaultValue={1}
                   min={0}
@@ -120,16 +120,16 @@ class BuyTokenPage extends React.Component {
                   formatter={value => `${value}%`}
                   parser={value => value.replace('%', '')}
                   style={{ width: 200 }}
-                  />
+                />
               </div>
-              <div className = "col-xl-4">
+              <div className="col-xl-4">
                 <InputNumber
-                defaultValue={10}
-                disabled={true}
-                formatter={value => `$ ${value}`.replace(/B(?=(d{3})+(?!d))/g, ',')}
-                parser={value => value.replace(/\$s?|(,*)/g, '')}
-                style={{ width: 200 }}
-              />
+                  defaultValue={10}
+                  disabled={true}
+                  formatter={value => `$ ${value}`.replace(/B(?=(d{3})+(?!d))/g, ',')}
+                  parser={value => value.replace(/\$s?|(,*)/g, '')}
+                  style={{ width: 200 }}
+                />
               </div>
             </div>
             <div className="row utils__content">

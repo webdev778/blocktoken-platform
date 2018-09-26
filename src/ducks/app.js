@@ -3,9 +3,9 @@ import { push } from 'react-router-redux'
 import { pendingTask, begin, end } from 'react-redux-spinner'
 import { notification } from 'antd'
 import * as AuthAPI from 'lib/api/auth'
-import {fromJS, toJS} from 'immutable'
+import { fromJS, toJS } from 'immutable'
 import * as authActions from './auth'
-import {bindActionCreators} from 'redux'
+import { bindActionCreators } from 'redux'
 
 const REDUCER = 'app'
 const NS = `@@${REDUCER}/`
@@ -47,8 +47,7 @@ export const initAuth = roles => (dispatch, getState) => {
 
   if (state.app.userState.role !== '')
     return Promise.resolve(true);
-  else
-  {
+  else {
     const location = state.routing.location
     const from = location.pathname + location.search
     dispatch(_setFrom(from))
@@ -59,8 +58,8 @@ export const initAuth = roles => (dispatch, getState) => {
 
 export async function login(email, password, dispatch) {
   // Use Axios there to get User Auth Token with Basic Method Authentication
-  try{
-    const result = await AuthAPI.localLogin({email, password})
+  try {
+    const result = await AuthAPI.localLogin({ email, password })
     dispatch(
       setUserState({
         userState: {
@@ -72,8 +71,7 @@ export async function login(email, password, dispatch) {
         },
       }),
     )
-    if (email === 'admin@blocktoken.ai' && password === '123123')
-    {
+    if (email === 'admin@blocktoken.ai' && password === '123123') {
       dispatch(
         setUserState({
           userState: {
@@ -91,26 +89,24 @@ export async function login(email, password, dispatch) {
         type: 'success',
         message: 'You have successfully logged in!',
       })
-  
+
       return true;
     }
-    
-    if (result.data.auth_status > 0)
-    {
+
+    if (result.data.auth_status > 0) {
       dispatch(_setHideLogin(true))
       dispatch(push('/user/dashboard'))
       notification.open({
         type: 'success',
         message: 'Login success!',
-      })  
+      })
     }
-    else
-    {
+    else {
       dispatch(push('/confirm'))
     }
     return true;
-    
-  }catch(err){
+
+  } catch (err) {
     let message = '';
     if (err.message === 'Request failed with status code 402')
       message = 'Your password is wrong.';
@@ -129,12 +125,11 @@ export async function login(email, password, dispatch) {
 
 export async function signup(email, password, fullname, address, company, website, dispatch) {
   // Use Axios there to get User Auth Token with Basic Method Authentication
-  try{
-    const result = await AuthAPI.localRegister({email, password, fullname, address, company, website})
-  
+  try {
+    const result = await AuthAPI.localRegister({ email, password, fullname, address, company, website })
+
     //dispatch(_setHideLogin(true))
-    if (email === 'admin@blocktoken.ai')
-    {
+    if (email === 'admin@blocktoken.ai') {
       dispatch(
         setUserState({
           userState: {
@@ -147,8 +142,7 @@ export async function signup(email, password, fullname, address, company, websit
       )
       dispatch(push('/admin/dashboard'))
     }
-    else
-    {
+    else {
       dispatch(
         setUserState({
           userState: {
@@ -161,15 +155,15 @@ export async function signup(email, password, fullname, address, company, websit
       )
       dispatch(push('/confirm'))
     }
-    
+
     notification.open({
       type: 'success',
       message: 'You have successfully signed up!',
     })
 
     return true;
-    
-  }catch(err){
+
+  } catch (err) {
     let message = '';
     if (err.message === 'Request failed with status code 409')
       message = 'Your information conflicted.';
@@ -185,11 +179,11 @@ export async function signup(email, password, fullname, address, company, websit
 
 export async function socialSignup(fullname, address, company, website, dispatch, getState) {
   // Use Axios there to get User Auth Token with Basic Method Authentication
-  try{
+  try {
     const state = getState()
-    const {provider, accessToken} = state.auth.get('socialInfo').toJS()
+    const { provider, accessToken } = state.auth.get('socialInfo').toJS()
 
-    const result = await AuthAPI.socialRegister({fullname, address, company, website, provider, accessToken})
+    const result = await AuthAPI.socialRegister({ fullname, address, company, website, provider, accessToken })
     const socialProfile = state.auth.get('socialProfile');
     dispatch(
       setUserState({
@@ -204,15 +198,15 @@ export async function socialSignup(fullname, address, company, website, dispatch
     )
     dispatch(_setHideLogin(true))
     dispatch(push('/user/dashboard'))
-    
+
     notification.open({
       type: 'success',
       message: 'You have successfully signed up!',
     })
 
     return true;
-    
-  }catch(err){
+
+  } catch (err) {
     notification.open({
       type: 'error',
       message: 'Sign up failed!',
@@ -229,7 +223,7 @@ export const logout = () => async (dispatch, getState) => {
   const AuthActions = bindActionCreators(authActions, dispatch)
   const result = await AuthActions.logout()
   // dispatch(AuthActions.logout);
-  
+
   dispatch(
     setUserState({
       userState: {
@@ -243,7 +237,7 @@ export const logout = () => async (dispatch, getState) => {
   )
 
   dispatch(push('/login'))
-   
+
 }
 
 const initialState = {

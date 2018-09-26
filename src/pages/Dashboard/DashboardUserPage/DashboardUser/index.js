@@ -51,7 +51,7 @@ class DashboardUser extends React.Component {
         sorter: (a, b) => a.salary - b.salary,
       },
     ]
-    const {userState} = this.props;
+    const { userState } = this.props;
     return (
       <div>
         {
@@ -78,10 +78,10 @@ class DashboardUser extends React.Component {
             showIcon
           />
         }
-        
+
         <div className="row mt-4">
           <div className="col-lg-6">
-            <div className="card" style={{height: "300px"}}>
+            <div className="card" style={{ height: "300px" }}>
               <div className="card-header">
                 <div className="utils__title">Latest Announcements</div>
               </div>
@@ -96,12 +96,12 @@ class DashboardUser extends React.Component {
           </div>
 
           <div className="col-lg-6">
-            <div className="card" style={{height: "300px"}}>
+            <div className="card" style={{ height: "300px" }}>
               <div className="card-header">
                 <div className="utils__title">Useful Resources</div>
               </div>
               <div className="card-body">
-                
+
               </div>
             </div>
           </div>
@@ -109,7 +109,7 @@ class DashboardUser extends React.Component {
         <div className="utils__title utils__title--flat mb-3 mt-4">
           <span className="text-uppercase font-size-16 text-center"><h1>Get Started</h1></span>
         </div>
-        
+
         <div className="row">
           <div className="col-lg-4">
             <Link to='/identity'>

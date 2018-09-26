@@ -10,7 +10,7 @@ const FormItem = Form.Item
 const Option = Select.Option
 
 class ICOStatus extends React.Component {
-  
+
   state = {
     crowdsaleContracts: [],
     selectedContract: null,
@@ -30,10 +30,10 @@ class ICOStatus extends React.Component {
   async componentDidMount() {
     const contractAddress = this.props.address;
 
-    try{
+    try {
       const result = await ContractAPI.getCrowdsaleList()
       const { contracts } = result.data
-      if(contracts){
+      if (contracts) {
         const selectedContract = contracts.find(contract => {
           return contract.contract_address === contractAddress;
         });
@@ -45,7 +45,7 @@ class ICOStatus extends React.Component {
           selectedContract
         });
       }
-    }catch(e) {
+    } catch (e) {
     }
   }
 
@@ -93,7 +93,7 @@ class ICOStatus extends React.Component {
   };
 
   handleOnClickStartICO = () => {
-    const {selectedContract} = this.state;
+    const { selectedContract } = this.state;
     manage.startICO(selectedContract.contract_address).then(() => {
       console.log('Success');
       this.getICOStatus(selectedContract);
@@ -103,7 +103,7 @@ class ICOStatus extends React.Component {
   };
 
   handleOnClickAdvanceMainSale = () => {
-    const {selectedContract} = this.state;
+    const { selectedContract } = this.state;
     manage.advanceMainSale(selectedContract.contract_address).then(() => {
       console.log('Success');
       this.getICOStatus(selectedContract);
@@ -113,7 +113,7 @@ class ICOStatus extends React.Component {
   };
 
   handleOnClickEmergencyStart = () => {
-    const {selectedContract} = this.state;
+    const { selectedContract } = this.state;
     manage.emergencyStart(selectedContract.contract_address).then(() => {
       console.log('Success');
       this.getICOStatus(selectedContract);
@@ -123,7 +123,7 @@ class ICOStatus extends React.Component {
   };
 
   handleOnClickEmergencyStop = () => {
-    const {selectedContract} = this.state;
+    const { selectedContract } = this.state;
     manage.emergencyStop(selectedContract.contract_address).then(() => {
       console.log('Success');
       this.getICOStatus(selectedContract);
@@ -133,7 +133,7 @@ class ICOStatus extends React.Component {
   };
 
   handleOnClickFinalize = () => {
-    const {selectedContract} = this.state;
+    const { selectedContract } = this.state;
     manage.finalize(selectedContract.contract_address).then(() => {
       console.log('Success');
       this.getICOStatus(selectedContract);
@@ -144,7 +144,7 @@ class ICOStatus extends React.Component {
 
   render() {
     const { form } = this.props
-    const {crowdsaleContracts, selectedContract, currentStage, numContributors, ethRaised, totalTokensSold, tokenPrice, maxCap, minCap, isPaused, isCrowdsaleClosed, decimals} = this.state;
+    const { crowdsaleContracts, selectedContract, currentStage, numContributors, ethRaised, totalTokensSold, tokenPrice, maxCap, minCap, isPaused, isCrowdsaleClosed, decimals } = this.state;
     const factor = Math.pow(10, decimals);
 
     return (
@@ -162,9 +162,9 @@ class ICOStatus extends React.Component {
                   <label className="form-label">
                     <strong>Crowdsale Contract</strong>
                   </label>
-                  <Select placeholder="Select crowdsale contract" 
-                          defaultValue={selectedContract ? selectedContract.contract_address : ''}
-                          onChange={this.handleOnCrowdsaleContractChange}
+                  <Select placeholder="Select crowdsale contract"
+                    defaultValue={selectedContract ? selectedContract.contract_address : ''}
+                    onChange={this.handleOnCrowdsaleContractChange}
                   >
                     {
                       crowdsaleContracts.map((contract) => (
@@ -236,19 +236,19 @@ class ICOStatus extends React.Component {
                   </label>
                   <div className="row-lg-6">
                     <div className="col-md-6">
-                      <FormItem><Button type="primary" size = "large" style={{width:"150px"}} onClick={this.handleOnClickStartICO} disabled={currentStage !== 0}>Start ICO</Button></FormItem>
+                      <FormItem><Button type="primary" size="large" style={{ width: "150px" }} onClick={this.handleOnClickStartICO} disabled={currentStage !== 0}>Start ICO</Button></FormItem>
                     </div>
                     <div className="col-md-6">
-                      <FormItem><Button type="success" size = "large" className="btn btn-md btn-success" style={{width:"150px"}} onClick={this.handleOnClickAdvanceMainSale} disabled={currentStage === 2 || currentStage === 0}>Advance MainSale</Button></FormItem>
+                      <FormItem><Button type="success" size="large" className="btn btn-md btn-success" style={{ width: "150px" }} onClick={this.handleOnClickAdvanceMainSale} disabled={currentStage === 2 || currentStage === 0}>Advance MainSale</Button></FormItem>
                     </div>
                     <div className="col-md-6">
-                      <FormItem><Button type="primary" size = "large" className="btn btn-md btn-danger" style={{width:"150px"}} onClick={this.handleOnClickEmergencyStop} disabled={isPaused === true}>Emergency Stop</Button></FormItem>
+                      <FormItem><Button type="primary" size="large" className="btn btn-md btn-danger" style={{ width: "150px" }} onClick={this.handleOnClickEmergencyStop} disabled={isPaused === true}>Emergency Stop</Button></FormItem>
                     </div>
                     <div className="col-md-6">
-                      <FormItem><Button disabled="" size = "large" type="primary" className="ico-control-Button btn btn-md btn-warning" style={{width:"150px"}} onClick={this.handleOnClickEmergencyStart} disabled={isPaused === false}>Emergency Start</Button></FormItem>
+                      <FormItem><Button disabled="" size="large" type="primary" className="ico-control-Button btn btn-md btn-warning" style={{ width: "150px" }} onClick={this.handleOnClickEmergencyStart} disabled={isPaused === false}>Emergency Start</Button></FormItem>
                     </div>
                     <div className="col-md-6">
-                      <FormItem><Button type="primary" size = "large" className="ico-control-Button btn btn-md btn-info" style={{width:"150px"}} onClick={this.handleOnClickFinalize} disabled={isCrowdsaleClosed === true}>Finalize</Button></FormItem>
+                      <FormItem><Button type="primary" size="large" className="ico-control-Button btn btn-md btn-info" style={{ width: "150px" }} onClick={this.handleOnClickFinalize} disabled={isCrowdsaleClosed === true}>Finalize</Button></FormItem>
                     </div>
                   </div>
                 </FormItem>

@@ -1,5 +1,5 @@
 import React from 'react'
-import {Row, Col, Form, Card} from 'antd'
+import { Row, Col, Form, Card } from 'antd'
 import './style.scss'
 
 import PersonalInfo from './PersonalInfo'
@@ -7,7 +7,7 @@ import Password from './Password'
 
 @Form.create()
 class Account extends React.Component {
-  
+
   render() {
     const { getFieldDecorator } = this.props.form
     return (
@@ -26,10 +26,10 @@ class Account extends React.Component {
             </Col>
             <Col span={12}>
               <Card title="New Password" bordered={true}>
-                <Password />              
+                <Password />
               </Card>
             </Col>
-          </Row>   
+          </Row>
         </div>
       </div>
     )

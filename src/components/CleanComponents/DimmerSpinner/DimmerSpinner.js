@@ -2,12 +2,12 @@ import React from 'react';
 import Dimmer from '../Dimmer';
 import Spinner from '../Spinner';
 
-const DimmerSpinner = ({visible}) => {
+const DimmerSpinner = ({ visible }) => {
 
-  if(!visible) return null;
+  if (!visible) return null;
   return (
     <Dimmer>
-      <Spinner color="#ffffff"/>
+      <Spinner color="#ffffff" />
     </Dimmer>
   );
 };

@@ -8,8 +8,8 @@ class TopBar extends React.Component {
   render() {
     return (
       <div className="topbar">
-        <HomeMenu style={{float:'left'}} />
-        <BitcoinPrice style={{float:'left'}} /> 
+        <HomeMenu style={{ float: 'left' }} />
+        <BitcoinPrice style={{ float: 'left' }} />
         <div className="topbar__right">
           <ProfileMenu />
         </div>

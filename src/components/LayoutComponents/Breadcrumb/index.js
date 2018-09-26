@@ -35,10 +35,8 @@ class Breadcrumb extends React.Component {
     let { breadcrumb } = this.state
     let url = props.location.pathname
     let [activeMenuItem, ...path] = this.getPath(items, url)
-    if (url === '/token-wizard/crowdsale' || url === '/token-wizard/token')
-    {
-      if (!path.length)
-      {
+    if (url === '/token-wizard/crowdsale' || url === '/token-wizard/token') {
+      if (!path.length) {
         path.push(items[5]);
         activeMenuItem = path[0].children[0];
       }

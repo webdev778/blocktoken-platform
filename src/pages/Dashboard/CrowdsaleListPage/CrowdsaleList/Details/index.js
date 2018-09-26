@@ -1,12 +1,12 @@
 import React from 'react'
-import { Form, Select} from 'antd'
+import { Form, Select } from 'antd'
 import axios from 'axios/index'
 
 const FormItem = Form.Item
 const Option = Select.Option
 
 class Details extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
 
     this.state = {
@@ -17,14 +17,14 @@ class Details extends React.Component {
   async componentDidMount() {
     const { address } = this.props
 
-    try{
+    try {
 
       const res = await axios.get('/api/v1.0/contract/getCrowdsaleContractByAddress/' + address)
       const { crowdsaleContract: contract } = res.data
-      if(contract) {
-        this.setState({ contract });        
+      if (contract) {
+        this.setState({ contract });
       }
-    }catch ( e ){
+    } catch (e) {
     }
   }
 
@@ -35,7 +35,7 @@ class Details extends React.Component {
     return (
       <div className="card">
         <span>
-          <a href="javascript: void(0);" onClick={ this.props.onClose } className="mr-2 pull-right">
+          <a href="javascript: void(0);" onClick={this.props.onClose} className="mr-2 pull-right">
             <i className="icmn-cross" title="Close" width={16} />
           </a>
         </span>
@@ -170,6 +170,6 @@ class Details extends React.Component {
   }
 }
 
-Details.propTypes={}
+Details.propTypes = {}
 
 export default Details

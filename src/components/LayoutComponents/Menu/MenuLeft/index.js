@@ -89,10 +89,8 @@ class MenuLeft extends React.Component {
     if (collapsed) {
       path = ['']
     }
-    if (pathname === '/token-wizard/crowdsale' || pathname === '/token-wizard/token')
-    {
-      if (!path.length)
-      {
+    if (pathname === '/token-wizard/crowdsale' || pathname === '/token-wizard/token') {
+      if (!path.length) {
         path.push(items[5]);
         activeMenuItem = path[0].children[0];
       }
@@ -136,8 +134,8 @@ class MenuLeft extends React.Component {
           onClick={
             this.props.isMobile
               ? () => {
-                  dispatch(setLayoutState({ menuCollapsed: false }))
-                }
+                dispatch(setLayoutState({ menuCollapsed: false }))
+              }
               : undefined
           }
         >
@@ -146,11 +144,11 @@ class MenuLeft extends React.Component {
         </Link>
       </Menu.Item>
     ) : (
-      <Menu.Item key={key} disabled={disabled}>
-        <span className="menuLeft__item-title">{title}</span>
-        {icon && <span className={icon + ' menuLeft__icon'} />}
-      </Menu.Item>
-    )
+          <Menu.Item key={key} disabled={disabled}>
+            <span className="menuLeft__item-title">{title}</span>
+            {icon && <span className={icon + ' menuLeft__icon'} />}
+          </Menu.Item>
+        )
   }
 
   onCollapse = (value, type) => {
@@ -163,7 +161,7 @@ class MenuLeft extends React.Component {
   }
 
   componentDidMount() {
-    const {userState} = this.props;
+    const { userState } = this.props;
     if (userState.role === 'user')
       this.getActiveMenuItem(this.props, menuUser)
     else if (userState.role === 'admin')
@@ -171,7 +169,7 @@ class MenuLeft extends React.Component {
   }
 
   componentWillReceiveProps(newProps) {
-    const {userState} = this.props;
+    const { userState } = this.props;
     this.setState(
       {
         selectedKeys: '',
@@ -209,7 +207,7 @@ class MenuLeft extends React.Component {
       breakpoint: 'lg',
     }
     const params = isMobile ? paramsMobile : paramsDesktop
-    const {userState} = this.props;
+    const { userState } = this.props;
     return (
       <Sider {...params} className="menuLeft">
         <Scrollbars

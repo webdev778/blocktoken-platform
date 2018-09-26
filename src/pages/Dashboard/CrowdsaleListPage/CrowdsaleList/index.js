@@ -39,7 +39,7 @@ class CrowdsaleList extends React.Component {
           })
         }
       });
-    }
+  }
 
   handleTableChange = (pagination, filters, sorter) => {
     if (this.state.pager) {
@@ -72,16 +72,16 @@ class CrowdsaleList extends React.Component {
     })
   }
 
-  handleOnClickDetails(address){
-    this.setState({address: address, viewDetails: !this.state.viewDetails});
+  handleOnClickDetails(address) {
+    this.setState({ address: address, viewDetails: !this.state.viewDetails });
   }
 
   handleOnClickICOStatus = (address) => {
-    this.setState({address, viewICOStatus: !this.state.viewICOStatus})
+    this.setState({ address, viewICOStatus: !this.state.viewICOStatus })
   }
 
   handleOnClickWhitelist = (address) => {
-    this.setState({address, viewWhitelist: !this.state.viewWhitelist})
+    this.setState({ address, viewWhitelist: !this.state.viewWhitelist })
   }
 
   handleCloseDetail = () => {
@@ -142,7 +142,7 @@ class CrowdsaleList extends React.Component {
             <a target="_blank" href={`http://${record.network}.etherscan.io/address/${record.contract_address}`} className="mr-2">
               <i className="icmn-eye mr-1" width={16} />
             </a>
-            <a href="javascript: void(0);" className="mr-2" onClick={() => { this.handleOnClickDetails(record.contract_address)}}>
+            <a href="javascript: void(0);" className="mr-2" onClick={() => { this.handleOnClickDetails(record.contract_address) }}>
               <i className="icmn-list mr-1" width={16} />
             </a>
             <a href="javascript: void(0);" className="mr-2" onClick={() => this.handleOnClickICOStatus(record.contract_address)}>
@@ -160,18 +160,18 @@ class CrowdsaleList extends React.Component {
       <div className="card">
 
         {
-          this.state.viewDetails && 
-          <Details address = {this.state.address} onClose = { this.handleCloseDetail }/>
+          this.state.viewDetails &&
+          <Details address={this.state.address} onClose={this.handleCloseDetail} />
         }
         {
-          this.state.viewICOStatus && 
+          this.state.viewICOStatus &&
           <div>
             <span>
               <a href="javascript: void(0);" className="mr-2 pull-right" onClick={this.handleOnClickICOStatus}>
                 <i className="icmn-cross" title="Close" width={16} />
               </a>
             </span>
-            <ICOStatus address={this.state.address}/>
+            <ICOStatus address={this.state.address} />
           </div>
         }
         {
@@ -182,26 +182,26 @@ class CrowdsaleList extends React.Component {
                 <i className="icmn-cross" title="Close" width={16} />
               </a>
             </span>
-            <Whitelist address={this.state.address}/>
+            <Whitelist address={this.state.address} />
           </div>
         }
         {
           (!this.state.viewDetails && !this.state.viewICOStatus && !this.state.viewWhitelist) &&
           <div>
-          <div className="card-header">
-            <div className="utils__title">
-              <strong>Crowdsale Contracts List</strong>
+            <div className="card-header">
+              <div className="utils__title">
+                <strong>Crowdsale Contracts List</strong>
+              </div>
             </div>
-          </div>
-          <div className="card-body">
-            <Table
-              columns={columns}
-              dataSource={data}
-              pagination={pager}
-              onChange={this.handleTableChange}
-              rowKey = "_id"
-            />
-          </div>
+            <div className="card-body">
+              <Table
+                columns={columns}
+                dataSource={data}
+                pagination={pager}
+                onChange={this.handleTableChange}
+                rowKey="_id"
+              />
+            </div>
           </div>
         }
       </div>

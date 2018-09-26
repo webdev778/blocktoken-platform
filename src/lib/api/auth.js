@@ -19,10 +19,10 @@ export const localRegister = ({
   website
   //initialMoney: { currency, index }
 })
-export const localLogin = ({email, password}) => axios.post('/api/v1.0/auth/login/local', {
+export const localLogin = ({ email, password }) => axios.post('/api/v1.0/auth/login/local', {
   email, password
 });
-export const socialLogin = ({provider, accessToken}) => axios.post('/api/v1.0/auth/login/' + provider, {
+export const socialLogin = ({ provider, accessToken }) => axios.post('/api/v1.0/auth/login/' + provider, {
   accessToken
 });
 export const socialRegister = ({
@@ -44,4 +44,4 @@ export const socialRegister = ({
 export const checkLoginStatus = () => axios.get('/api/v1.0/auth/check');
 export const logout = () => axios.post('/api/v1.0/auth/logout');
 
-export const resendEmail = ({email}) => axios.post('/api/v1.0/auth/resend', {email});
+export const resendEmail = ({ email }) => axios.post('/api/v1.0/auth/resend', { email });

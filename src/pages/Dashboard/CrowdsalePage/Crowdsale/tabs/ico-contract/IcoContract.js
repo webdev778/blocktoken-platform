@@ -45,7 +45,7 @@ class IcoContract extends React.Component {
   };
 
   render() {
-    const {variables} = this.props;
+    const { variables } = this.props;
 
     return (
       <div>

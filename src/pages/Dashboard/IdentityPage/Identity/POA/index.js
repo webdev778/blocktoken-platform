@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Input, DatePicker, Col, TimePicker, Select, Cascader, InputNumber, Upload, Button, Icon, Card, notification, message } from 'antd'
+import { Form, Input, DatePicker, Select, Upload, Button, notification, message } from 'antd'
 import bankverify from '../../../../../assets/images/bank_verify.png';
 import DimmerSpinner from 'components/CleanComponents/DimmerSpinner';
 import * as UserAPI from 'lib/api/users';

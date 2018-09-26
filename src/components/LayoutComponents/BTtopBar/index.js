@@ -3,7 +3,7 @@ import './style.scss'
 import { enquireScreen, unenquireScreen } from 'enquire-js'
 import DrawerMenu from 'rc-drawer'
 
-let mobileQuery ='only screen and (max-width: 1100px)'
+let mobileQuery = 'only screen and (max-width: 1100px)'
 let mobileMenu
 
 enquireScreen((b) => {
@@ -18,71 +18,71 @@ const navigation = (<nav className="header__nav">
             <ul className="header__subMenu">
                 <li className="header__subMenuItem">
                     <a href="https://dev.blocktoken.ai/airdrop/"
-                       className="header__subMenuLink">AirDrop</a>
+                        className="header__subMenuLink">AirDrop</a>
                 </li>
                 <li className="header__subMenuItem">
                     <a href="https://dev.blocktoken.ai/bounty/"
-                       className="header__subMenuLink">Bounty Program</a>
+                        className="header__subMenuLink">Bounty Program</a>
                 </li>
             </ul>
         </li>
         <li className="header__menuItem">
             <a href="https://dev.blocktoken.ai/products/"
-               className="header__menuLink">Products</a>
+                className="header__menuLink">Products</a>
             <ul className="header__subMenu">
                 <li className="header__subMenuItem">
                     <a href="https://dev.blocktoken.ai/syndicates/"
-                       className="header__subMenuLink">Syndicates</a>
+                        className="header__subMenuLink">Syndicates</a>
                 </li>
                 <li className="header__subMenuItem">
                     <a href="https://dev.blocktoken.ai/ico-marketing/"
-                       className="header__subMenuLink">ICO Marketing</a>
+                        className="header__subMenuLink">ICO Marketing</a>
                 </li>
                 <li className="header__subMenuItem">
                     <a href="https://dev.blocktoken.ai/blockchain-development/"
-                       className="header__subMenuLink">Blockchain Development</a>
+                        className="header__subMenuLink">Blockchain Development</a>
                 </li>
             </ul>
         </li>
         <li className="header__menuItem">
             <a href="https://dev.blocktoken.ai/features/"
-               className="header__menuLink">Features</a>
+                className="header__menuLink">Features</a>
         </li>
         <li className="header__menuItem">
             <a href="https://blocktoken.ai/BlockToken_Whitepaper.pdf"
-               className="header__menuLink">Whitepaper</a>
+                className="header__menuLink">Whitepaper</a>
         </li>
         <li className="header__menuItem">
             <a href="https://dev.blocktoken.ai/products/"
-               className="header__menuLink">About</a>
+                className="header__menuLink">About</a>
             <ul className="header__subMenu">
                 <li className="header__subMenuItem">
                     <a href="https://dev.blocktoken.ai/projects/"
-                       className="header__subMenuLink">Projects</a>
+                        className="header__subMenuLink">Projects</a>
                 </li>
                 <li className="header__subMenuItem">
                     <a href="https://dev.blocktoken.ai/blog/"
-                       className="header__subMenuLink">Blogs</a>
+                        className="header__subMenuLink">Blogs</a>
                 </li>
                 <li className="header__subMenuItem">
                     <a href="https://dev.blocktoken.ai/terms/"
-                       className="header__subMenuLink">Terms</a>
+                        className="header__subMenuLink">Terms</a>
                 </li>
                 <li className="header__subMenuItem">
                     <a href="https://dev.blocktoken.ai/privacy/"
-                       className="header__subMenuLink">Privacy</a>
+                        className="header__subMenuLink">Privacy</a>
                 </li>
             </ul>
         </li>
         <li className="header__menuItem">
             <a className="header__menuLink header__menuLink--button header__menuLink--buttonFilled"
-               href="javascript: void(0);">
+                href="javascript: void(0);">
                 Buy <span className="hidden-xl">BLT</span> Tokens
             </a>
         </li>
         <li className="header__menuItem">
             <a className="header__menuLink header__menuLink--button"
-               href="https://blocktoken.ai/airdrop" target="_blank" rel="noopener noreferrer" >
+                href="https://blocktoken.ai/airdrop" target="_blank" rel="noopener noreferrer" >
                 Get Free <span className="hidden-xl">BLT</span> Tokens
             </a>
         </li>
@@ -118,7 +118,7 @@ class BTtopBar extends React.Component {
                         <div className="header__content">
                             <a href="https://dev.blocktoken.ai/" className="header__logoLink">
                                 <img className="header__logoImg"
-                                     src="https://dev.blocktoken.ai/wp-content/uploads/thegem-logos/logo_5ed388aa7c69b61be6aa09babaeee6a4_1x.png" alt="BlockToken ICO Platform"
+                                    src="https://dev.blocktoken.ai/wp-content/uploads/thegem-logos/logo_5ed388aa7c69b61be6aa09babaeee6a4_1x.png" alt="BlockToken ICO Platform"
                                 />
                             </a>
                             {mobileMenu ?

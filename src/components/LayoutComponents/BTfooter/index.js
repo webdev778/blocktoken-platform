@@ -11,7 +11,7 @@ class BTfooter extends React.Component {
                             <a href="https://dev.blocktoken.ai/" className="footer__logoLink">
                                 <img
                                     src="https://dev.blocktoken.ai/wp-content/uploads/thegem-logos/logo_5ed388aa7c69b61be6aa09babaeee6a4_1x.png"
-                                    alt="logo"/>
+                                    alt="logo" />
                             </a>
                             <div className="footer__partitionContent">
                                 <p>
@@ -47,13 +47,13 @@ class BTfooter extends React.Component {
                                 </li>
                                 <li className="footer__navItem">
                                     <a href="https://dev.blocktoken.ai/token-generator"
-                                       className="footer__navLink">
+                                        className="footer__navLink">
                                         Create a Token
                                     </a>
                                 </li>
                                 <li className="footer__navItem">
                                     <a href="https://dev.blocktoken.ai/ico-advisory"
-                                       className="footer__navLink">
+                                        className="footer__navLink">
                                         ICO Advisory
                                     </a>
                                 </li>

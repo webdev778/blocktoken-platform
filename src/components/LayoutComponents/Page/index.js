@@ -46,7 +46,7 @@ class Page extends React.Component {
     isNotFound: false,
     onMounted: null,
     isLoading: false,
-    dispatch: () => {},
+    dispatch: () => { },
   }
 
   isFirstContent = true

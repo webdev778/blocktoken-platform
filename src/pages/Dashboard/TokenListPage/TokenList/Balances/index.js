@@ -8,7 +8,7 @@ const FormItem = Form.Item
 const Option = Select.Option
 
 class Balances extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       tokenContracts: [],
@@ -17,11 +17,11 @@ class Balances extends React.Component {
       tokenAmount: 0,
       newAddress: '',
       address: '',
-      loading: false, 
+      loading: false,
       iconLoading: false,
     }
   }
-  
+
   componentDidMount() {
     const { address } = this.props
 
@@ -82,7 +82,7 @@ class Balances extends React.Component {
   };
 
   handleOnClickSendToken = () => {
-    const {selectedContract, address, tokenAmount} = this.state;
+    const { selectedContract, address, tokenAmount } = this.state;
     const contract = window.web3.eth.contract(tokenAbi);
     const contractHandle = contract.at(selectedContract.contract_address);
     const clientAddress = window.web3.eth.defaultAccount;
@@ -126,7 +126,7 @@ class Balances extends React.Component {
   };
 
   handleOnClickAddAddress = () => {
-    const {selectedContract, newAddress} = this.state;
+    const { selectedContract, newAddress } = this.state;
 
     if (!selectedContract) {
       message.warning('Please select contract first.');
@@ -153,7 +153,7 @@ class Balances extends React.Component {
       selectedContract.team_addresses.push(newAddress);
     }
 
-    axios.patch('/api/v1.0/contract/token/' + selectedContract._id, {team_addresses: selectedContract.team_addresses})
+    axios.patch('/api/v1.0/contract/token/' + selectedContract._id, { team_addresses: selectedContract.team_addresses })
       .then(() => {
         this.setState({
           newAddress: 0,
@@ -163,14 +163,14 @@ class Balances extends React.Component {
   };
 
   handleOnClickDeleteAddress = (address) => {
-    const {selectedContract} = this.state;
+    const { selectedContract } = this.state;
     console.log(address);
     selectedContract.team_addresses = selectedContract.team_addresses.filter(addr => {
       console.log(addr);
       return addr !== address;
     });
 
-    axios.patch('/api/v1.0/contract/token/' + selectedContract._id, {team_addresses: selectedContract.team_addresses})
+    axios.patch('/api/v1.0/contract/token/' + selectedContract._id, { team_addresses: selectedContract.team_addresses })
       .then(() => {
         this.setState({
           selectedContract
@@ -199,7 +199,7 @@ class Balances extends React.Component {
         key: 'action',
         render: (text, record) => (
           <span>
-            <a href="javascript: void(0);" className="mr-2" onClick = {() => {this.handleOnClickDeleteAddress(record.address)}}>
+            <a href="javascript: void(0);" className="mr-2" onClick={() => { this.handleOnClickDeleteAddress(record.address) }}>
               <i className="icmn-cross mr-1" width={16} />
             </a>
           </span>
@@ -209,12 +209,12 @@ class Balances extends React.Component {
 
     const data = [];
 
-    const {tokenContracts, balances, newAddress, selectedContract, address, tokenAmount} = this.state;
+    const { tokenContracts, balances, newAddress, selectedContract, address, tokenAmount } = this.state;
 
     return (
       <div className="card">
         <span>
-          <a href="javascript: void(0);" onClick={ this.props.onClose } className="mr-2 pull-right">
+          <a href="javascript: void(0);" onClick={this.props.onClose} className="mr-2 pull-right">
             <i className="icmn-cross" title="Close" width={16} />
           </a>
         </span>
@@ -231,7 +231,7 @@ class Balances extends React.Component {
                   <label className="form-label">
                     <strong>Token Contract</strong>
                   </label>
-                  <Select placeholder="Select token contract" 
+                  <Select placeholder="Select token contract"
                     onChange={this.handleOnTokenContractChange}
                     value={selectedContract ? selectedContract.contract_address : ''}>
                     <Option value="">Select token contract</Option>
@@ -244,37 +244,37 @@ class Balances extends React.Component {
                 </FormItem>
               </div>
               {
-                balances ? 
-                <div className="row-lg-6">
-                  <Card>
-                    <p><strong>Tokens for Team: { balances[0].toNumber() / Math.pow(10, selectedContract.decimal_points) }</strong></p>
-                    <Select 
-                      placeholder="Select Address" 
-                      onChange={this.handleAddressChange}
-                      value={address}>
-                      <Option value="">Select Address</Option>
-                      {
-                        selectedContract ? selectedContract.team_addresses.map((address) =>(
-                          <Option value={address}>{address}</Option>
-                        )) : null
-                      }
-                    </Select>
-                    <label className="form-label">&nbsp;</label>
-                    <div className="row">
-                      <div className="col">
-                        <Input type="text" placeholder="e.g. 10000" onChange={this.handleTokenAmountChange} value={tokenAmount} />
-                      </div>
-                      <div className="col-lg-2">
-                        <Button type="primary pull-right" loading={this.state.loading} onClick={this.handleOnClickSendToken}>
-                          Send Token
+                balances ?
+                  <div className="row-lg-6">
+                    <Card>
+                      <p><strong>Tokens for Team: {balances[0].toNumber() / Math.pow(10, selectedContract.decimal_points)}</strong></p>
+                      <Select
+                        placeholder="Select Address"
+                        onChange={this.handleAddressChange}
+                        value={address}>
+                        <Option value="">Select Address</Option>
+                        {
+                          selectedContract ? selectedContract.team_addresses.map((address) => (
+                            <Option value={address}>{address}</Option>
+                          )) : null
+                        }
+                      </Select>
+                      <label className="form-label">&nbsp;</label>
+                      <div className="row">
+                        <div className="col">
+                          <Input type="text" placeholder="e.g. 10000" onChange={this.handleTokenAmountChange} value={tokenAmount} />
+                        </div>
+                        <div className="col-lg-2">
+                          <Button type="primary pull-right" loading={this.state.loading} onClick={this.handleOnClickSendToken}>
+                            Send Token
                         </Button>
+                        </div>
                       </div>
-                    </div>
-                  </Card>
-                </div>
-                : null
+                    </Card>
+                  </div>
+                  : null
               }
-              
+
               <div className="row-lg-6">
                 <label className="form-label">&nbsp;</label>
                 <div className="row">
@@ -292,7 +292,7 @@ class Balances extends React.Component {
                 <label className="form-label">&nbsp;</label>
                 {
                   selectedContract && balances && selectedContract.team_addresses.map((address, index) => (
-                    data.push({key:address, address:address, balance:balances[index + 1].toNumber() / Math.pow(10, selectedContract.decimal_points)})
+                    data.push({ key: address, address: address, balance: balances[index + 1].toNumber() / Math.pow(10, selectedContract.decimal_points) })
                   )) &&
                   <Table
                     columns={columns}

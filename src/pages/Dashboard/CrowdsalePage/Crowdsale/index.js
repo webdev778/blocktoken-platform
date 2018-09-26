@@ -15,7 +15,7 @@ import saveToDatabase from 'utils/saveToDatabase';
 
 import * as ContractAPI from 'lib/api/contract';
 
-import {networks} from '../../../../constants';
+import { networks } from '../../../../constants';
 
 import spinner from 'assets/images/spinner.gif';
 import axios from "axios/index";
@@ -28,7 +28,7 @@ const Option = Select.Option
 
 @Form.create()
 class CreateCrowdsale extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
 
     this.state = {
@@ -67,14 +67,16 @@ class CreateCrowdsale extends React.Component {
   }
 
   storeContractToDatabase = async () => {
-    const {multisigETH, tokensForTeam, minContributionPreSale, minContributionMainSale, maxContributionETH, maxCap, minCap, tokenPriceWei, campaignDurationDays, firstPeriod,
-    secondPeriod, thirdPeriod, firstBonus, secondBonus, thirdBonus, presaleBonus, vestingDuration, vestingCliff, vestingStart, crowdsaleAddress, network, tokenAddress,
-    isWhitelistingEnabled, isVestingEnabled, whitelistAddress} = this.state;
+    const { multisigETH, tokensForTeam, minContributionPreSale, minContributionMainSale, maxContributionETH, maxCap, minCap, tokenPriceWei, campaignDurationDays, firstPeriod,
+      secondPeriod, thirdPeriod, firstBonus, secondBonus, thirdBonus, presaleBonus, vestingDuration, vestingCliff, vestingStart, crowdsaleAddress, network, tokenAddress,
+      isWhitelistingEnabled, isVestingEnabled, whitelistAddress } = this.state;
 
     const result = await ContractAPI.registCrowdsale(
-          {multisigETH, tokensForTeam, minContributionPreSale, minContributionMainSale, maxContributionETH, maxCap, minCap, tokenPriceWei, campaignDurationDays, firstPeriod,
+      {
+        multisigETH, tokensForTeam, minContributionPreSale, minContributionMainSale, maxContributionETH, maxCap, minCap, tokenPriceWei, campaignDurationDays, firstPeriod,
         secondPeriod, thirdPeriod, firstBonus, secondBonus, thirdBonus, presaleBonus, vestingDuration, vestingCliff, vestingStart, crowdsaleAddress, network, tokenAddress,
-        isWhitelistingEnabled, isVestingEnabled, whitelistAddress}
+        isWhitelistingEnabled, isVestingEnabled, whitelistAddress
+      }
     );
   }
 
@@ -88,13 +90,13 @@ class CreateCrowdsale extends React.Component {
 
     const token_len = this.state.tokenContracts.length
 
-    if(!token_len){
+    if (!token_len) {
       message.error('Please deploy more than one token contracts before deploying crowdsale');
       return;
     }
 
     const { tokenAddress } = this.state;
-    if( !tokenAddress ){
+    if (!tokenAddress) {
       message.warning('Please select a token');
       return;
     }
@@ -115,12 +117,12 @@ class CreateCrowdsale extends React.Component {
 
       const setState = this.setState.bind(this);
 
-      try{
+      try {
         const crowdsaleAddress = await deployCrowdSale(this.state, setState);
         console.log('Deployed Phases Successfully Finished.');
         setState({ crowdsaleAddress });
 
-        await allocateTokens(this.state, setState, crowdsaleAddress);      
+        await allocateTokens(this.state, setState, crowdsaleAddress);
         console.log('AllocateTokens Phases Successfully Finished.');
 
         const whitelistAddress = await deployWhitelist(this.state, setState);
@@ -138,11 +140,11 @@ class CreateCrowdsale extends React.Component {
         console.log('initializeToken Phases Successfully Finished.');
 
         const result = await this.storeContractToDatabase();
-        setState({isSpinnerVisible: false});
+        setState({ isSpinnerVisible: false });
         console.log('Save Contract to Database Successfully Finished.');
-      }catch(e){
-        console.log(e);    
-        setState({isSpinnerVisible: false});
+      } catch (e) {
+        console.log(e);
+        setState({ isSpinnerVisible: false });
         message.error('Failed to deploy.');
       }
     });
@@ -215,7 +217,7 @@ class CreateCrowdsale extends React.Component {
       minCap: 50000000,
       tokenPriceWei: 0.001,
       campaignDurationDays: 30,
-      tokenAddress: '',      
+      tokenAddress: '',
       whitelistAddress: '',
     };
 
@@ -224,17 +226,17 @@ class CreateCrowdsale extends React.Component {
 
   render() {
     const { getFieldDecorator } = this.props.form
-    const { selectedTokenContract, isSpinnerVisible, contractDeploymentStatus} = this.state;
+    const { selectedTokenContract, isSpinnerVisible, contractDeploymentStatus } = this.state;
 
     return (
       <div className="card">
         <div className="card-header">
-        <div className="utils__title">
+          <div className="utils__title">
             <strong>Token Wizard</strong>
           </div>
         </div>
         <div className="card-body">
-          <div className="col">     
+          <div className="col">
             <div className="token-wizard">
               <Tabs defaultActiveKey="2" tabPosition="top" size="large">
                 <TabPane tab={<Link to='/token-wizard/token'><span className="mainTab"><Icon type="home" />[STEP-1] Token Creator</span></Link>} key="1">
@@ -254,7 +256,7 @@ class CreateCrowdsale extends React.Component {
                               <label className="form-label">
                                 <strong>Token Contract</strong>
                               </label>
-                              <Select placeholder="Select token contract" onChange={this.handleOnTokenContractChange} required >                                
+                              <Select placeholder="Select token contract" onChange={this.handleOnTokenContractChange} required >
                                 {
                                   this.state.tokenContracts.map((contract) => (
                                     <Option key={contract} value={contract.contract_address}>{contract.name}</Option>
@@ -304,18 +306,18 @@ class CreateCrowdsale extends React.Component {
 
                           <Tabs defaultActiveKey="1">
                             <TabPane tab="ICO Contract" key="1">
-                              <IcoContract 
+                              <IcoContract
                                 onValueChange={this.handleOnValueChange}
                                 variables={this.state} />
                             </TabPane>
                             <TabPane tab="Bonuses" key="2">
-                              <Bonuses 
+                              <Bonuses
                                 onValueChange={this.handleOnValueChange}
                                 variables={this.state} />
                             </TabPane>
                             {this.state.isVestingEnabled && (
                               <TabPane tab="Vesting" key="3">
-                                <Vesting 
+                                <Vesting
                                   onValueChange={this.handleOnValueChange}
                                   variables={this.state} />
                               </TabPane>
@@ -323,7 +325,7 @@ class CreateCrowdsale extends React.Component {
                           </Tabs>
                         </div>
                         <Button type="primary" htmlType="submit" className="btn btn-primary pull-right" size="large"
-                          disabled = {isSpinnerVisible}>
+                          disabled={isSpinnerVisible}>
                           Deploy
                         </Button>
                         <span className="pull-right deployment-status">{contractDeploymentStatus}</span>

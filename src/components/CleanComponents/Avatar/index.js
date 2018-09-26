@@ -15,7 +15,7 @@ class Avatar extends React.Component {
       <a
         className={`d-block mx-auto ${size > 0 ? 'avatar avatar--' + size : ''} ${
           border ? ' avatar--border' : ''
-        }`}
+          }`}
         href="javascript: void(0);"
         style={{
           borderColor: borderColor,

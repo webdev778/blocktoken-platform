@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { tokenTableData, syndicateTableData } from './data.json'
-import {Table} from 'antd'
+import { Table } from 'antd'
 
 class ViewProjects extends React.Component {
   render() {

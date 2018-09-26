@@ -56,7 +56,7 @@ const loadableRoutes = {
   '/user/dashboard': {
     component: loadable(() => import('pages/Dashboard/DashboardUserPage')),
   },
-  
+
   '/admin/dashboard': {
     component: loadable(() => import('pages/Dashboard/DashboardUserPage')),
   },
@@ -64,13 +64,13 @@ const loadableRoutes = {
   '/account': {
     component: loadable(() => import('pages/Dashboard/AccountPage')),
   },
-  '/identity' : {
+  '/identity': {
     component: loadable(() => import('pages/Dashboard/IdentityPage')),
   },
   '/buytoken': {
     component: loadable(() => import('pages/Dashboard/BuyTokenPage')),
   },
-  '/confirmation/:token/' : {
+  '/confirmation/:token/': {
     component: loadable(() => import('pages/DefaultPages/VerifyPage')),
   },
 }

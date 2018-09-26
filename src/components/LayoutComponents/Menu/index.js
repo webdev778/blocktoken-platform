@@ -45,10 +45,10 @@ class AppMenu extends React.Component {
         <MenuLeft {...this.props} />
       </DrawerMenu>
     ) : (
-      <div>
-        <MenuLeft {...this.props} />
-      </div>
-    )
+        <div>
+          <MenuLeft {...this.props} />
+        </div>
+      )
   }
 }
 

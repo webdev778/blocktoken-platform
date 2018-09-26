@@ -27,15 +27,14 @@ class UsersList extends React.Component {
     try {
       const result = await UserAPI.getUserList()
 
-      if (result.data)
-      {
+      if (result.data) {
         this.setState({
           tableData: result.data.users,
           data: result.data.users,
         });
 
       }
-    }catch(e){
+    } catch (e) {
       console.log(e)
     }
   }

@@ -16,17 +16,16 @@ const mapStateToProps = (state, props) => ({
 @connect(mapStateToProps)
 @Form.create()
 class SignupForm extends React.Component {
-  constructor(props)
-  {
+  constructor(props) {
     super(props);
     this.recaptchaLoaded = this.recaptchaLoaded.bind(this);
     this.verifyCallback = this.verifyCallback.bind(this);
     this.state = {
       confirmDirty: false,
       isVerified: false,
-    }  
+    }
   }
-  
+
   handleConfirmBlur = e => {
     const value = e.target.value
     this.setState({ confirmDirty: this.state.confirmDirty || !!value })
@@ -40,8 +39,7 @@ class SignupForm extends React.Component {
         if (this.state.isVerified)
           dispatch(submit(values))
 
-        else
-        {
+        else {
           notification.open({
             type: 'error',
             message: 'Please verify that you are a human!',
@@ -85,7 +83,7 @@ class SignupForm extends React.Component {
   render() {
     const { form, socialProfile, redirectToRegister } = this.props
     let email = '', fullname = '';
-    if(socialProfile){
+    if (socialProfile) {
       email = socialProfile.email || ''
       fullname = socialProfile.name || ''
     }
@@ -109,7 +107,7 @@ class SignupForm extends React.Component {
               />,
             )}
           </FormItem>
-            { !redirectToRegister ?
+          {!redirectToRegister ?
             <FormItem>
               {form.getFieldDecorator('password', {
                 rules: [
@@ -129,8 +127,8 @@ class SignupForm extends React.Component {
               )}
             </FormItem>
             : null
-            }
-            { !redirectToRegister ?
+          }
+          {!redirectToRegister ?
             <FormItem>
               {form.getFieldDecorator('confirm', {
                 rules: [
@@ -151,7 +149,7 @@ class SignupForm extends React.Component {
               )}
             </FormItem>
             : null
-            }
+          }
           <div className="form-actions">
             <FormItem>
               {form.getFieldDecorator('fullname', {
@@ -203,7 +201,7 @@ class SignupForm extends React.Component {
             render="explicit"
             onloadCallback={this.recaptchaLoaded}
             verifyCallback={this.verifyCallback}
-            type = "image"
+            type="image"
           />
           <div className="form-actions">
             <Button type="primary" htmlType="submit" className="login-form-button width-100 mr-3">

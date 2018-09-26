@@ -97,8 +97,8 @@ class Layout extends React.Component {
               <Spinner />
               <BackTop />
               <Routes />
-              <BTtopBar/>
-              <AntLayout style={{marginTop:'-6px'}}>
+              <BTtopBar />
+              <AntLayout style={{ marginTop: '-6px' }}>
                 <Menu isMobile={isMobile} />
                 <SettingsSider />
                 <AntLayout>
@@ -113,7 +113,7 @@ class Layout extends React.Component {
                   </AntFooter> */}
                 </AntLayout>
               </AntLayout>
-              <BTfooter/>
+              <BTfooter />
             </AntLayout>
           </div>
         )}

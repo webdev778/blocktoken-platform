@@ -13,7 +13,7 @@ const SET_MODAL_MODE = 'auth/SET_MODAL_MODE';
 const CHANGE_INPUT = 'auth/CHANGE_INPUT';
 const SET_ERROR = 'auth/SET_ERROR';
 const CHECK_EMAIL = 'auth/CHECK_EMAIL';
-const LOCAL_LOGIN  = 'auth/LOCAL_LOGIN';
+const LOCAL_LOGIN = 'auth/LOCAL_LOGIN';
 const PROVIDER_LOGIN = 'auth/PROVIDER_LOGIN';
 const SOCIAL_LOGIN = 'auth/SOCIAL_LOGIN';
 const LOGOUT = 'auth/LOGOUT';
@@ -52,11 +52,10 @@ export default handleActions({
     onSuccess: (state, action) => {
       const { data: loginResult } = action.payload;
       const { data: { socialProfile } } = action.payload;
-      if(socialProfile) {
+      if (socialProfile) {
         return state.set('socialProfile', socialProfile).set('redirectToRegister', true);
       }
-      else
-      {
+      else {
         const { data: socialLoginProfile } = action.payload;
         return state.set('socialProfile', socialLoginProfile).set('redirectToRegister', false).set('loginResult', loginResult);
       }
@@ -68,5 +67,5 @@ export default handleActions({
       return initialState;
     }
   })
-  
+
 }, initialState)

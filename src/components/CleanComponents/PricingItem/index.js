@@ -16,7 +16,7 @@ class PricingItem extends React.Component {
       <div
         className={`pricing-table__item  ${extended > 0 ? ' pricing-table__item--extended' : ''} ${
           type ? ' pricing-table__item--' + type : ''
-        }`}
+          }`}
       >
         <div className="pricing-table__header">
           <div className="pricing-table__pricing__price">

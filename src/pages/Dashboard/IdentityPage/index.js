@@ -4,7 +4,7 @@ import Helmet from 'react-helmet'
 import Identity from './Identity/index';
 
 class IdentityPage extends React.Component {
-  static defaultProps ={
+  static defaultProps = {
     pathName: 'Identity',
     roles: ['user', 'administrator',]
   }

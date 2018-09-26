@@ -30,24 +30,23 @@ class IdentityList extends React.Component {
   async componentDidMount() {
     try {
       const result = await UserAPI.getUserList()
-      if (result.data)
-      {
+      if (result.data) {
         this.setState({
           tableData: result.data.users,
           data: result.data.users,
         });
 
       }
-    }catch(e){
+    } catch (e) {
       console.log(e)
     }
   }
 
   handleOnClickDetails = (status, id) => {
-    this.setState({status:status});
-    this.setState({user_id:id})
+    this.setState({ status: status });
+    this.setState({ user_id: id })
     if (Number(status) !== 0)
-      this.setState({viewDetails: !this.state.viewDetails});
+      this.setState({ viewDetails: !this.state.viewDetails });
   }
 
   handleCloseDetail = () => {
@@ -74,17 +73,17 @@ class IdentityList extends React.Component {
         dataIndex: 'auth_status',
         key: 'auth_status',
         render: (text, record) => (
-          (record.auth_status !== 9) && 
-            (record.kyc_status === 0) ? 
-            <Tag color="#f50">Submit</Tag> : 
+          (record.auth_status !== 9) &&
+            (record.kyc_status === 0) ?
+            <Tag color="#f50">Submit</Tag> :
             (
               (record.kyc_status === 1) ?
-              <Tag color="#108ee9">Review</Tag> : 
-              (
-                (record.kyc_status === 2) ?
-                <Tag color="#87d068">Success</Tag> : null
-              )
-            )            
+                <Tag color="#108ee9">Review</Tag> :
+                (
+                  (record.kyc_status === 2) ?
+                    <Tag color="#87d068">Success</Tag> : null
+                )
+            )
         ),
       },
       {
@@ -103,8 +102,8 @@ class IdentityList extends React.Component {
     return (
       <div className="card">
         {
-          (Number(this.state.status) !== 0 && this.state.viewDetails) ? 
-          <Details user_id={this.state.user_id} onClose = { this.handleCloseDetail }/> : null
+          (Number(this.state.status) !== 0 && this.state.viewDetails) ?
+            <Details user_id={this.state.user_id} onClose={this.handleCloseDetail} /> : null
         }
         {
           !this.state.viewDetails &&

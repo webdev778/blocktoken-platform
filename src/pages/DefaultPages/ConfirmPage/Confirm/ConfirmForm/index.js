@@ -17,16 +17,15 @@ class ConfirmForm extends React.Component {
     const { userState } = this.props;
     try {
       const email = userState.email;
-      const result = await AuthAPI.resendEmail({email});
-      if (result.data)
-      {
+      const result = await AuthAPI.resendEmail({ email });
+      if (result.data) {
         notification.open({
           type: 'success',
           message: result.data
         })
 
       }
-    }catch(e){
+    } catch (e) {
       let message = '';
       if (e.message === 'Request failed with status code 401')
         message = 'This account has already been verified. Please log in.';
@@ -40,7 +39,7 @@ class ConfirmForm extends React.Component {
   }
 
   render() {
-    
+
     return (
       <div>
         <div className="card-header">
@@ -61,7 +60,7 @@ class ConfirmForm extends React.Component {
             </Button>
           </div>
         </div>
-      </div> 
+      </div>
     )
   }
 }

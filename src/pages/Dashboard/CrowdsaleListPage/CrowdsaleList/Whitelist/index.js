@@ -9,7 +9,7 @@ const FormItem = Form.Item
 const Option = Select.Option
 
 class Whitelist extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       crowdsaleContracts: [],
@@ -17,12 +17,12 @@ class Whitelist extends React.Component {
       selectedContract: null,
       newAddress: '',
       address: '',
-      loading: false, 
+      loading: false,
       isSpinnerVisible: false,
       iconLoading: false,
     }
   }
-  
+
   componentDidMount() {
     const { address } = this.props
 
@@ -59,7 +59,7 @@ class Whitelist extends React.Component {
   };
 
   handleOnClickAddAddress = () => {
-    const {selectedContract, newAddress} = this.state;
+    const { selectedContract, newAddress } = this.state;
 
     if (!selectedContract) {
       message.warning('Please select contract first.');
@@ -99,10 +99,10 @@ class Whitelist extends React.Component {
             console.log(res)
           }
         });
-        axios.patch('/api/v1.0/contract/crowdsale/' + selectedContract._id, {whitelist_addresses: [ ...selectedContract.whitelist_addresses, newAddress ]})
+        axios.patch('/api/v1.0/contract/crowdsale/' + selectedContract._id, { whitelist_addresses: [...selectedContract.whitelist_addresses, newAddress] })
           .then(() => {
             console.log('Added');
-            const {selectedContract, isSpinnerVisible} = this.state;
+            const { selectedContract, isSpinnerVisible } = this.state;
             selectedContract.whitelist_addresses.push(newAddress);
             this.setState({
               selectedContract,
@@ -115,7 +115,7 @@ class Whitelist extends React.Component {
   };
 
   handleOnClickDeleteAddress = (address) => {
-    const {selectedContract, isSpinnerVisible} = this.state;
+    const { selectedContract, isSpinnerVisible } = this.state;
     const contract = window.web3.eth.contract(whitelistAbi);
     const contractHandle = contract.at(selectedContract.whitelist_contract_address);
     const clientAddress = window.web3.eth.defaultAccount;
@@ -138,9 +138,11 @@ class Whitelist extends React.Component {
 
       logStarted.watch((error, res) => {
 
-        axios.put('/api/contract/crowdsale/' + selectedContract._id, {whitelist_addresses: selectedContract.whitelist_addresses.filter(addr => {
+        axios.put('/api/contract/crowdsale/' + selectedContract._id, {
+          whitelist_addresses: selectedContract.whitelist_addresses.filter(addr => {
             return addr !== address;
-          })})
+          })
+        })
           .then(() => {
             selectedContract.whitelist_addresses = selectedContract.whitelist_addresses.filter(addr => {
               return addr !== address;
@@ -168,7 +170,7 @@ class Whitelist extends React.Component {
         key: 'action',
         render: (text, record) => (
           <span>
-            <a href="javascript: void(0);" className="mr-2" onClick = {() => {this.handleOnClickDeleteAddress(record.address)}}>
+            <a href="javascript: void(0);" className="mr-2" onClick={() => { this.handleOnClickDeleteAddress(record.address) }}>
               <i className="icmn-cross mr-1" width={16} />
               {
                 isSpinnerVisible ? (
@@ -187,7 +189,7 @@ class Whitelist extends React.Component {
 
     const data = [];
 
-    const {crowdsaleContracts, newAddress, selectedContract, address, isSpinnerVisible} = this.state;
+    const { crowdsaleContracts, newAddress, selectedContract, address, isSpinnerVisible } = this.state;
 
     return (
       <div className="card">
@@ -204,7 +206,7 @@ class Whitelist extends React.Component {
                   <label className="form-label">
                     <strong>Crowdsale Contract</strong>
                   </label>
-                  <Select placeholder="Select crowdsale contract" 
+                  <Select placeholder="Select crowdsale contract"
                     onChange={this.handleOnCrowdsaleContractChange}
                     value={selectedContract ? selectedContract.contract_address : ''}>
                     <Option value="">Select crowdsale contract</Option>
@@ -232,9 +234,9 @@ class Whitelist extends React.Component {
                 <label className="form-label">&nbsp;</label>
                 {
                   selectedContract && (selectedContract.whitelist_addresses || []).map((address, index) => (
-                    data.push({key:address, address:address})
+                    data.push({ key: address, address: address })
                   )) &&
-                  
+
                   <Table
                     columns={columns}
                     dataSource={data}

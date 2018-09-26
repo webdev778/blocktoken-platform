@@ -8,7 +8,7 @@ const Message = ({ chat, user }) => (
   <div
     className={`clearfix chat__item ${
       user === chat.username ? 'chat__item--left' : 'chat__item--right'
-    }`}
+      }`}
   >
     <div className="chat__itemAvatar">
       <Avatar src={chat.img} size="50" border="false" />

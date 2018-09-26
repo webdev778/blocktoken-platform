@@ -2,8 +2,8 @@ import React from 'react'
 import DimmerSpinner from 'components/CleanComponents/DimmerSpinner';
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import {bindActionCreators} from 'redux';
-import { FacebookLoginButton, GoogleLoginButton, LinkedInLoginButton  } from 'react-social-login-buttons'
+import { bindActionCreators } from 'redux';
+import { FacebookLoginButton, GoogleLoginButton, LinkedInLoginButton } from 'react-social-login-buttons'
 import { REDUCER, submit } from 'ducks/login'
 import { Form, Input, Icon, Button, notification } from 'antd'
 import * as authActions from 'ducks/auth';
@@ -35,7 +35,7 @@ class LoginForm extends React.Component {
 
       await AuthActions.providerLogin(provider);
 
-      const { socialInfo } = this.props;      
+      const { socialInfo } = this.props;
       const result = await AuthActions.socialLogin({
         provider,
         accessToken: socialInfo.get('accessToken')
@@ -43,7 +43,7 @@ class LoginForm extends React.Component {
 
       const { redirectToRegister, socialProfile } = this.props;
       console.log(socialProfile);
-      if(redirectToRegister) {
+      if (redirectToRegister) {
         // AppActions._setHideLogin(true);
         // get social email
         const social_email = 'social@social.com';
@@ -55,14 +55,16 @@ class LoginForm extends React.Component {
         // }, 400);
         return;
       }
-      if (result.data.auth_status > 0)
-      {
-        AppActions.setUserState({userState:{
-          email:result.data.email, 
-          fullname:result.data.fullname, 
-          auth_stauts:result.data.auth_status,
-          kyc_status:result.data.kyc_status,
-          role:'user'}})
+      if (result.data.auth_status > 0) {
+        AppActions.setUserState({
+          userState: {
+            email: result.data.email,
+            fullname: result.data.fullname,
+            auth_stauts: result.data.auth_status,
+            kyc_status: result.data.kyc_status,
+            role: 'user'
+          }
+        })
         AppActions._setHideLogin(true);
         AppActions.goToPage('/user/dashboard');
 
@@ -82,7 +84,7 @@ class LoginForm extends React.Component {
   render() {
     const { form, isSubmitForm } = this.props
     const { handleSocialLogin } = this
-    
+
     return (
       <div className="cat__pages__login__block__form">
         <h4 className="text-uppercase">
@@ -136,11 +138,11 @@ class LoginForm extends React.Component {
           </div>
 
           <div className="form-actions" align="center">
-            <GoogleLoginButton align="center" onClick={()=> handleSocialLogin('google')} />
+            <GoogleLoginButton align="center" onClick={() => handleSocialLogin('google')} />
             <br />
-            <FacebookLoginButton align="center" onClick={()=> handleSocialLogin('facebook')}/>
+            <FacebookLoginButton align="center" onClick={() => handleSocialLogin('facebook')} />
             <br />
-            <LinkedInLoginButton  align="center" onClick={()=> handleSocialLogin('linkedin')}/>
+            <LinkedInLoginButton align="center" onClick={() => handleSocialLogin('linkedin')} />
             <div className="mb-4">
               <br />
               <br />
@@ -151,7 +153,7 @@ class LoginForm extends React.Component {
             </div>
           </div>
         </Form>
-        <DimmerSpinner visible={isSubmitForm}/>
+        <DimmerSpinner visible={isSubmitForm} />
       </div>
     )
   }
@@ -166,8 +168,8 @@ export default connect(
     redirectToRegister: state.auth.get('redirectToRegister'),
   }),
   (dispatch) => ({
-      AppActions: bindActionCreators(appActions, dispatch),
-      AuthActions: bindActionCreators(authActions, dispatch),
-      SubmitLogin: bindActionCreators(submit, dispatch)
+    AppActions: bindActionCreators(appActions, dispatch),
+    AuthActions: bindActionCreators(authActions, dispatch),
+    SubmitLogin: bindActionCreators(submit, dispatch)
   })
 )(Form.create()(LoginForm));
