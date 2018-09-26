@@ -92,7 +92,7 @@ class Routes extends React.Component {
   }
 
   render() {
-    const { userState } = this.props;
+    const isUserVerified = false
 
     return (
       <ConnectedSwitch>
@@ -101,7 +101,9 @@ class Routes extends React.Component {
           const { exact, needsVerification, ...props } = loadableRoutes[path]
           props.exact = exact === void 0 || exact || false // set true as default
           props.needsVerification = needsVerification === void 0 || needsVerification || false  //set true as default
-
+          if (!isUserVerified && needsVerification) {
+            props.component = loadable(() => import('pages/DefaultPages/EmptyPage')) // TODO: replace with your verify page component
+          }
           return <Route key={path} path={path} {...props} />
         })}
         <Route
