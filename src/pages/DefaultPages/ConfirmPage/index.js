@@ -1,6 +1,5 @@
 import React from 'react'
 import Page from 'components/LayoutComponents/Page'
-import Helmet from 'react-helmet'
 import Confirm from './Confirm'
 
 import { connect } from 'react-redux'
@@ -8,18 +7,15 @@ import {bindActionCreators} from 'redux';
 
 import * as authActions from 'ducks/auth';
 import * as appActions from 'ducks/app';
-import { REDUCER } from 'ducks/login'
 
 class ConfirmPage extends React.Component {
   render() {
     const { match, ...props } = this.props
-    const status = window.localStorage.getItem('app.Status');
-    console.log(status);
-    const { AppActions } = this.props;
+    const { AppActions, userState } = this.props;
     return (
       <Page {...props}>
       {
-        (Number(status) === 0) ? 
+        (Number(userState.auth_status) === 0) ? 
         <Confirm />
         : AppActions.goToPage('/user/dashboard')
       }        
@@ -29,7 +25,9 @@ class ConfirmPage extends React.Component {
 }
 
 export default connect(
-  (state) => ({}),
+  (state) => ({
+    userState: state.app.userState,
+  }),
   (dispatch) => ({
       AppActions: bindActionCreators(appActions, dispatch),
       AuthActions: bindActionCreators(authActions, dispatch)

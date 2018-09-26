@@ -1,8 +1,7 @@
 import { createAction, handleActions } from 'redux-actions'
 // import * as app from './app'
-import { Map, fromJS } from 'immutable';
+import { Map } from 'immutable';
 import { pender } from 'redux-pender';
-import { message } from 'antd'
 import * as AuthAPI from 'lib/api/auth';
 import social from 'lib/social';
 
@@ -56,7 +55,11 @@ export default handleActions({
       if(socialProfile) {
         return state.set('socialProfile', socialProfile).set('redirectToRegister', true);
       }
-      return state.set('socialProfile', null).set('redirectToRegister', false).set('loginResult', loginResult);
+      else
+      {
+        const { data: socialLoginProfile } = action.payload;
+        return state.set('socialProfile', socialLoginProfile).set('redirectToRegister', false).set('loginResult', loginResult);
+      }
     }
   }),
   ...pender({

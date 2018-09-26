@@ -20,6 +20,7 @@ const mapStateToProps = ({ app, routing }, props) => {
     collapsed: layoutState.menuCollapsed,
     theme: layoutState.themeLight ? 'light' : 'dark',
     settingsOpened: layoutState.settingsOpened,
+    userState: app.userState,
   }
 }
 
@@ -162,14 +163,15 @@ class MenuLeft extends React.Component {
   }
 
   componentDidMount() {
-    var userRole = window.localStorage.getItem('app.Role');
-    if (userRole === 'user')
+    const {userState} = this.props;
+    if (userState.role === 'user')
       this.getActiveMenuItem(this.props, menuUser)
-    else if (userRole === 'administrator')
+    else if (userState.role === 'admin')
       this.getActiveMenuItem(this.props, menuAdmin)
   }
 
   componentWillReceiveProps(newProps) {
+    const {userState} = this.props;
     this.setState(
       {
         selectedKeys: '',
@@ -179,10 +181,9 @@ class MenuLeft extends React.Component {
       },
       () => {
         if (!newProps.isMobile) {
-          var userRole = window.localStorage.getItem('app.Role');
-          if (userRole === 'user')
+          if (userState.role === 'user')
             this.getActiveMenuItem(newProps, menuUser)
-          else if (userRole === 'administrator')
+          else if (userState.role === 'admin')
             this.getActiveMenuItem(newProps, menuAdmin)
         }
       },
@@ -208,7 +209,7 @@ class MenuLeft extends React.Component {
       breakpoint: 'lg',
     }
     const params = isMobile ? paramsMobile : paramsDesktop
-    const userRole = window.localStorage.getItem('app.Role')
+    const {userState} = this.props;
     return (
       <Sider {...params} className="menuLeft">
         <Scrollbars
@@ -230,8 +231,8 @@ class MenuLeft extends React.Component {
                 className={'icmn icmn-cog menuLeft__icon utils__spin-delayed--pseudo-selector'}
               />
             </Menu.Item>
-            {(userRole === 'user') && menuUserItems}
-            {(userRole === 'administrator') && menuAdminItems}
+            {(userState.role === 'user') && menuUserItems}
+            {(userState.role === 'admin') && menuAdminItems}
           </Menu>
         </Scrollbars>
       </Sider>

@@ -43,41 +43,10 @@ export const resetHideLogin = () => (dispatch, getState) => {
 export const initAuth = roles => (dispatch, getState) => {
   // Use Axios there to get User Data by Auth Token with Bearer Method Authentication
 
-  const userRole = window.localStorage.getItem('app.Role')
-  const email = window.localStorage.getItem('app.Email')
-  const displayName = window.localStorage.getItem('app.Name')
-
   const state = getState()
 
-  const setUser = userState => {
-    dispatch(
-      setUserState({
-        userState: {
-          ...userState,
-        },
-      }),
-    )
-    if (!roles.find(role => role === userRole)) {
-      if (userRole === 'administrator')
-      {
-        if (!(state.routing.location.pathname === '/admin/dashboard')) {
-          dispatch(push('/admin/dashboard'))
-        }
-      }
-      else if (userRole === 'user')
-      {
-        if (!(state.routing.location.pathname === '/user/dashboard')) {
-          dispatch(push('/user/dashboard'))
-        }
-      }
-      
-      return Promise.resolve(false)
-    }
-    return Promise.resolve(true)
-  }
-
-  if (userRole === 'administrator' || userRole === 'user')
-    return setUser({email:email, role:userRole, name:displayName}, userRole)
+  if (state.app.userState.role !== '')
+    return Promise.resolve(true);
   else
   {
     const location = state.routing.location
@@ -92,13 +61,30 @@ export async function login(email, password, dispatch) {
   // Use Axios there to get User Auth Token with Basic Method Authentication
   try{
     const result = await AuthAPI.localLogin({email, password})
-    window.localStorage.setItem('app.Status', result.data.auth_status)
-    window.localStorage.setItem('app.KYC', result.data.kyc_status)
-    window.localStorage.setItem('app.Email', email);
-    window.localStorage.setItem('app.Name', result.data.fullname)
+    dispatch(
+      setUserState({
+        userState: {
+          email: email,
+          fullname: result.data.fullname,
+          auth_status: result.data.auth_status,
+          kyc_status: result.data.kyc_status,
+          role: 'user',
+        },
+      }),
+    )
     if (email === 'admin@blocktoken.ai' && password === '123123')
     {
-      window.localStorage.setItem('app.Role', 'administrator')
+      dispatch(
+        setUserState({
+          userState: {
+            email: email,
+            fullname: result.data.fullname,
+            auth_status: result.data.auth_status,
+            kyc_status: result.data.kyc_status,
+            role: 'admin',
+          },
+        }),
+      )
       dispatch(_setHideLogin(true))
       dispatch(push('/admin/dashboard'))
       notification.open({
@@ -111,7 +97,6 @@ export async function login(email, password, dispatch) {
     
     if (result.data.auth_status > 0)
     {
-      window.localStorage.setItem('app.Role', 'user')
       dispatch(_setHideLogin(true))
       dispatch(push('/user/dashboard'))
       notification.open({
@@ -145,16 +130,37 @@ export async function login(email, password, dispatch) {
 export async function signup(email, password, fullname, address, company, website, dispatch) {
   // Use Axios there to get User Auth Token with Basic Method Authentication
   try{
-    //console.log(displayName + ", " + email + ", " + password);
-
     const result = await AuthAPI.localRegister({email, password, fullname, address, company, website})
   
-    //window.localStorage.setItem('app.Role', 'user')
     //dispatch(_setHideLogin(true))
     if (email === 'admin@blocktoken.ai')
-      window.localStorage.setItem('app.Status', 1);
-    window.localStorage.setItem('app.Status', 0)
-    dispatch(push('/confirm'))
+    {
+      dispatch(
+        setUserState({
+          userState: {
+            email: email,
+            fullname: fullname,
+            auth_status: 1,
+            role: 'admin',
+          },
+        }),
+      )
+      dispatch(push('/admin/dashboard'))
+    }
+    else
+    {
+      dispatch(
+        setUserState({
+          userState: {
+            email: email,
+            fullname: fullname,
+            auth_status: 0,
+            role: 'user',
+          },
+        }),
+      )
+      dispatch(push('/confirm'))
+    }
     
     notification.open({
       type: 'success',
@@ -184,11 +190,18 @@ export async function socialSignup(fullname, address, company, website, dispatch
     const {provider, accessToken} = state.auth.get('socialInfo').toJS()
 
     const result = await AuthAPI.socialRegister({fullname, address, company, website, provider, accessToken})
-    //console.log(result);
     const socialProfile = state.auth.get('socialProfile');
-    window.localStorage.setItem('app.Email', socialProfile.email);
-    window.localStorage.setItem('app.Name', socialProfile.name);
-    window.localStorage.setItem('app.Role', 'user')
+    dispatch(
+      setUserState({
+        userState: {
+          email: socialProfile.email,
+          fullname: socialProfile.name,
+          auth_status: 0,
+          kyc_status: 0,
+          role: 'user',
+        },
+      }),
+    )
     dispatch(_setHideLogin(true))
     dispatch(push('/user/dashboard'))
     
@@ -200,7 +213,6 @@ export async function socialSignup(fullname, address, company, website, dispatch
     return true;
     
   }catch(err){
-    console.log(err);
     notification.open({
       type: 'error',
       message: 'Sign up failed!',
@@ -222,13 +234,14 @@ export const logout = () => async (dispatch, getState) => {
     setUserState({
       userState: {
         email: '',
+        fullname: '',
+        auth_status: 99,
+        kyc_status: 99,
         role: '',
       },
     }),
   )
 
-  window.localStorage.setItem('app.Authorization', '')
-  window.localStorage.setItem('app.Role', '')
   dispatch(push('/login'))
    
 }
@@ -259,6 +272,9 @@ const initialState = {
   // USER STATE
   userState: {
     email: '',
+    fullname: '',
+    auth_status: 99,
+    kyc_status: 99,
     role: '',
   },
 }

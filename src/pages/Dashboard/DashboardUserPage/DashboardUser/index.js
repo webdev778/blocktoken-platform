@@ -1,10 +1,16 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 import PaymentCard from 'components/CleanComponents/PaymentCard'
-import { Button, Input, Icon, Table, Alert, Card, Avatar } from 'antd'
+import { Table, Alert } from 'antd'
 
-const { Meta } = Card;
+const mapStateToProps = (state, props) => ({
+  userState: state.app.userState,
+})
 
+@connect(
+  mapStateToProps,
+)
 class DashboardUser extends React.Component {
   state = {
     tableData: null,
@@ -45,12 +51,11 @@ class DashboardUser extends React.Component {
         sorter: (a, b) => a.salary - b.salary,
       },
     ]
-    const status = window.localStorage.getItem('app.KYC')
-
+    const {userState} = this.props;
     return (
       <div>
         {
-          (Number(status) === 0) &&
+          (Number(userState.kyc_status) === 0) &&
           <Alert
             message="You have to complete verifications."
             type="warning"
@@ -58,7 +63,7 @@ class DashboardUser extends React.Component {
           />
         }
         {
-          (Number(status) === 1) &&
+          (Number(userState.kyc_status) === 1) &&
           <Alert
             message="Review in your verification."
             type="info"
@@ -66,7 +71,7 @@ class DashboardUser extends React.Component {
           />
         }
         {
-          (Number(status) === 2) &&
+          (Number(userState.kyc_status) === 2) &&
           <Alert
             message="Verification Complete."
             type="success"

@@ -5,6 +5,7 @@ import Loadable from 'react-loadable'
 import Page from 'components/LayoutComponents/Page'
 import NotFoundPage from 'pages/DefaultPages/NotFoundPage'
 import HomePage from 'pages/DefaultPages/HomePage'
+import { connect } from 'react-redux'
 
 const loadable = loader =>
   Loadable({
@@ -17,9 +18,11 @@ const loadableRoutes = {
   // Default Pages
   '/login': {
     component: loadable(() => import('pages/DefaultPages/LoginPage')),
+    needsVerification: false,
   },
   '/signup': {
     component: loadable(() => import('pages/DefaultPages/SignupPage')),
+    needsVerification: false,
   },
   '/confirm': {
     component: loadable(() => import('pages/DefaultPages/ConfirmPage')),
@@ -89,12 +92,16 @@ class Routes extends React.Component {
   }
 
   render() {
+    const { userState } = this.props;
+
     return (
       <ConnectedSwitch>
         <Route exact path="/" component={HomePage} />
         {Object.keys(loadableRoutes).map(path => {
-          const { exact, ...props } = loadableRoutes[path]
+          const { exact, needsVerification, ...props } = loadableRoutes[path]
           props.exact = exact === void 0 || exact || false // set true as default
+          props.needsVerification = needsVerification === void 0 || needsVerification || false  //set true as default
+
           return <Route key={path} path={path} {...props} />
         })}
         <Route

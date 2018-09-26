@@ -1,6 +1,7 @@
 import React from 'react'
-import { Form, Button, Steps, notification, Tag, message } from 'antd'
+import { Form, Steps, Tag } from 'antd'
 import './style.scss'
+import { connect } from 'react-redux'
 import PaymentCard from 'components/CleanComponents/PaymentCard'
 import POI from './POI'
 import POA from './POA'
@@ -8,12 +9,18 @@ import POA from './POA'
 const Step = Steps.Step;
 
 const kyc_steps = [{
-  title: 'Proof of Identity',
-  content: <POI onValueChange={this.handleOnValueChange} variables={this.state}/>,
+  title: 'Proof of Identity'
 }, {
   title: 'Proof of Address',
-  content: <POA/>,
 }];
+
+const mapStateToProps = (state, props) => ({
+  userState: state.app.userState,
+})
+
+@connect(
+  mapStateToProps,
+)
 
 @Form.create()
 class Identity extends React.Component {
@@ -46,7 +53,7 @@ class Identity extends React.Component {
   render() {
     const { selectMode } = this.state;
     const { kyc_current } = this.state;
-    const status = window.localStorage.getItem('app.KYC')
+    const { userState } = this.props;
 
     return (
       <div className="card">
@@ -105,15 +112,15 @@ class Identity extends React.Component {
                   />
                 </a>
                 {
-                  (Number(status) === 2 || Number(status) === 5) &&
+                  (Number(userState.kyc_status) === 2) &&
                   <Tag color="#87d068">Verification Success</Tag>
                 }
                 {
-                  (Number(status) === 1 || Number(status) === 4) &&
+                  (Number(userState.kyc_status) === 1) &&
                   <Tag color="#2db7f5">Review in your verification</Tag>
                 }
                 {
-                  (Number(status) === 0 || Number(status) === 3) &&
+                  (Number(userState.kyc_status) === 0) &&
                   <Tag color="#f50">You have to verify</Tag>
                 }
               </div>

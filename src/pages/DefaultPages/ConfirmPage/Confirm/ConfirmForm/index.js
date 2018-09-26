@@ -1,13 +1,22 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { notification, Button } from 'antd'
 import * as AuthAPI from 'lib/api/auth';
 
+const mapStateToProps = (state, props) => ({
+  userState: state.app.userState,
+})
+
+@connect(
+  mapStateToProps,
+)
 class ConfirmForm extends React.Component {
   static defaultProps = {}
 
   resend = async () => {
+    const { userState } = this.props;
     try {
-      const email = window.localStorage.getItem('app.Email');
+      const email = userState.email;
       const result = await AuthAPI.resendEmail({email});
       if (result.data)
       {

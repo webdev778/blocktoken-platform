@@ -30,7 +30,7 @@ class ProfileMenu extends React.Component {
       <Menu selectable={false}>
         <Menu.Item>
           <div className="rfq__widget__system-status__item">
-            <strong>Hello, {userState.name}</strong>
+            <strong>Hello, {userState.fullname}</strong>
             <div>
               <strong>Role:</strong> {userState.role}
             </div>

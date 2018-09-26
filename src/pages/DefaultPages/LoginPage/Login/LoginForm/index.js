@@ -28,7 +28,7 @@ class LoginForm extends React.Component {
   }
 
   handleSocialLogin = async (provider) => {
-    const { AuthActions, AppActions } = this.props;
+    const { AuthActions, AppActions, userState } = this.props;
 
     try {
       AppActions.addSubmitForm(REDUCER)
@@ -41,8 +41,8 @@ class LoginForm extends React.Component {
         accessToken: socialInfo.get('accessToken')
       });
 
-      const { redirectToRegister } = this.props;
-  
+      const { redirectToRegister, socialProfile } = this.props;
+      console.log(socialProfile);
       if(redirectToRegister) {
         // AppActions._setHideLogin(true);
         // get social email
@@ -55,15 +55,14 @@ class LoginForm extends React.Component {
         // }, 400);
         return;
       }
-
       if (result.data.auth_status > 0)
       {
-
-        window.localStorage.setItem('app.Email', result.data.email)
-        window.localStorage.setItem('app.Name', result.data.fullname)
-        window.localStorage.setItem('app.Role', 'user')
-        window.localStorage.setItem('app.Status', result.data.auth_status)
-        window.localStorage.setItem('app.KYC', result.data.kyc_status)
+        AppActions.setUserState({userState:{
+          email:result.data.email, 
+          fullname:result.data.fullname, 
+          auth_stauts:result.data.auth_status,
+          kyc_status:result.data.kyc_status,
+          role:'user'}})
         AppActions._setHideLogin(true);
         AppActions.goToPage('/user/dashboard');
 
@@ -161,7 +160,9 @@ class LoginForm extends React.Component {
 export default connect(
   (state) => ({
     isSubmitForm: state.app.submitForms[REDUCER],
+    userState: state.app.userState,
     socialInfo: state.auth.get('socialInfo'),
+    socialProfile: state.auth.get('socialProfile'),
     redirectToRegister: state.auth.get('redirectToRegister'),
   }),
   (dispatch) => ({
