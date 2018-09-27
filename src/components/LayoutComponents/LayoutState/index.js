@@ -39,7 +39,7 @@ class LayoutState extends React.PureComponent {
 
   componentDidMount() {
     const { userState, dispatch } = this.props
-    if (userState.role === '')
+    if (userState.role === '' && window.localStorage.getItem('userState') !== null)
       dispatch(setUserState({userState: JSON.parse(window.localStorage.getItem('userState'))}))
   }
 
