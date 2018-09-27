@@ -2,12 +2,13 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import qs from 'querystring'
-import { setLayoutState } from 'ducks/app'
+import { setLayoutState, setUserState } from 'ducks/app'
 import { merge } from 'lodash'
 import classNames from 'classnames'
 
 const mapStateToProps = (state, props) => ({
   layoutState: state.app.layoutState,
+  userState: state.app.userState,
 })
 
 @connect(mapStateToProps)
@@ -34,6 +35,12 @@ class LayoutState extends React.PureComponent {
 
   componentWillMount() {
     this.bootstrapLayoutSettings()
+  }
+
+  componentDidMount() {
+    const { userState, dispatch } = this.props
+    if (userState.role === '')
+      dispatch(setUserState({userState: JSON.parse(window.localStorage.getItem('userState'))}))
   }
 
   updateBodyClass(layoutState) {

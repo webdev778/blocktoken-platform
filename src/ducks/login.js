@@ -10,7 +10,7 @@ export const submit = ({ email, password }: { email: string, password: string })
 ) => {
   dispatch(app.addSubmitForm(REDUCER))
 
-  let isLoggined = app.login(email, password, dispatch)
+  let isLoggined = app.login(email, password, dispatch, getState)
 
   if (isLoggined) {
     dispatch(app.deleteSubmitForm(REDUCER))

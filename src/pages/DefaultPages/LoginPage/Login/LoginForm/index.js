@@ -28,7 +28,7 @@ class LoginForm extends React.Component {
   }
 
   handleSocialLogin = async (provider) => {
-    const { AuthActions, AppActions, userState } = this.props;
+    const { AuthActions, AppActions } = this.props;
 
     try {
       AppActions.addSubmitForm(REDUCER)
@@ -65,6 +65,10 @@ class LoginForm extends React.Component {
             role: 'user'
           }
         })
+
+        const { userState } = this.props
+
+        window.localStorage.setItem('userState', JSON.stringify(userState))
         AppActions._setHideLogin(true);
         AppActions.goToPage('/user/dashboard');
 

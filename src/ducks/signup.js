@@ -19,7 +19,7 @@ export const submit = ({ email, password, fullname, address, company, website }:
       isLoggined = app.socialSignup(fullname, address, company, website, dispatch, getState)
     } else {
       //console.log('local signup')
-      isLoggined = app.signup(email, password, fullname, address, company, website, dispatch)
+      isLoggined = app.signup(email, password, fullname, address, company, website, dispatch, getState)
     }
 
     if (isLoggined) {

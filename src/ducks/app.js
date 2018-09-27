@@ -44,7 +44,6 @@ export const initAuth = roles => (dispatch, getState) => {
   // Use Axios there to get User Data by Auth Token with Bearer Method Authentication
 
   const state = getState()
-
   if (state.app.userState.role !== '')
     return Promise.resolve(true);
   else {
@@ -56,7 +55,7 @@ export const initAuth = roles => (dispatch, getState) => {
   }
 }
 
-export async function login(email, password, dispatch) {
+export async function login(email, password, dispatch, getState) {
   // Use Axios there to get User Auth Token with Basic Method Authentication
   try {
     const result = await AuthAPI.localLogin({ email, password })
@@ -71,6 +70,8 @@ export async function login(email, password, dispatch) {
         },
       }),
     )
+    const state = getState();
+    window.localStorage.setItem('userState', JSON.stringify(state.app.userState))
     if (email === 'admin@blocktoken.ai' && password === '123123') {
       dispatch(
         setUserState({
@@ -83,6 +84,7 @@ export async function login(email, password, dispatch) {
           },
         }),
       )
+      window.localStorage.setItem('userState', JSON.stringify(state.app.userState))
       dispatch(_setHideLogin(true))
       dispatch(push('/admin/dashboard'))
       notification.open({
@@ -123,7 +125,7 @@ export async function login(email, password, dispatch) {
   }
 }
 
-export async function signup(email, password, fullname, address, company, website, dispatch) {
+export async function signup(email, password, fullname, address, company, website, dispatch, getState) {
   // Use Axios there to get User Auth Token with Basic Method Authentication
   try {
     const result = await AuthAPI.localRegister({ email, password, fullname, address, company, website })
@@ -155,6 +157,9 @@ export async function signup(email, password, fullname, address, company, websit
       )
       dispatch(push('/confirm'))
     }
+
+    const state = getState()
+    window.localStorage.setItem('userState', JSON.stringify(state.app.userState))
 
     notification.open({
       type: 'success',
@@ -196,6 +201,9 @@ export async function socialSignup(fullname, address, company, website, dispatch
         },
       }),
     )
+
+    window.localStorage.setItem('userState', JSON.stringify(state.app.userState))
+
     dispatch(_setHideLogin(true))
     dispatch(push('/user/dashboard'))
 
@@ -235,6 +243,8 @@ export const logout = () => async (dispatch, getState) => {
       },
     }),
   )
+  const state = getState()
+  window.localStorage.setItem('userState', JSON.stringify(state.app.userState))
 
   dispatch(push('/login'))
 
