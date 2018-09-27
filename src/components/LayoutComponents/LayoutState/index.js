@@ -5,6 +5,7 @@ import qs from 'querystring'
 import { setLayoutState, setUserState } from 'ducks/app'
 import { merge } from 'lodash'
 import classNames from 'classnames'
+import * as AuthAPI from 'lib/api/auth';
 
 const mapStateToProps = (state, props) => ({
   layoutState: state.app.layoutState,
@@ -37,10 +38,34 @@ class LayoutState extends React.PureComponent {
     this.bootstrapLayoutSettings()
   }
 
-  componentDidMount() {
+  checkLoginStatus = async() => {
     const { userState, dispatch } = this.props
-    if (userState.role === '' && window.localStorage.getItem('userState') !== null)
-      dispatch(setUserState({userState: JSON.parse(window.localStorage.getItem('userState'))}))
+    try {
+      await AuthAPI.checkLoginStatus();
+      if (userState.role === '' && window.localStorage.getItem('userState') !== null) {
+        dispatch(setUserState({ userState: JSON.parse(window.localStorage.getItem('userState')) }))
+      }
+    }
+    catch (e) {
+      dispatch(
+        setUserState({
+          userState: {
+            email: '',
+            fullname: '',
+            auth_status: 99,
+            kyc_status: 99,
+            role: '',
+          },
+        }),
+      )
+
+      const { userState } = this.props
+      window.localStorage.setItem('userState', JSON.stringify(userState))
+    }
+  }
+
+  componentDidMount() {
+    this.checkLoginStatus();
   }
 
   updateBodyClass(layoutState) {
