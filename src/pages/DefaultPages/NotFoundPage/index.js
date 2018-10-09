@@ -9,7 +9,7 @@ const NotFoundPage = () =>
         <div className="col-lg-8">
           <div className="login__header__logo">
             <a href="javascript: void(0);">
-              <img src="https://dev.blocktoken.ai/wp-content/uploads/thegem-logos/logo_5ed388aa7c69b61be6aa09babaeee6a4_1x.png" alt="logo" />
+              <img src="https://blocktoken.ai/wp-content/uploads/thegem-logos/logo_5ed388aa7c69b61be6aa09babaeee6a4_1x.png" alt="logo" />
             </a>
           </div>
         </div>
