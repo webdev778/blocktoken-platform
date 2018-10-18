@@ -45,7 +45,7 @@ export default [
       {
         title: 'Join a Syndicate',
         key: 'joinSyndicate',
-        url: '/syndicates',
+        url: '/joinsyndicates',
       },
     ],
   },
@@ -129,7 +129,7 @@ export default [
       {
         title: 'View Syndicates',
         key: 'viewSyndicates',
-        url: '/syndicates',
+        url: '/viewsyndicates',
       },
     ],
   },

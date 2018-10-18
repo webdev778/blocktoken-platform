@@ -70,6 +70,18 @@ const loadableRoutes = {
   '/buytoken': {
     component: loadable(() => import('pages/Dashboard/BuyTokenPage')),
   },
+  '/airdrop': {
+    component: loadable(() => import('pages/Dashboard/AirDropPage')),
+  },
+  '/project-wizard': {
+    component: loadable(() => import('pages/Dashboard/CreateProjectPage')),
+  },
+  '/syndicate-wizard': {
+    component: loadable(() => import('pages/Dashboard/CreateSyndicatePage')),
+  },
+  '/services': {
+    component: loadable(() => import('pages/Dashboard/MarketingServicesPage')),
+  },
   '/confirmation/:token/': {
     component: loadable(() => import('pages/DefaultPages/VerifyPage')),
   },
