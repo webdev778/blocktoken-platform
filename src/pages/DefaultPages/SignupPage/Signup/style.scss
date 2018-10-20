@@ -1,6 +1,6 @@
 @import '../../../../resources/mixins';
 
-.main-login {
+.main-signup {
   background-size: cover;
   background-image: linear-gradient(120Deg, rgba(178,65,177,0.8), rgba(45,17,112,0.8), rgba(25,16,76,0.8), rgba(11,5,46,0.8)), url(https://blocktoken.ai/wp-content/uploads/2018/05/main-bg.jpg);
   transition: background 0.3s, border-radius 0.3s, opacity 0.3s;
@@ -16,6 +16,9 @@
     width: 100%;
     overflow-y: auto;
     overflow-x: hidden;
+
+    .particles-container { position: fixed; top: 0; left: 0; height: 100vh; width: 100vw; }
+    
   }
 
   &__block {
@@ -28,6 +31,10 @@
 
     &--pb200 {
       padding-bottom: rem(200) !important;
+    }
+
+    @media (min-width: $xl-min-width) {
+      top: rem(-90);
     }
 
     @media (max-width: $md-max-width) {
@@ -44,13 +51,14 @@
       background-color: $white;
       position: relative;
       box-shadow: 0 10px 40px -20px rgba(0,0,50,.2),  0 10px 80px -20px rgba(0,0,50,.1);
+      z-index: 3;
     }
     &__form {
       position: relative;
       z-index: 2;
     }
     &__promo {
-      padding: 0 0 rem(60);
+      padding: 0 0 rem(30);
       max-width: rem(800);
       font-size: rem(16);
       line-height: rem(26);
@@ -64,16 +72,16 @@
 
     @media (min-width: $md-min-width) {
       &--extended {
-        .main-login__block__inner {
+        .main-signup__block__inner {
           max-width: rem(800);
-          padding: rem(80) rem(80) rem(50);
+          padding: rem(40) rem(40) rem(20);
         }
 
-        .main-login__block__form {
+        .main-signup__block__form {
           margin-right: rem(300);
         }
 
-        .main-login__block__sidebar {
+        .main-signup__block__sidebar {
           display: block;
           position: absolute;
           top: 0;

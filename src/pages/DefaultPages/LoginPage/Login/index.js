@@ -69,7 +69,7 @@ class Login extends React.Component {
                     <i className="icmn-location mr-3" />
                     Sydney, Australia
                   </div>
-                  <div id="particles-js-1" className="particles-container"></div>
+                  <div id="particles-js-1" className="particles-container1"></div>
                 </div>
               </div>
             </div>

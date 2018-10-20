@@ -196,13 +196,15 @@ class SignupForm extends React.Component {
               )}
             </FormItem>
           </div>
-          <Recaptcha
-            sitekey="6LclSG4UAAAAAApRMVKVnZjJhbQcSmjr5kwVELHO"
-            render="explicit"
-            onloadCallback={this.recaptchaLoaded}
-            verifyCallback={this.verifyCallback}
-            type="image"
-          />
+          <div style={{textAlign:"center"}}>
+            <Recaptcha
+              sitekey="6LclSG4UAAAAAApRMVKVnZjJhbQcSmjr5kwVELHO"
+              render="explicit"
+              onloadCallback={this.recaptchaLoaded}
+              verifyCallback={this.verifyCallback}
+              type="image"
+            />
+          </div>
           <div className="form-actions">
             <Button type="primary" htmlType="submit" className="login-form-button width-100 mr-3">
               Sign Up

@@ -1,11 +1,21 @@
 import React from 'react'
-import { Form, Steps, Tag } from 'antd'
+import { Row, Col, Form, Steps, Tag, Button, message } from 'antd'
 import './style.scss'
 import { connect } from 'react-redux'
 import PaymentCard from 'components/CleanComponents/PaymentCard'
 import POI from './POI'
 import POA from './POA'
+import OtpInput from 'react-otp-input'
+import QRCode from 'qrcode.react'
+import CircularProgressbar from 'react-circular-progressbar';
 
+import * as otpActions from 'ducks/otp'
+import { bindActionCreators } from 'redux';
+
+
+import {authenticator} from 'otplib';
+
+const secret = 'KVKFKRCPNZQUYMLXOVYDSQKJKZDTSRLD'
 const Step = Steps.Step;
 
 const kyc_steps = [{
@@ -16,10 +26,18 @@ const kyc_steps = [{
 
 const mapStateToProps = (state, props) => ({
   userState: state.app.userState,
+  qrcodeURI: state.otp.get('secretURI'),
+  otpSecret: state.otp.get('secret'),
+  otpVerified: state.otp.get('verified')
+})
+
+const mapDispatchToProps = (dispatch, props) => ({
+  OtpActions: bindActionCreators(otpActions, dispatch)
 })
 
 @connect(
   mapStateToProps,
+  mapDispatchToProps
 )
 
 @Form.create()
@@ -29,7 +47,23 @@ class Identity extends React.Component {
     this.state = {
       selectMode: 0,
       kyc_current: 0,
+      otpauth: '',
+      otp: ''
     };
+  }
+
+  componentDidMount() {
+
+    /*
+    const {email} = this.props.userState;
+    const otpauth = authenticator.keyuri(email, 'dash.blocktoken.ai', secret);
+    
+    this.setState({otpauth});
+    */
+
+    const { OtpActions } = this.props;
+
+    OtpActions.getSecret();
   }
 
   KYCClick = () => {
@@ -50,10 +84,28 @@ class Identity extends React.Component {
     })
   }
 
+  verifyOTP = async () => {
+    /*
+    const otp = this.state.otp;
+    console.log(otp);
+    const isValid = authenticator.check(otp, secret);
+    if(isValid) {
+      message.success('Token Verified', 5);
+      return;
+    }
+    message.error('Wrong Token', 5);
+    */    
+    const { OtpActions } = this.props;
+    const otp = this.state.otp;
+    const secret = this.props.otpSecret;
+    console.log(otp);
+    OtpActions.verifyOTP({otp, secret});
+  }
+
   render() {
     const { selectMode } = this.state;
     const { kyc_current } = this.state;
-    const { userState } = this.props;
+    const { userState, qrcodeURI } = this.props;
 
     return (
       <div className="card">
@@ -96,7 +148,31 @@ class Identity extends React.Component {
 
           {
             (Number(selectMode) === 2) ?
-              <div></div>
+              <div>
+                <Row type="flex" justify="center">
+                  <h2>Please scan QR code below with your phone and input the pin code</h2>
+                </Row>                
+                <Row type="flex" justify="center">
+                  { qrcodeURI && <QRCode value={qrcodeURI} /> }
+                </Row>             
+                <Row type="flex" justify="center" style={{marginTop:'1rem'}}>
+                  <OtpInput
+                    onChange={otp => {this.setState({otp})}}
+                    numInputs={6}
+                    separator={<span>-</span>}
+                    inputStyle={{'width':'2rem', 'height': '3rem'}}
+                  />
+                </Row>
+                {/* <Row type="flex" justify="center" style={{marginTop:'1rem'}}>
+                  <CircularProgressbar
+                    percentage={otpTimeRemain}
+                    text={`${(60-otpTimeRemain)/60*100}%`}
+                  />
+                </Row>                                               */}
+                <Row type="flex" justify="center" style={{marginTop:'1rem'}}>
+                  <Button type="primary" onClick={this.verifyOTP}>Verify</Button>
+                </Row>   
+              </div>
               : null
           }
 
@@ -132,6 +208,11 @@ class Identity extends React.Component {
                       name={'2FA'}
                     />
                   </a>
+                  {
+                      this.props.otpVerified ? 
+                      <Tag color="#87d068">Verification Success</Tag> :
+                      <Tag color="#f50">You have to verify</Tag>
+                  }
                 </div>
               </div>
               : null
