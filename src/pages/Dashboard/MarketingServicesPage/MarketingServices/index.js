@@ -58,7 +58,6 @@ class MarketingServices extends React.Component {
           this.setState({
             selList:services
           })
-
         }
       });
   }
