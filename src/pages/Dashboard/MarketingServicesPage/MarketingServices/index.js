@@ -1,5 +1,6 @@
 import React from 'react'
-import { Table, Button, Checkbox } from 'antd'
+import { Table, Button, Checkbox, notification } from 'antd'
+import axios from 'axios';
 import './style.scss'
 
 const data = [{
@@ -43,6 +44,53 @@ const data = [{
 class MarketingServices extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      selList: []
+    }
+  }
+
+  componentDidMount() {
+    axios.get('/api/v1.0/users/services')
+      .then((result) => {
+        if (result.status === 200)
+        {
+          var services = JSON.parse(result.data.marketing_services)
+          this.setState({
+            selList:services
+          })
+
+        }
+      });
+  }
+
+  onChange = (e) => {
+    if (e.target.checked === true) {
+      this.state.selList.push(e.target.value);
+    }
+    else if (e.target.checked === false) {
+      for (var i = 0; i < this.state.selList.length; i++) {
+        if (this.state.selList[i] === e.target.value)
+          this.state.selList.splice(i, 1);
+      }
+    }
+
+    this.setState({
+      selList: this.state.selList
+    })
+    var jsonString = JSON.stringify(this.state.selList);
+    console.log(jsonString);
+  }
+
+  submitRequest = () => {
+    axios.post('/api/v1.0/users/marketing', { marketing_services: JSON.stringify(this.state.selList) })
+      .then((result) => {
+        if (result.status === 200) {
+          notification.open({
+            type: 'success',
+            message: 'Submit Success',
+          })
+        }
+      });
   }
 
   render() {
@@ -60,8 +108,8 @@ class MarketingServices extends React.Component {
       {
         title: '',
         key: 'action',
-        render: (text, record) => (
-          <Checkbox checked></Checkbox>
+        render: (record) => (
+          <Checkbox onChange={this.onChange} checked={this.state.selList.indexOf(record.key) !== -1 ? true : false} value={record.key}></Checkbox>
         ),
       },
     ]
@@ -74,7 +122,7 @@ class MarketingServices extends React.Component {
         <div className="card-body" style={{ marginLeft: '20px' }}>
           <h4>BlockToken provides the following marketing services. Check the services you need to setup a discussion with our team.</h4><br />
           <Table columns={columns} dataSource={data} align='right' />
-          <Button className="btn btn-md btn-danger" type="primary" size='large'>Submit Request</Button>
+          <Button className="btn btn-md btn-danger" type="primary" size='large' onClick={this.submitRequest}>Submit Request</Button>
         </div>
       </div>
     )
