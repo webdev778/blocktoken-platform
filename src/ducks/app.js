@@ -72,7 +72,7 @@ export async function login(email, password, dispatch, getState) {
     )
     const state = getState();
     window.localStorage.setItem('userState', JSON.stringify(state.app.userState))
-    if (email === 'admin@blocktoken.ai' && password === '123123') {
+    if (state.app.userState.auth_status === 99) {
       dispatch(
         setUserState({
           userState: {
