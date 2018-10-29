@@ -32,7 +32,7 @@ class Login extends React.Component {
               <div className="main-login__header__logo">
                 <a href="javascript: void(0);">
                   <img
-                    src="https://dev.blocktoken.ai/wp-content/uploads/thegem-logos/logo_5ed388aa7c69b61be6aa09babaeee6a4_1x.png"
+                    src="https://blocktoken.ai/wp-content/uploads/thegem-logos/logo_5ed388aa7c69b61be6aa09babaeee6a4_1x.png"
                     alt="BlockToken"
                   />
                 </a>
@@ -69,7 +69,7 @@ class Login extends React.Component {
                     <i className="icmn-location mr-3" />
                     Sydney, Australia
                   </div>
-                  <div id="particles-js-1" className="particles-container"></div>
+                  <div id="particles-js-1" className="particles-container1"></div>
                 </div>
               </div>
             </div>

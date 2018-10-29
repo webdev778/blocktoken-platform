@@ -17,7 +17,8 @@
     overflow-y: auto;
     overflow-x: hidden;
 
-    .particles-container { position: absolute; top: 0; left: 0; height: 100vh; width: 100vw; }
+    .particles-container { position: fixed; top: 0; left: 0; height: 100vh; width: 100vw; }
+    .particles-container1 { position: absolute; top: 0; left: 0; height: 100vh; width: 100vw; }
 
   }
 
@@ -33,6 +34,10 @@
       padding-bottom: rem(200) !important;
     }
 
+    @media (min-width: $xl-min-width) {
+      top: rem(-90);
+    }
+    
     @media (max-width: $md-max-width) {
       padding: rem(40) rem(20) rem(80);
     }
@@ -54,7 +59,7 @@
       z-index: 2;
     }
     &__promo {
-      padding: 0 0 rem(60);
+      padding: 0 0 rem(30);
       max-width: rem(800);
       font-size: rem(16);
       line-height: rem(26);
@@ -71,11 +76,11 @@
       &--extended {
         .main-login__block__inner {
           max-width: rem(800);
-          padding: rem(80) rem(80) rem(50);
+          padding: rem(40) rem(40) rem(20);
         }
 
         .main-login__block__form {
-          margin-right: rem(300);
+          margin-right: rem(300);          
         }
 
         .main-login__block__sidebar {

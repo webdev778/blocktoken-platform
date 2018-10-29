@@ -5,6 +5,7 @@ import { penderReducer } from 'redux-pender'
 import app from './app'
 import login from './login'
 import auth from './auth'
+import otp from './otp'
 
 export default combineReducers({
   routing: routerReducer,
@@ -12,7 +13,8 @@ export default combineReducers({
   pender: penderReducer,
   app,
   login,
-  auth
+  auth,
+  otp
 })
 
 

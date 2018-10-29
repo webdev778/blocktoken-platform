@@ -57,7 +57,7 @@ class DashboardUser extends React.Component {
         {
           (Number(userState.kyc_status) === 0) &&
           <Alert
-            message="You have to complete verifications."
+            message="Verify your profile to participate in token offerings."
             type="warning"
             showIcon
           />
@@ -79,33 +79,6 @@ class DashboardUser extends React.Component {
           />
         }
 
-        <div className="row mt-4">
-          <div className="col-lg-6">
-            <div className="card" style={{ height: "300px" }}>
-              <div className="card-header">
-                <div className="utils__title">Latest Announcements</div>
-              </div>
-              <div className="card-body">
-                <Table
-                  columns={tableColumns}
-                  dataSource={this.state.tableData}
-                  pagination={false}
-                />
-              </div>
-            </div>
-          </div>
-
-          <div className="col-lg-6">
-            <div className="card" style={{ height: "300px" }}>
-              <div className="card-header">
-                <div className="utils__title">Useful Resources</div>
-              </div>
-              <div className="card-body">
-
-              </div>
-            </div>
-          </div>
-        </div>
         <div className="utils__title utils__title--flat mb-3 mt-4">
           <span className="text-uppercase font-size-16 text-center"><h1>Get Started</h1></span>
         </div>
