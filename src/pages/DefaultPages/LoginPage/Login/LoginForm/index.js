@@ -62,7 +62,7 @@ class LoginForm extends React.Component {
             fullname: result.data.fullname,
             auth_stauts: result.data.auth_status,
             kyc_status: result.data.kyc_status,
-            role: 'user'
+            role: result.data.role
           }
         })
 

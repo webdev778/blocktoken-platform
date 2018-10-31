@@ -66,25 +66,25 @@ export async function login(email, password, dispatch, getState) {
           fullname: result.data.fullname,
           auth_status: result.data.auth_status,
           kyc_status: result.data.kyc_status,
-          role: 'user',
+          role: result.data.role,
         },
       }),
     )
     const state = getState();
     window.localStorage.setItem('userState', JSON.stringify(state.app.userState))
-    if (state.app.userState.auth_status === 99) {
-      dispatch(
-        setUserState({
-          userState: {
-            email: email,
-            fullname: result.data.fullname,
-            auth_status: result.data.auth_status,
-            kyc_status: result.data.kyc_status,
-            role: 'admin',
-          },
-        }),
-      )
-      window.localStorage.setItem('userState', JSON.stringify(state.app.userState))
+    if (state.app.userState.role === 'admin') {
+      // dispatch(
+      //   setUserState({
+      //     userState: {
+      //       email: email,
+      //       fullname: result.data.fullname,
+      //       auth_status: result.data.auth_status,
+      //       kyc_status: result.data.kyc_status,
+      //       role: 'admin',
+      //     },
+      //   }),
+      // )
+      // window.localStorage.setItem('userState', JSON.stringify(state.app.userState))
       dispatch(_setHideLogin(true))
       dispatch(push('/admin/dashboard'))
       notification.open({
